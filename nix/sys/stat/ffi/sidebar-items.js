@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["stat",""]],"fn":[["fstat",""]]});
+initSidebarItems({"fn":[["fstat",""]],"struct":[["stat",""]]});
