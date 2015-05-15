@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["UtsName",""]],"fn":[["uname",""]]});
+initSidebarItems({"fn":[["uname",""]],"struct":[["UtsName",""]]});

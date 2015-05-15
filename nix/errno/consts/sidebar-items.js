@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["from_i32",""]],"constant":[["EDEADLOCK",""],["EWOULDBLOCK",""]],"enum":[["Errno",""]]});
+initSidebarItems({"constant":[["EDEADLOCK",""],["EWOULDBLOCK",""]],"enum":[["Errno",""]],"fn":[["from_i32",""]]});
