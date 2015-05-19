@@ -53,6 +53,9 @@
 <span id="11">11</span>
 <span id="12">12</span>
 <span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
 </pre><pre class='rust '>
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>bitflags</span>;
@@ -63,10 +66,13 @@
 <span class='kw'>mod</span> <span class='ident'>error</span>;
 <span class='kw'>mod</span> <span class='ident'>terminal</span>;
 <span class='kw'>mod</span> <span class='ident'>cellbuffer</span>;
+<span class='kw'>mod</span> <span class='ident'>bytebuffer</span>;
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>device</span>::{<span class='ident'>Device</span>, <span class='ident'>DFunction</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>error</span>::<span class='ident'>TtyError</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>terminal</span>::<span class='ident'>Terminal</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attribute</span>, <span class='ident'>Cell</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>bytebuffer</span>::<span class='ident'>ByteBuffer</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

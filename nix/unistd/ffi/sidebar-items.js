@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["close",""],["fork",""],["ftruncate",""],["pipe",""],["read",""],["unlink",""],["write",""]]});
+initSidebarItems({"fn":[["close",""],["fork",""],["ftruncate",""],["getpid",""],["getppid",""],["pipe",""],["read",""],["unlink",""],["write",""]]});

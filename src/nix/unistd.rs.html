@@ -400,6 +400,15 @@
 <span id="358">358</span>
 <span id="359">359</span>
 <span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Standard symbolic constants and types</span>
 <span class='doccomment'>//!</span>
@@ -417,7 +426,7 @@
 <span class='kw'>mod</span> <span class='ident'>ffi</span> {
     <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_char</span>, <span class='ident'>c_int</span>, <span class='ident'>size_t</span>};
     <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>close</span>, <span class='ident'>read</span>, <span class='ident'>write</span>, <span class='ident'>pipe</span>, <span class='ident'>ftruncate</span>, <span class='ident'>unlink</span>};
-    <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>funcs</span>::<span class='ident'>posix88</span>::<span class='ident'>unistd</span>::<span class='ident'>fork</span>;
+    <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>funcs</span>::<span class='ident'>posix88</span>::<span class='ident'>unistd</span>::{<span class='ident'>fork</span>, <span class='ident'>getpid</span>, <span class='ident'>getppid</span>};
 
     <span class='kw'>extern</span> {
         <span class='comment'>// duplicate a file descriptor</span>
@@ -488,6 +497,15 @@
     } <span class='kw'>else</span> {
         <span class='prelude-val'>Ok</span>(<span class='ident'>Parent</span>(<span class='ident'>res</span>))
     }
+}
+
+<span class='attribute'>#[<span class='ident'>inline</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>getpid</span>() <span class='op'>-&gt;</span> <span class='ident'>pid_t</span> {
+    <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>getpid</span>() } <span class='comment'>// no error handling, according to man page: &quot;These functions are always successful.&quot;</span>
+}
+<span class='attribute'>#[<span class='ident'>inline</span>]</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>getppid</span>() <span class='op'>-&gt;</span> <span class='ident'>pid_t</span> {
+    <span class='kw'>unsafe</span> { <span class='ident'>ffi</span>::<span class='ident'>getppid</span>() } <span class='comment'>// no error handling, according to man page: &quot;These functions are always successful.&quot;</span>
 }
 
 <span class='attribute'>#[<span class='ident'>inline</span>]</span>
