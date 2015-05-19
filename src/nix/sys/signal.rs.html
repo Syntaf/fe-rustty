@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.3.5/src/sys/signal.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/git/checkouts/nix-rust-f423826171ff8c33/master/src/sys/signal.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>signal.rs.html -- source</title>
@@ -414,6 +414,7 @@
 <span id="372">372</span>
 <span id="373">373</span>
 <span id="374">374</span>
+<span id="375">375</span>
 </pre><pre class='rust '>
 <span class='comment'>// Portions of this file are Copyright 2014 The Rust Project Developers.</span>
 <span class='comment'>// See http://rust-lang.org/COPYRIGHT.</span>
@@ -659,6 +660,7 @@
     <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>sigset_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;dragonfly&quot;</span>))]</span>
     <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Copy</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>sigset_t</span> {
         <span class='ident'>bits</span>: [<span class='ident'>u32</span>; <span class='number'>4</span>],
     }

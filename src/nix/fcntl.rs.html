@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.3.5/src/fcntl.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/git/checkouts/nix-rust-f423826171ff8c33/master/src/fcntl.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>fcntl.rs.html -- source</title>
@@ -233,6 +233,43 @@
 <span id="191">191</span>
 <span id="192">192</span>
 <span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> {<span class='ident'>Error</span>, <span class='prelude-ty'>Result</span>, <span class='ident'>NixPath</span>, <span class='ident'>AsExtStr</span>};
 <span class='kw'>use</span> <span class='ident'>errno</span>::<span class='ident'>Errno</span>;
@@ -278,7 +315,7 @@
         <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>F_GETLK</span>:         <span class='ident'>c_int</span> <span class='op'>=</span> <span class='number'>5</span>;
     }
 
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
     <span class='kw'>mod</span> <span class='ident'>os</span> {
         <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_short</span>, <span class='ident'>off_t</span>, <span class='ident'>pid_t</span>};
 
@@ -418,6 +455,43 @@
             <span class='kw'>const</span> <span class='ident'>O_SYNC</span>      <span class='op'>=</span> <span class='number'>0x0000080</span>,
             <span class='kw'>const</span> <span class='ident'>O_NDELAY</span>    <span class='op'>=</span> <span class='ident'>O_NONBLOCK</span>.<span class='ident'>bits</span>,
             <span class='kw'>const</span> <span class='ident'>O_FSYNC</span>     <span class='op'>=</span> <span class='ident'>O_SYNC</span>.<span class='ident'>bits</span>
+        }
+    );
+
+    <span class='macro'>bitflags</span><span class='macro'>!</span>(
+        <span class='ident'>flags</span> <span class='ident'>FdFlag</span>: <span class='ident'>c_int</span> {
+            <span class='kw'>const</span> <span class='ident'>FD_CLOEXEC</span> <span class='op'>=</span> <span class='number'>1</span>
+        }
+    );
+}
+
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>)]</span>
+<span class='kw'>mod</span> <span class='ident'>consts</span> {
+    <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_int</span>;
+
+    <span class='macro'>bitflags</span><span class='macro'>!</span>(
+        <span class='ident'>flags</span> <span class='ident'>OFlag</span>: <span class='ident'>c_int</span> {
+            <span class='kw'>const</span> <span class='ident'>O_ACCMODE</span>   <span class='op'>=</span> <span class='number'>0x0000003</span>,
+            <span class='kw'>const</span> <span class='ident'>O_RDONLY</span>    <span class='op'>=</span> <span class='number'>0x0000000</span>,
+            <span class='kw'>const</span> <span class='ident'>O_WRONLY</span>    <span class='op'>=</span> <span class='number'>0x0000001</span>,
+            <span class='kw'>const</span> <span class='ident'>O_RDWR</span>      <span class='op'>=</span> <span class='number'>0x0000002</span>,
+            <span class='kw'>const</span> <span class='ident'>O_CREAT</span>     <span class='op'>=</span> <span class='number'>0x0000200</span>,
+            <span class='kw'>const</span> <span class='ident'>O_EXCL</span>      <span class='op'>=</span> <span class='number'>0x0000800</span>,
+            <span class='kw'>const</span> <span class='ident'>O_NOCTTY</span>    <span class='op'>=</span> <span class='number'>0x0008000</span>,
+            <span class='kw'>const</span> <span class='ident'>O_TRUNC</span>     <span class='op'>=</span> <span class='number'>0x0000400</span>,
+            <span class='kw'>const</span> <span class='ident'>O_APPEND</span>    <span class='op'>=</span> <span class='number'>0x0000008</span>,
+            <span class='kw'>const</span> <span class='ident'>O_NONBLOCK</span>  <span class='op'>=</span> <span class='number'>0x0000004</span>,
+            <span class='kw'>const</span> <span class='ident'>O_DIRECTORY</span> <span class='op'>=</span> <span class='number'>0x0020000</span>,
+            <span class='kw'>const</span> <span class='ident'>O_NOFOLLOW</span>  <span class='op'>=</span> <span class='number'>0x0000100</span>,
+            <span class='kw'>const</span> <span class='ident'>O_CLOEXEC</span>   <span class='op'>=</span> <span class='number'>0x0100000</span>,
+            <span class='kw'>const</span> <span class='ident'>O_SYNC</span>      <span class='op'>=</span> <span class='number'>0x0000080</span>,
+            <span class='kw'>const</span> <span class='ident'>O_NDELAY</span>    <span class='op'>=</span> <span class='ident'>O_NONBLOCK</span>.<span class='ident'>bits</span>,
+            <span class='kw'>const</span> <span class='ident'>O_FSYNC</span>     <span class='op'>=</span> <span class='ident'>O_SYNC</span>.<span class='ident'>bits</span>,
+            <span class='kw'>const</span> <span class='ident'>O_SHLOCK</span>    <span class='op'>=</span> <span class='number'>0x0000080</span>,
+            <span class='kw'>const</span> <span class='ident'>O_EXLOCK</span>    <span class='op'>=</span> <span class='number'>0x0000020</span>,
+            <span class='kw'>const</span> <span class='ident'>O_DIRECT</span>    <span class='op'>=</span> <span class='number'>0x0010000</span>,
+            <span class='kw'>const</span> <span class='ident'>O_EXEC</span>      <span class='op'>=</span> <span class='number'>0x0040000</span>,
+            <span class='kw'>const</span> <span class='ident'>O_TTY_INIT</span>  <span class='op'>=</span> <span class='number'>0x0080000</span>
         }
     );
 

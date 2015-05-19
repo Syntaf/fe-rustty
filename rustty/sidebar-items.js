@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Device",""],["Terminal",""],["TtyError",""]]});
+initSidebarItems({"enum":[["DFunction",""]],"struct":[["Device",""],["Terminal",""],["TtyError",""]]});

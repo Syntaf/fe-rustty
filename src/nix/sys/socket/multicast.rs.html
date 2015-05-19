@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.3.5/src/sys/socket/multicast.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/git/checkouts/nix-rust-f423826171ff8c33/master/src/sys/socket/multicast.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>multicast.rs.html -- source</title>
@@ -66,9 +66,23 @@
 <span id="24">24</span>
 <span id="25">25</span>
 <span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>addr</span>::<span class='ident'>Ipv4Addr</span>;
-<span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>in_addr</span>;
+<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>addr</span>::{<span class='ident'>Ipv4Addr</span>, <span class='ident'>Ipv6Addr</span>};
+<span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>in_addr</span>, <span class='ident'>in6_addr</span>, <span class='ident'>c_uint</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -90,6 +104,20 @@
         <span class='ident'>ip_mreq</span> {
             <span class='ident'>imr_multiaddr</span>: <span class='ident'>group</span>.<span class='number'>0</span>,
             <span class='ident'>imr_interface</span>: <span class='ident'>interface</span>.<span class='ident'>unwrap_or</span>(<span class='ident'>Ipv4Addr</span>::<span class='ident'>any</span>()).<span class='number'>0</span>
+        }
+    }
+}
+
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ipv6_mreq</span> {
+    <span class='kw'>pub</span> <span class='ident'>ipv6mr_multiaddr</span>: <span class='ident'>in6_addr</span>,
+    <span class='kw'>pub</span> <span class='ident'>ipv6mr_interface</span>: <span class='ident'>c_uint</span>,
+}
+
+<span class='kw'>impl</span> <span class='ident'>ipv6_mreq</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>group</span>: <span class='ident'>Ipv6Addr</span>) <span class='op'>-&gt;</span> <span class='ident'>ipv6_mreq</span> {
+        <span class='ident'>ipv6_mreq</span> {
+            <span class='ident'>ipv6mr_multiaddr</span>: <span class='ident'>group</span>.<span class='number'>0</span>,
+            <span class='ident'>ipv6mr_interface</span>: <span class='number'>0</span>,
         }
     }
 }

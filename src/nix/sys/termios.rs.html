@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.3.5/src/sys/termios.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/git/checkouts/nix-rust-f423826171ff8c33/master/src/sys/termios.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>termios.rs.html -- source</title>
@@ -540,7 +540,7 @@
     <span class='comment'>// `Termios` contains bitflags which are not considered</span>
     <span class='comment'>// `foreign-function-safe` by the compiler.</span>
     <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>improper_ctypes</span>)]</span>
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>))]</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>))]</span>
     <span class='kw'>extern</span> {
         <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>cfgetispeed</span>(<span class='ident'>termios</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>Termios</span>) <span class='op'>-&gt;</span> <span class='ident'>speed_t</span>;
         <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>cfgetospeed</span>(<span class='ident'>termios</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>Termios</span>) <span class='op'>-&gt;</span> <span class='ident'>speed_t</span>;
@@ -612,7 +612,7 @@
     <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>android</span>::<span class='op'>*</span>;
 
 
-    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>)]</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>))]</span>
     <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>consts</span> {
         <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>c_ulong</span>, <span class='ident'>c_uchar</span>};
 

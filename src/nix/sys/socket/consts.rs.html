@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.3.5/src/sys/socket/consts.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/git/checkouts/nix-rust-f423826171ff8c33/master/src/sys/socket/consts.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>consts.rs.html -- source</title>
@@ -215,8 +215,17 @@
 <span id="173">173</span>
 <span id="174">174</span>
 <span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
 </pre><pre class='rust '>
+<span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='self'>self</span>, <span class='ident'>c_int</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>os</span>::<span class='op'>*</span>;
+
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>IPV6_ADD_MEMBERSHIP</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>IPV6_ADD_MEMBERSHIP</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>IPV6_DROP_MEMBERSHIP</span>: <span class='ident'>c_int</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>IPV6_DROP_MEMBERSHIP</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;android&quot;</span>))]</span>
 <span class='kw'>mod</span> <span class='ident'>os</span> {
@@ -304,7 +313,8 @@
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>MSG_DONTWAIT</span>: <span class='ident'>SockMessageFlags</span> <span class='op'>=</span> <span class='number'>0x40</span>;
 }
 
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
+<span class='comment'>// Not all of these constants exist on freebsd</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;macos&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;freebsd&quot;</span>, <span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;ios&quot;</span>))]</span>
 <span class='kw'>mod</span> <span class='ident'>os</span> {
     <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_int</span>, <span class='ident'>uint8_t</span>};
 

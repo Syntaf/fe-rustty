@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ip_mreq",""]]});
+initSidebarItems({"struct":[["ip_mreq",""],["ipv6_mreq",""]]});
