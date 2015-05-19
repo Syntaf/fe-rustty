@@ -212,7 +212,6 @@
 <span id="170">170</span>
 <span id="171">171</span>
 <span id="172">172</span>
-<span id="173">173</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>OpenOptions</span>;
@@ -235,7 +234,6 @@
 <span class='kw'>use</span> <span class='ident'>TtyError</span>;
 <span class='kw'>use</span> <span class='ident'>CellBuffer</span>;
 <span class='kw'>use</span> <span class='ident'>Color</span>;
-<span class='kw'>use</span> <span class='ident'>ByteBuffer</span>;
 
 
 <span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when handled elsewhere.</span>
@@ -261,7 +259,7 @@
     <span class='ident'>device</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>Device</span>,
     <span class='ident'>frontbuf</span>: <span class='ident'>CellBuffer</span>,
     <span class='ident'>backbuf</span>: <span class='ident'>CellBuffer</span>,
-    <span class='ident'>bytebuf</span>: <span class='ident'>ByteBuffer</span>,
+    <span class='ident'>outbuf</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>,
     <span class='ident'>fgcolor</span>: <span class='ident'>Color</span>,
     <span class='ident'>bgcolor</span>: <span class='ident'>Color</span>,
 }
@@ -311,7 +309,7 @@
             <span class='ident'>device</span>: <span class='ident'>device</span>,
             <span class='ident'>frontbuf</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='number'>0</span>),
             <span class='ident'>backbuf</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='number'>0</span>),
-            <span class='ident'>bytebuf</span>: <span class='ident'>ByteBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>),
+            <span class='ident'>outbuf</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
             <span class='ident'>fgcolor</span>: <span class='ident'>Color</span>::<span class='ident'>Default</span>,
             <span class='ident'>bgcolor</span>: <span class='ident'>Color</span>::<span class='ident'>Default</span>,
         };
