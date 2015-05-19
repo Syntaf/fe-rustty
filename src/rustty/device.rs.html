@@ -142,56 +142,11 @@
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
-<span id="103">103</span>
-<span id="104">104</span>
-<span id="105">105</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>env</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::<span class='ident'>Index</span>;
 
 <span class='kw'>use</span> <span class='ident'>TtyError</span>;
-
-<span class='kw'>const</span> <span class='ident'>XTERM_FUNCS</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[
-    <span class='string'>&quot;\x1b[?1049h&quot;</span>,
-    <span class='string'>&quot;\x1b[?1049l&quot;</span>,
-    <span class='string'>&quot;\x1b[?12l\x1b[?25h&quot;</span>,
-    <span class='string'>&quot;\x1b[?25l&quot;</span>,
-    <span class='string'>&quot;\x1b[H\x1b[2J&quot;</span>,
-    <span class='string'>&quot;\x1b(B\x1b[m&quot;</span>,
-    <span class='string'>&quot;\x1b[4m&quot;</span>,
-    <span class='string'>&quot;\x1b[1m&quot;</span>,
-    <span class='string'>&quot;\x1b[5m&quot;</span>,
-    <span class='string'>&quot;\x1b[7m&quot;</span>,
-    <span class='string'>&quot;\x1b[?1h\x1b=&quot;</span>,
-    <span class='string'>&quot;\x1b[?1l\x1b&gt;&quot;</span>,
-    <span class='string'>&quot;\x1b[?1000h&quot;</span>,
-    <span class='string'>&quot;\x1b[?1000l&quot;</span>,
-];
-
-<span class='kw'>const</span> <span class='ident'>XTERM_KEYS</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[
-    <span class='string'>&quot;\x1bOP&quot;</span>,
-    <span class='string'>&quot;\x1bOQ&quot;</span>,
-    <span class='string'>&quot;\x1bOR&quot;</span>,
-    <span class='string'>&quot;\x1bOS&quot;</span>,
-    <span class='string'>&quot;\x1b[15~&quot;</span>,
-    <span class='string'>&quot;\x1b[17~&quot;</span>,
-    <span class='string'>&quot;\x1b[18~&quot;</span>,
-    <span class='string'>&quot;\x1b[19~&quot;</span>,
-    <span class='string'>&quot;\x1b[20~&quot;</span>,
-    <span class='string'>&quot;\x1b[21~&quot;</span>,
-    <span class='string'>&quot;\x1b[23~&quot;</span>,
-    <span class='string'>&quot;\x1b[24~&quot;</span>,
-    <span class='string'>&quot;\x1b[2~&quot;</span>,
-    <span class='string'>&quot;\x1b[3~&quot;</span>,
-    <span class='string'>&quot;\x1bOH&quot;</span>,
-    <span class='string'>&quot;\x1bOF&quot;</span>,
-    <span class='string'>&quot;\x1b[5~&quot;</span>,
-    <span class='string'>&quot;\x1b[6~&quot;</span>,
-    <span class='string'>&quot;\x1bOA&quot;</span>,
-    <span class='string'>&quot;\x1bOB&quot;</span>,
-    <span class='string'>&quot;\x1bOD&quot;</span>,
-    <span class='string'>&quot;\x1bOC&quot;</span>,
-];
 
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Device</span> {
     <span class='ident'>name</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>,
@@ -202,7 +157,7 @@
 <span class='kw'>impl</span> <span class='ident'>Device</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>Device</span>, <span class='ident'>TtyError</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>dname</span>) <span class='op'>=</span> <span class='ident'>env</span>::<span class='ident'>var</span>(<span class='string'>&quot;TERM&quot;</span>) {
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>dev</span>) <span class='op'>=</span> <span class='ident'>DEVICES</span>.<span class='ident'>iter</span>().<span class='ident'>find</span>(<span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> { <span class='ident'>d</span>.<span class='ident'>name</span> <span class='op'>==</span> <span class='ident'>dname</span> }) {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>dev</span>) <span class='op'>=</span> <span class='ident'>DEVICES</span>.<span class='ident'>iter</span>().<span class='ident'>find</span>(<span class='op'>|</span><span class='ident'>d</span><span class='op'>|</span> { <span class='ident'>dname</span>.<span class='ident'>contains</span>(<span class='ident'>d</span>.<span class='ident'>name</span>) }) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>dev</span>)
             } <span class='kw'>else</span> {
                 <span class='prelude-val'>Err</span>(<span class='ident'>TtyError</span>::<span class='ident'>new</span>(<span class='string'>&quot;Unsupported terminal&quot;</span>))
@@ -245,11 +200,50 @@
 
 <span class='kw'>const</span> <span class='ident'>DEVICES</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='ident'>Device</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[
     <span class='ident'>Device</span> {
-        <span class='ident'>name</span>: <span class='string'>&quot;xterm-256color&quot;</span>,
-        <span class='ident'>keys</span>: <span class='ident'>XTERM_KEYS</span>,
-        <span class='ident'>funcs</span>: <span class='ident'>XTERM_FUNCS</span>,
+        <span class='ident'>name</span>: <span class='string'>&quot;xterm&quot;</span>,
+        <span class='ident'>funcs</span>: <span class='kw-2'>&amp;</span>[
+            <span class='string'>&quot;\x1b[?1049h&quot;</span>,
+            <span class='string'>&quot;\x1b[?1049l&quot;</span>,
+            <span class='string'>&quot;\x1b[?12l\x1b[?25h&quot;</span>,
+            <span class='string'>&quot;\x1b[?25l&quot;</span>,
+            <span class='string'>&quot;\x1b[H\x1b[2J&quot;</span>,
+            <span class='string'>&quot;\x1b(B\x1b[m&quot;</span>,
+            <span class='string'>&quot;\x1b[4m&quot;</span>,
+            <span class='string'>&quot;\x1b[1m&quot;</span>,
+            <span class='string'>&quot;\x1b[5m&quot;</span>,
+            <span class='string'>&quot;\x1b[7m&quot;</span>,
+            <span class='string'>&quot;\x1b[?1h\x1b=&quot;</span>,
+            <span class='string'>&quot;\x1b[?1l\x1b&gt;&quot;</span>,
+            <span class='string'>&quot;\x1b[?1000h&quot;</span>,
+            <span class='string'>&quot;\x1b[?1000l&quot;</span>,
+        ],
+        <span class='ident'>keys</span>: <span class='kw-2'>&amp;</span>[
+            <span class='string'>&quot;\x1bOP&quot;</span>,
+            <span class='string'>&quot;\x1bOQ&quot;</span>,
+            <span class='string'>&quot;\x1bOR&quot;</span>,
+            <span class='string'>&quot;\x1bOS&quot;</span>,
+            <span class='string'>&quot;\x1b[15~&quot;</span>,
+            <span class='string'>&quot;\x1b[17~&quot;</span>,
+            <span class='string'>&quot;\x1b[18~&quot;</span>,
+            <span class='string'>&quot;\x1b[19~&quot;</span>,
+            <span class='string'>&quot;\x1b[20~&quot;</span>,
+            <span class='string'>&quot;\x1b[21~&quot;</span>,
+            <span class='string'>&quot;\x1b[23~&quot;</span>,
+            <span class='string'>&quot;\x1b[24~&quot;</span>,
+            <span class='string'>&quot;\x1b[2~&quot;</span>,
+            <span class='string'>&quot;\x1b[3~&quot;</span>,
+            <span class='string'>&quot;\x1bOH&quot;</span>,
+            <span class='string'>&quot;\x1bOF&quot;</span>,
+            <span class='string'>&quot;\x1b[5~&quot;</span>,
+            <span class='string'>&quot;\x1b[6~&quot;</span>,
+            <span class='string'>&quot;\x1bOA&quot;</span>,
+            <span class='string'>&quot;\x1bOB&quot;</span>,
+            <span class='string'>&quot;\x1bOD&quot;</span>,
+            <span class='string'>&quot;\x1bOC&quot;</span>,
+        ],
     },
 ];
+
 
 </pre>
 </section>

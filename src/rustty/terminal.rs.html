@@ -183,6 +183,21 @@
 <span id="141">141</span>
 <span id="142">142</span>
 <span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>OpenOptions</span>;
@@ -204,7 +219,11 @@
 <span class='kw'>use</span> <span class='ident'>DFunction</span>;
 <span class='kw'>use</span> <span class='ident'>TtyError</span>;
 
+<span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when handled elsewhere.</span>
 <span class='kw'>static</span> <span class='ident'>SIGWINCH_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
+
+<span class='doccomment'>/// Set to true when there is an active Terminal instance.</span>
+<span class='doccomment'>/// Reset to false when it goes out of scope.</span>
 <span class='kw'>static</span> <span class='ident'>RUSTTY_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;macos&quot;</span>)]</span>
@@ -225,22 +244,29 @@
 
 <span class='kw'>impl</span> <span class='ident'>Terminal</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>TtyError</span><span class='op'>&gt;</span> {
+
         <span class='kw'>if</span> <span class='ident'>RUSTTY_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>false</span>, <span class='boolval'>true</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>TtyError</span>::<span class='ident'>new</span>(<span class='string'>&quot;Rustty already initialized&quot;</span>))
         }
+
         <span class='kw'>let</span> <span class='ident'>tty</span> <span class='op'>=</span> <span class='ident'>OpenOptions</span>::<span class='ident'>new</span>()
             .<span class='ident'>write</span>(<span class='boolval'>true</span>)
             .<span class='ident'>read</span>(<span class='boolval'>true</span>)
             .<span class='ident'>open</span>(<span class='string'>&quot;/dev/tty&quot;</span>)
             .<span class='ident'>unwrap</span>();
+
+        <span class='kw'>let</span> <span class='ident'>ttyfd</span> <span class='op'>=</span> <span class='ident'>tty</span>.<span class='ident'>as_raw_fd</span>();
+
         <span class='kw'>let</span> <span class='ident'>device</span> <span class='op'>=</span> <span class='ident'>Device</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
+
         <span class='kw'>let</span> <span class='ident'>sa_winch</span> <span class='op'>=</span> <span class='ident'>signal</span>::<span class='ident'>SigAction</span>::<span class='ident'>new</span>(<span class='ident'>sigwinch_handler</span>, <span class='ident'>SockFlag</span>::<span class='ident'>empty</span>(), <span class='ident'>SigSet</span>::<span class='ident'>empty</span>());
         <span class='kw'>unsafe</span> {
             <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='ident'>signal</span>::<span class='ident'>sigaction</span>(<span class='ident'>SIGWINCH</span>, <span class='kw-2'>&amp;</span><span class='ident'>sa_winch</span>) {
                 <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>e</span>);
             }
         }
-        <span class='kw'>let</span> <span class='ident'>orig_tios</span> <span class='op'>=</span> <span class='ident'>termios</span>::<span class='ident'>tcgetattr</span>(<span class='ident'>tty</span>.<span class='ident'>as_raw_fd</span>()).<span class='ident'>unwrap</span>();
+
+        <span class='kw'>let</span> <span class='ident'>orig_tios</span> <span class='op'>=</span> <span class='ident'>termios</span>::<span class='ident'>tcgetattr</span>(<span class='ident'>ttyfd</span>).<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>tios</span> <span class='op'>=</span> <span class='ident'>orig_tios</span>.<span class='ident'>clone</span>();
         <span class='ident'>tios</span>.<span class='ident'>c_iflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_iflag</span> <span class='kw-2'>&amp;</span> <span class='op'>!</span>(<span class='ident'>IGNBRK</span> <span class='op'>|</span> <span class='ident'>BRKINT</span> <span class='op'>|</span> <span class='ident'>PARMRK</span> <span class='op'>|</span> <span class='ident'>ISTRIP</span> <span class='op'>|</span> <span class='ident'>INLCR</span> <span class='op'>|</span> <span class='ident'>IGNCR</span> <span class='op'>|</span> <span class='ident'>ICRNL</span> <span class='op'>|</span> <span class='ident'>IXON</span>);
         <span class='ident'>tios</span>.<span class='ident'>c_oflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_oflag</span> <span class='kw-2'>&amp;</span> <span class='op'>!</span><span class='ident'>OPOST</span>;
@@ -249,8 +275,8 @@
         <span class='ident'>tios</span>.<span class='ident'>c_cflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_cflag</span> <span class='op'>|</span> <span class='ident'>CS8</span>;
         <span class='ident'>tios</span>.<span class='ident'>c_cc</span>[<span class='ident'>VMIN</span>] <span class='op'>=</span> <span class='number'>0</span>;
         <span class='ident'>tios</span>.<span class='ident'>c_cc</span>[<span class='ident'>VTIME</span>] <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='ident'>termios</span>::<span class='ident'>tcsetattr</span>(<span class='ident'>tty</span>.<span class='ident'>as_raw_fd</span>(), <span class='ident'>SetArg</span>::<span class='ident'>TCSAFLUSH</span>, <span class='kw-2'>&amp;</span><span class='ident'>tios</span>).<span class='ident'>unwrap</span>();
-        <span class='kw'>let</span> <span class='ident'>ttyfd</span> <span class='op'>=</span> <span class='ident'>tty</span>.<span class='ident'>as_raw_fd</span>();
+
+        <span class='ident'>termios</span>::<span class='ident'>tcsetattr</span>(<span class='ident'>ttyfd</span>, <span class='ident'>SetArg</span>::<span class='ident'>TCSAFLUSH</span>, <span class='kw-2'>&amp;</span><span class='ident'>tios</span>).<span class='ident'>unwrap</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>terminal</span> <span class='op'>=</span> <span class='ident'>Terminal</span> {
             <span class='ident'>orig_tios</span>: <span class='ident'>orig_tios</span>,
             <span class='ident'>tios</span>: <span class='ident'>tios</span>,
@@ -264,22 +290,22 @@
         <span class='prelude-val'>Ok</span>(<span class='ident'>terminal</span>)
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>tty</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DFunction</span>::<span class='ident'>ClearScreen</span>]).<span class='ident'>unwrap</span>();
-    }
-
+    <span class='doccomment'>/// Returns the width of the terminal.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>width</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='self'>self</span>.<span class='ident'>width</span>
     }
 
+    <span class='doccomment'>/// Returns the height of the terminal.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>height</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='self'>self</span>.<span class='ident'>height</span>
     }
 
+    <span class='doccomment'>/// Returns the size of the terminal as (x, y).</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>u16</span>, <span class='ident'>u16</span>) {
         (<span class='self'>self</span>.<span class='ident'>width</span>, <span class='self'>self</span>.<span class='ident'>height</span>)
     }
 
+    <span class='doccomment'>/// Updates the size of the Terminal object to reflect that of the underlying terminal.</span>
     <span class='kw'>fn</span> <span class='ident'>update_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>TtyError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ws</span> <span class='op'>=</span> <span class='ident'>WindowSize</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='ident'>status</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
@@ -293,6 +319,10 @@
             },
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> { <span class='prelude-val'>Err</span>(<span class='ident'>TtyError</span>::<span class='ident'>from_nix</span>(<span class='ident'>e</span>)) },
         }
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>tty</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DFunction</span>::<span class='ident'>ClearScreen</span>]).<span class='ident'>unwrap</span>();
     }
 
 }
