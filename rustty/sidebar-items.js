@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Attribute",""],["Color",""],["DFunction",""]],"struct":[["Cell",""],["CellBuffer",""],["Device",""],["Style",""],["Terminal",""],["TtyError",""]]});
+initSidebarItems({"enum":[["Attr",""],["Color",""],["DFunction",""]],"struct":[["Cell",""],["CellBuffer",""],["Device",""],["Style",""],["Terminal",""],["TtyError",""]]});
