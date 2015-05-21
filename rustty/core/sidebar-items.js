@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["terminal",""]],"struct":[["Terminal","Terminal object."]]});
+initSidebarItems({"enum":[["Attr",""],["Color",""]],"mod":[["cellbuffer",""],["terminal",""]],"struct":[["Cell",""],["Style",""],["Terminal","Terminal object."]]});

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Error",""]]});
+initSidebarItems({"mod":[["error","Errors."]],"struct":[["Error",""]]});
