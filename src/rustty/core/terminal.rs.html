@@ -414,6 +414,7 @@
 <span id="372">372</span>
 <span id="373">373</span>
 <span id="374">374</span>
+<span id="375">375</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>OpenOptions</span>;
@@ -451,6 +452,7 @@
 <span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x00005413</span>;
 
 
+<span class='doccomment'>/// Terminal object.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Terminal</span> {
     <span class='ident'>orig_tios</span>: <span class='ident'>termios</span>::<span class='ident'>Termios</span>,
     <span class='ident'>tios</span>: <span class='ident'>termios</span>::<span class='ident'>Termios</span>,

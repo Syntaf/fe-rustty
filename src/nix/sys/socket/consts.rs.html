@@ -323,6 +323,7 @@
 <span id="281">281</span>
 <span id="282">282</span>
 <span id="283">283</span>
+<span id="284">284</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='self'>self</span>, <span class='ident'>c_int</span>};
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>os</span>::<span class='op'>*</span>;
@@ -558,7 +559,7 @@
             <span class='ident'>SO_RCVTIMEO</span>,
             <span class='ident'>SO_SNDTIMEO</span>,
             <span class='ident'>SO_REUSEADDR</span>,
-            <span class='ident'>SO_REUSEPORT</span>,
+            <span class='comment'>// SO_REUSEPORT,</span>
             <span class='ident'>SO_SNDBUF</span>,
             <span class='ident'>SO_TIMESTAMP</span>,
             <span class='ident'>SO_TYPE</span>,
@@ -586,6 +587,7 @@
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span> <span class='op'>=</span> <span class='string'>&quot;linux&quot;</span>)]</span>
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>test_linux_consts</span>() {
+        <span class='comment'>// TODO Figure out how to test new constants</span>
         <span class='macro'>check_const</span><span class='macro'>!</span>(
             <span class='ident'>SOL_IP</span>,
             <span class='ident'>SOL_TCP</span>,
@@ -596,13 +598,13 @@
             <span class='ident'>SO_DOMAIN</span>,
             <span class='ident'>SO_MARK</span>,
             <span class='ident'>TCP_CORK</span>,
-            <span class='ident'>SO_BUSY_POLL</span>,
+            <span class='comment'>// SO_BUSY_POLL,</span>
             <span class='ident'>SO_RXQ_OVFL</span>,
             <span class='ident'>SO_PASSCRED</span>,
             <span class='ident'>SO_PRIORITY</span>,
             <span class='ident'>SO_PROTOCOL</span>,
             <span class='ident'>SO_RCVBUFFORCE</span>,
-            <span class='ident'>SO_PEEK_OFF</span>,
+            <span class='comment'>// SO_PEEK_OFF,</span>
             <span class='ident'>SO_PEERCRED</span>,
             <span class='ident'>SO_SNDBUFFORCE</span>);
     }

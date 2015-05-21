@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Terminal",""]]});
+initSidebarItems({"struct":[["Terminal","Terminal object."]]});
