@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `terminal` mod in crate `rustty`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, terminal">
+    <meta name="description" content="API documentation for the Rust `DevFunc` enum in crate `rustty`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, DevFunc">
 
-    <title>rustty::core::terminal - Rust</title>
+    <title>rustty::core::device::DevFunc - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='../../index.html'>rustty</a>::<wbr><a href='../index.html'>core</a></p><script>window.sidebarCurrent = {name: 'terminal', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>rustty</a>::<wbr><a href='../index.html'>core</a>::<wbr><a href='index.html'>device</a></p><script>window.sidebarCurrent = {name: 'DevFunc', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -40,23 +40,30 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../../index.html'>rustty</a>::<wbr><a href='../index.html'>core</a>::<wbr><a class='mod' href=''>terminal</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>rustty</a>::<wbr><a href='../index.html'>core</a>::<wbr><a href='index.html'>device</a>::<wbr><a class='enum' href=''>DevFunc</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-9' class='srclink' href='../../../src/rustty/core/terminal.rs.html#1-374' title='goto source code'>[src]</a></span></h1>
-<h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Terminal.html'
-                               title='rustty::core::terminal::Terminal'>Terminal</a></td>
-                        <td class='docblock short'>
-                             <p>Terminal object.</p>
-
-                        </td>
-                    </tr>
-                </table></section>
+        </span><a id='src-2803' class='srclink' href='../../../src/rustty/core/device.rs.html#38-54' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum DevFunc {
+    EnterCa,
+    ExitCa,
+    ShowCursor,
+    HideCursor,
+    ClearScreen,
+    Sgr0,
+    Underline,
+    Bold,
+    Blink,
+    Reverse,
+    EnterKeypad,
+    ExitKeypad,
+    EnterMouse,
+    ExitMouse,
+    FuncsNum,
+}</pre><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.EnterCa'><code>EnterCa</code></td><td></td></tr><tr><td id='variant.ExitCa'><code>ExitCa</code></td><td></td></tr><tr><td id='variant.ShowCursor'><code>ShowCursor</code></td><td></td></tr><tr><td id='variant.HideCursor'><code>HideCursor</code></td><td></td></tr><tr><td id='variant.ClearScreen'><code>ClearScreen</code></td><td></td></tr><tr><td id='variant.Sgr0'><code>Sgr0</code></td><td></td></tr><tr><td id='variant.Underline'><code>Underline</code></td><td></td></tr><tr><td id='variant.Bold'><code>Bold</code></td><td></td></tr><tr><td id='variant.Blink'><code>Blink</code></td><td></td></tr><tr><td id='variant.Reverse'><code>Reverse</code></td><td></td></tr><tr><td id='variant.EnterKeypad'><code>EnterKeypad</code></td><td></td></tr><tr><td id='variant.ExitKeypad'><code>ExitKeypad</code></td><td></td></tr><tr><td id='variant.EnterMouse'><code>EnterMouse</code></td><td></td></tr><tr><td id='variant.ExitMouse'><code>ExitMouse</code></td><td></td></tr><tr><td id='variant.FuncsNum'><code>FuncsNum</code></td><td></td></tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

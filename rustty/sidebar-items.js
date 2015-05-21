@@ -1,1 +1,1 @@
-initSidebarItems({});
+initSidebarItems({"mod":[["core","Core module"],["util",""]]});
