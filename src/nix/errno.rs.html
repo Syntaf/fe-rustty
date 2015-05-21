@@ -2688,12 +2688,12 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
     <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
-    <span class='kw'>use</span> <span class='ident'>nixtest</span>::<span class='ident'>assert_errno_eq</span>;
+    <span class='kw'>use</span> <span class='ident'>nixtest</span>::<span class='ident'>assert_const_eq</span>;
     <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_int</span>;
 
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>check_errno</span> {
         ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span>:<span class='ident'>ident</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{
-            $(<span class='ident'>assert_errno_eq</span>(<span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span>), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span> <span class='kw'>as</span> <span class='ident'>c_int</span>);)<span class='op'>+</span>
+            $(<span class='ident'>assert_const_eq</span>(<span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span>), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span> <span class='kw'>as</span> <span class='ident'>c_int</span>);)<span class='op'>+</span>
         }};
     }
 

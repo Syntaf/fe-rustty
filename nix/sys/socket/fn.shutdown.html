@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `DevFunc` enum in crate `rustty`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, DevFunc">
+    <meta name="description" content="API documentation for the Rust `shutdown` fn in crate `nix`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, shutdown">
 
-    <title>rustty::DevFunc - Rust</title>
+    <title>nix::sys::socket::shutdown - Rust</title>
 
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
     
@@ -26,7 +26,7 @@
 
     <section class="sidebar">
         
-        <p class='location'><a href='index.html'>rustty</a></p><script>window.sidebarCurrent = {name: 'DevFunc', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>nix</a>::<wbr><a href='../index.html'>sys</a>::<wbr><a href='index.html'>socket</a></p><script>window.sidebarCurrent = {name: 'shutdown', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </section>
 
     <nav class="sub">
@@ -40,30 +40,16 @@
         </form>
     </nav>
 
-    <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>rustty</a>::<wbr><a class='enum' href=''>DevFunc</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content fn">
+<h1 class='fqn'><span class='in-band'>Function <a href='../../index.html'>nix</a>::<wbr><a href='../index.html'>sys</a>::<wbr><a href='index.html'>socket</a>::<wbr><a class='fn' href=''>shutdown</a></span><span class='out-of-band'><span id='render-detail'>
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-126' class='srclink' href='../src/rustty/device.rs.html#38-54' title='goto source code'>[src]</a></span></h1>
-<pre class='rust enum'>pub enum DevFunc {
-    EnterCa,
-    ExitCa,
-    ShowCursor,
-    HideCursor,
-    ClearScreen,
-    Sgr0,
-    Underline,
-    Bold,
-    Blink,
-    Reverse,
-    EnterKeypad,
-    ExitKeypad,
-    EnterMouse,
-    ExitMouse,
-    FuncsNum,
-}</pre><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.EnterCa'><code>EnterCa</code></td><td></td></tr><tr><td id='variant.ExitCa'><code>ExitCa</code></td><td></td></tr><tr><td id='variant.ShowCursor'><code>ShowCursor</code></td><td></td></tr><tr><td id='variant.HideCursor'><code>HideCursor</code></td><td></td></tr><tr><td id='variant.ClearScreen'><code>ClearScreen</code></td><td></td></tr><tr><td id='variant.Sgr0'><code>Sgr0</code></td><td></td></tr><tr><td id='variant.Underline'><code>Underline</code></td><td></td></tr><tr><td id='variant.Bold'><code>Bold</code></td><td></td></tr><tr><td id='variant.Blink'><code>Blink</code></td><td></td></tr><tr><td id='variant.Reverse'><code>Reverse</code></td><td></td></tr><tr><td id='variant.EnterKeypad'><code>EnterKeypad</code></td><td></td></tr><tr><td id='variant.ExitKeypad'><code>ExitKeypad</code></td><td></td></tr><tr><td id='variant.EnterMouse'><code>EnterMouse</code></td><td></td></tr><tr><td id='variant.ExitMouse'><code>ExitMouse</code></td><td></td></tr><tr><td id='variant.FuncsNum'><code>FuncsNum</code></td><td></td></tr></table></section>
+        </span><a id='src-21407' class='srclink' href='../../../src/nix/sys/socket/mod.rs.html#377-391' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn shutdown(df: <a class='type' href='../../../nix/fcntl/type.Fd.html' title='nix::fcntl::Fd'>Fd</a>, how: &amp;<a class='enum' href='../../../nix/sys/socket/enum.Shutdown.html' title='nix::sys::socket::Shutdown'>Shutdown</a>) -&gt; <a class='type' href='../../../nix/type.Result.html' title='nix::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</pre><div class='docblock'><p>Shut down part of a full-duplex connection.</p>
+
+<p><a href="http://man7.org/linux/man-pages/man2/shutdown.2.html">Further reading</a></p>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -106,13 +92,13 @@
     
 
     <script>
-        window.rootPath = "../";
-        window.currentCrate = "rustty";
+        window.rootPath = "../../../";
+        window.currentCrate = "nix";
         window.playgroundUrl = "";
     </script>
-    <script src="../jquery.js"></script>
-    <script src="../main.js"></script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script async src="../../../search-index.js"></script>
 </body>
 </html>
