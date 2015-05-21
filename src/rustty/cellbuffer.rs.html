@@ -157,6 +157,30 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>;
 
@@ -164,7 +188,7 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CellBuffer</span> {
     <span class='ident'>cols</span>: <span class='ident'>usize</span>,
     <span class='ident'>rows</span>: <span class='ident'>usize</span>,
-    <span class='ident'>cells</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>cells</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;&gt;</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>CellBuffer</span> {
@@ -172,8 +196,16 @@
         <span class='ident'>CellBuffer</span> {
             <span class='ident'>cols</span>: <span class='ident'>cols</span>,
             <span class='ident'>rows</span>: <span class='ident'>rows</span>,
-            <span class='ident'>cells</span>: <span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Cell</span>::<span class='ident'>blank_default</span>(); <span class='ident'>rows</span>]; <span class='ident'>cols</span>],
+            <span class='ident'>cells</span>: <span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Cell</span>::<span class='ident'>blank_default</span>(); <span class='ident'>cols</span>]; <span class='ident'>rows</span>],
         }
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>cols</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
+        <span class='self'>self</span>.<span class='ident'>cols</span>
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rows</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
+        <span class='self'>self</span>.<span class='ident'>rows</span>
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>blank</span>: <span class='ident'>Cell</span>) {
@@ -222,15 +254,31 @@
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Cell</span> {
-    <span class='ident'>ch</span>: <span class='ident'>u8</span>,
-    <span class='ident'>fg</span>: <span class='ident'>Style</span>,
-    <span class='ident'>bg</span>: <span class='ident'>Style</span>,
+    <span class='kw'>pub</span> <span class='ident'>ch</span>: <span class='ident'>char</span>,
+    <span class='kw'>pub</span> <span class='ident'>fg</span>: <span class='ident'>Style</span>,
+    <span class='kw'>pub</span> <span class='ident'>bg</span>: <span class='ident'>Style</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Cell</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
+        <span class='ident'>Cell</span> {
+            <span class='ident'>ch</span>: <span class='ident'>ch</span>,
+            <span class='ident'>fg</span>: <span class='ident'>fg</span>,
+            <span class='ident'>bg</span>: <span class='ident'>bg</span>,
+        }
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>char_default</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
+        <span class='ident'>Cell</span> {
+            <span class='ident'>ch</span>: <span class='ident'>ch</span>,
+            <span class='ident'>fg</span>: <span class='ident'>Style</span>::<span class='ident'>default</span>(),
+            <span class='ident'>bg</span>: <span class='ident'>Style</span>::<span class='ident'>default</span>(),
+        }
+    }
+
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>blank</span>(<span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='ident'>Cell</span> {
-            <span class='ident'>ch</span>: <span class='string'>b&#39; &#39;</span>,
+            <span class='ident'>ch</span>: <span class='string'>&#39; &#39;</span>,
             <span class='ident'>fg</span>: <span class='ident'>fg</span>,
             <span class='ident'>bg</span>: <span class='ident'>bg</span>,
         }
@@ -238,7 +286,7 @@
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>blank_default</span>() <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='ident'>Cell</span> {
-            <span class='ident'>ch</span>: <span class='string'>b&#39; &#39;</span>,
+            <span class='ident'>ch</span>: <span class='string'>&#39; &#39;</span>,
             <span class='ident'>fg</span>: <span class='ident'>Style</span>::<span class='ident'>default</span>(),
             <span class='ident'>bg</span>: <span class='ident'>Style</span>::<span class='ident'>default</span>(),
         }
@@ -256,15 +304,15 @@
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Color</span> {
-    <span class='ident'>Default</span>,
-    <span class='ident'>Black</span>,
-    <span class='ident'>Red</span>,
-    <span class='ident'>Green</span>,
-    <span class='ident'>Yellow</span>,
-    <span class='ident'>Blue</span>,
-    <span class='ident'>Magenta</span>,
-    <span class='ident'>Cyan</span>,
-    <span class='ident'>White</span>,
+    <span class='ident'>Default</span> <span class='op'>=</span> <span class='number'>0x0000</span>,
+    <span class='ident'>Black</span> <span class='op'>=</span> <span class='number'>0x0001</span>,
+    <span class='ident'>Red</span> <span class='op'>=</span> <span class='number'>0x0002</span>,
+    <span class='ident'>Green</span> <span class='op'>=</span> <span class='number'>0x0003</span>,
+    <span class='ident'>Yellow</span> <span class='op'>=</span> <span class='number'>0x0004</span>,
+    <span class='ident'>Blue</span> <span class='op'>=</span> <span class='number'>0x0005</span>,
+    <span class='ident'>Magenta</span> <span class='op'>=</span> <span class='number'>0x0006</span>,
+    <span class='ident'>Cyan</span> <span class='op'>=</span> <span class='number'>0x0007</span>,
+    <span class='ident'>White</span> <span class='op'>=</span> <span class='number'>0x0008</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
