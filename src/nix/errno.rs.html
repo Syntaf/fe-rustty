@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/git/checkouts/nix-rust-f423826171ff8c33/master/src/errno.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.3.6/src/errno.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>errno.rs.html -- source</title>
@@ -2688,12 +2688,12 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
     <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
-    <span class='kw'>use</span> <span class='ident'>nixtest</span>::<span class='ident'>assert_const_eq</span>;
+    <span class='kw'>use</span> <span class='ident'>nixtest</span>::<span class='ident'>assert_errno_eq</span>;
     <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_int</span>;
 
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>check_errno</span> {
         ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span>:<span class='ident'>ident</span>),<span class='op'>+</span>) <span class='op'>=&gt;</span> {{
-            $(<span class='ident'>assert_const_eq</span>(<span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span>), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span> <span class='kw'>as</span> <span class='ident'>c_int</span>);)<span class='op'>+</span>
+            $(<span class='ident'>assert_errno_eq</span>(<span class='macro'>stringify</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span>), <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>errno</span> <span class='kw'>as</span> <span class='ident'>c_int</span>);)<span class='op'>+</span>
         }};
     }
 
