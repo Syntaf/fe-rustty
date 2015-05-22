@@ -432,11 +432,11 @@
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>signal</span>::<span class='ident'>signal</span>::<span class='ident'>SIGWINCH</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>ioctl</span>;
 
-<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>Error</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>device</span>::{<span class='ident'>Device</span>, <span class='ident'>DevFunc</span>};
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>bytebuffer</span>::<span class='ident'>ByteBuffer</span>;
-<span class='kw'>use</span> <span class='ident'>super</span>::<span class='ident'>cursor</span>::<span class='ident'>Cursor</span>;
+<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>device</span>::{<span class='ident'>Device</span>, <span class='ident'>DevFunc</span>};
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>bytebuffer</span>::<span class='ident'>ByteBuffer</span>;
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cursor</span>::<span class='ident'>Cursor</span>;
 
 <span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when handled elsewhere.</span>
 <span class='kw'>static</span> <span class='ident'>SIGWINCH_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;

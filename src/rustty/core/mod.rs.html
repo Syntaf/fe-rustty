@@ -40,29 +40,19 @@
         </form>
     </nav>
 
-    <section id='main' class="content source"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
-<span id="10">10</span>
-<span id="11">11</span>
+    <section id='main' class="content source"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
 </pre><pre class='rust '>
-<span class='doccomment'>//! Core module</span>
-
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>terminal</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>device</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>cellbuffer</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>bytebuffer</span>;
+<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>device</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>cursor</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>terminal</span>::<span class='ident'>Terminal</span>;
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>cursor</span>::<span class='ident'>Cursor</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
