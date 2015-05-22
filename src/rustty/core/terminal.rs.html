@@ -462,6 +462,9 @@
 <span id="420">420</span>
 <span id="421">421</span>
 <span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -629,6 +632,9 @@
         <span class='self'>self</span>.<span class='ident'>cursor_last</span> <span class='op'>=</span> <span class='ident'>Cursor</span>::<span class='ident'>Invalid</span>;
 
         <span class='kw'>for</span> <span class='ident'>x</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>cols</span>() {
+            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>x</span>] {
+                <span class='kw'>continue</span>; <span class='comment'>// Redundant draw checking.</span>
+            }
             <span class='kw'>for</span> <span class='ident'>y</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>rows</span>() {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] {
                     <span class='kw'>continue</span>; <span class='comment'>// Don&#39;t make rendundant draws.</span>
