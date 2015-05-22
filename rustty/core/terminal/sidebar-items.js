@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Terminal","Terminal object."]]});
+initSidebarItems({"struct":[["Terminal","A representation of the current terminal window."]]});

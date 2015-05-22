@@ -459,6 +459,24 @@
 <span id="417">417</span>
 <span id="418">418</span>
 <span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -483,59 +501,68 @@
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>bytebuffer</span>::<span class='ident'>ByteBuffer</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cursor</span>::<span class='ident'>Cursor</span>;
 
-<span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when handled elsewhere.</span>
+<span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when buffers are resized.</span>
 <span class='kw'>static</span> <span class='ident'>SIGWINCH_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
 
-<span class='doccomment'>/// Set to true when there is an active Terminal instance.</span>
-<span class='doccomment'>/// Reset to false when it goes out of scope.</span>
+<span class='doccomment'>/// Ensures that there is only ever one Terminal object at any one time.</span>
+<span class='doccomment'>/// Set to true on creation of a Terminal object.</span>
+<span class='doccomment'>/// Reset to false when terminal object goes out of scope.</span>
 <span class='kw'>static</span> <span class='ident'>RUSTTY_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
 
+<span class='doccomment'>/// Constant for TIOCGWINSZ syscall on OS X.</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;macos&quot;</span>)]</span>
 <span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x40087468</span>;
 
+<span class='doccomment'>/// Constant for TIOCGWINSZ syscall on Linux.</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;linux&quot;</span>)]</span>
 <span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x00005413</span>;
 
 
-<span class='doccomment'>/// Terminal object.</span>
+<span class='doccomment'>/// A representation of the current terminal window.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Only one `Terminal` object can exist at any one time.</span>
+<span class='doccomment'>/// When a `Terminal` goes out of scope it resets the underlying terminal to its original state.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Terminal</span> {
-    <span class='ident'>orig_tios</span>: <span class='ident'>termios</span>::<span class='ident'>Termios</span>,
-    <span class='ident'>tty</span>: <span class='ident'>File</span>,
-    <span class='ident'>rawtty</span>: <span class='ident'>RawFd</span>,
-    <span class='ident'>cols</span>: <span class='ident'>usize</span>,
-    <span class='ident'>rows</span>: <span class='ident'>usize</span>,
-    <span class='ident'>device</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>Device</span>,
-    <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>,
-    <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>,
-    <span class='ident'>outbuffer</span>: <span class='ident'>ByteBuffer</span>,
-    <span class='ident'>fg</span>: <span class='ident'>Style</span>,
-    <span class='ident'>bg</span>: <span class='ident'>Style</span>,
-    <span class='ident'>last_fg</span>: <span class='ident'>Style</span>,
-    <span class='ident'>last_bg</span>: <span class='ident'>Style</span>,
-    <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>,
-    <span class='ident'>cursor_last</span>: <span class='ident'>Cursor</span>,
+    <span class='ident'>orig_tios</span>: <span class='ident'>termios</span>::<span class='ident'>Termios</span>, <span class='comment'>// Original underlying terminal state.</span>
+    <span class='ident'>tty</span>: <span class='ident'>File</span>, <span class='comment'>// Underlying terminal file.</span>
+    <span class='ident'>rawtty</span>: <span class='ident'>RawFd</span>, <span class='comment'>// Raw file descriptor of underlying terminal file.</span>
+    <span class='ident'>cols</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of columns in the terminal window.</span>
+    <span class='ident'>rows</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of rows in the terminal window.</span>
+    <span class='ident'>device</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>Device</span>, <span class='comment'>// Underlying terminal device (xterm, gnome, etc.).</span>
+    <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>, <span class='comment'>// Internal backbuffer.</span>
+    <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>, <span class='comment'>// Internal frontbuffer.</span>
+    <span class='ident'>outbuffer</span>: <span class='ident'>ByteBuffer</span>, <span class='comment'>// Internal output buffer.</span>
+    <span class='ident'>inbuffer</span>: <span class='ident'>ByteBuffer</span>, <span class='comment'>// Internal input buffer.</span>
+    <span class='ident'>lastfg</span>: <span class='ident'>Style</span>, <span class='comment'>// Last foreground style written to the output buffer.</span>
+    <span class='ident'>lastbg</span>: <span class='ident'>Style</span>, <span class='comment'>// Last background style written to the input buffer.</span>
+    <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>, <span class='comment'>// Current cursor position.</span>
+    <span class='ident'>cursor_last</span>: <span class='ident'>Cursor</span>, <span class='comment'>// Last cursor position.</span>
 }
 
 <span class='kw'>impl</span> <span class='ident'>Terminal</span> {
+    <span class='doccomment'>/// Creates a new `Terminal` with default settings.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>())
     }
 
+    <span class='doccomment'>/// Creates a new `Terminal` with each cell set to the given character.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_char</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>))
     }
 
+    <span class='doccomment'>/// Creates a new `Terminal` with each cell set to the given styles.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_styles</span>(<span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>))
     }
 
+    <span class='doccomment'>/// Creates a new `Terminal` with each cell set to the given cell.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_cell</span>(<span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Make sure there is only ever one instance.</span>
         <span class='kw'>if</span> <span class='ident'>RUSTTY_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>false</span>, <span class='boolval'>true</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='string'>&quot;Rustty already initialized&quot;</span>))
         }
 
-        <span class='comment'>// Return the device object for the user&#39;s terminal.</span>
+        <span class='comment'>// Return the device for the user&#39;s terminal.</span>
         <span class='kw'>let</span> <span class='ident'>device</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Device</span>::<span class='ident'>new</span>());
 
         <span class='comment'>// Open the terminal file for the controlling process.</span>
@@ -584,10 +611,9 @@
             <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>with_cell</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
             <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>with_cell</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
             <span class='ident'>outbuffer</span>: <span class='ident'>ByteBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>32</span> <span class='op'>*</span> <span class='number'>1024</span>),
-            <span class='ident'>fg</span>: <span class='ident'>cell</span>.<span class='ident'>fg</span>(),
-            <span class='ident'>bg</span>: <span class='ident'>cell</span>.<span class='ident'>bg</span>(),
-            <span class='ident'>last_fg</span>: <span class='ident'>cell</span>.<span class='ident'>fg</span>(),
-            <span class='ident'>last_bg</span>: <span class='ident'>cell</span>.<span class='ident'>bg</span>(),
+            <span class='ident'>inbuffer</span>: <span class='ident'>ByteBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>128</span>),
+            <span class='ident'>lastfg</span>: <span class='ident'>cell</span>.<span class='ident'>fg</span>(),
+            <span class='ident'>lastbg</span>: <span class='ident'>cell</span>.<span class='ident'>bg</span>(),
             <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>::<span class='ident'>Invalid</span>,
             <span class='ident'>cursor_last</span>: <span class='ident'>Cursor</span>::<span class='ident'>Invalid</span>,
         };
@@ -615,9 +641,12 @@
         <span class='prelude-val'>Ok</span>(<span class='ident'>terminal</span>)
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
+    <span class='doccomment'>/// Send the current backbuffer to be displayed.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_buffers</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='comment'>// Invalidate the last cursor position.</span>
         <span class='self'>self</span>.<span class='ident'>cursor_last</span> <span class='op'>=</span> <span class='ident'>Cursor</span>::<span class='ident'>Invalid</span>;
 
+        <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>update_size</span>());
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
@@ -626,7 +655,7 @@
         <span class='kw'>for</span> <span class='ident'>x</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>cols</span>() {
             <span class='kw'>for</span> <span class='ident'>y</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>rows</span>() {
                 <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] {
-                    <span class='kw'>continue</span>;
+                    <span class='kw'>continue</span>; <span class='comment'>// Don&#39;t make rendundant draws.</span>
                 } <span class='kw'>else</span> {
                     <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>];
                 }
@@ -658,28 +687,34 @@
         (<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>)
     }
 
-    <span class='doccomment'>/// Clears the internal back buffer with the provided cell.</span>
+    <span class='doccomment'>/// Clears the internal backbuffer with whitespace.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>();
     }
 
+    <span class='doccomment'>/// Clears the internal backbuffer with the given character.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) {
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear_with_char</span>(<span class='ident'>ch</span>);
     }
 
+    <span class='doccomment'>/// Clears the internal backbuffer with the given styles.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) {
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear_with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>);
     }
 
+    <span class='doccomment'>/// Clears the internal backbuffer with the given cell.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) {
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear_with_cell</span>(<span class='ident'>cell</span>);
     }
 
+    <span class='doccomment'>/// Checks whether the window size has changed, returning `true` if it has.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>check_resize</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>)
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>resize_maybe</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
+    <span class='doccomment'>/// Performs a resize if the window size has changed, returning the new size. Otherwise returns</span>
+    <span class='doccomment'>/// none.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>update_size</span>());
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
@@ -724,6 +759,19 @@
         <span class='prelude-val'>Ok</span>(())
     }
 
+    <span class='kw'>fn</span> <span class='ident'>send_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>cx</span>, <span class='ident'>cy</span>) <span class='op'>=</span> <span class='ident'>cursor</span> {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>lx</span>, <span class='ident'>ly</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cursor_last</span> {
+                <span class='kw'>if</span> (<span class='ident'>cx</span>, <span class='ident'>cy</span>) <span class='op'>!=</span> (<span class='ident'>lx</span> <span class='op'>+</span> <span class='number'>1</span>, <span class='ident'>ly</span>) {
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>(<span class='ident'>cursor</span>));
+                }
+            }
+        }
+        <span class='self'>self</span>.<span class='ident'>cursor_last</span> <span class='op'>=</span> <span class='ident'>cursor</span>;
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>ch</span>));
+        <span class='prelude-val'>Ok</span>(())
+    }
+
     <span class='kw'>fn</span> <span class='ident'>send_clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>));
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ClearScreen</span>]));
@@ -736,7 +784,7 @@
     }
 
     <span class='kw'>fn</span> <span class='ident'>send_style</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='ident'>fg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>last_fg</span> <span class='op'>||</span> <span class='ident'>bg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>last_bg</span> {
+        <span class='kw'>if</span> <span class='ident'>fg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>lastfg</span> <span class='op'>||</span> <span class='ident'>bg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>lastbg</span> {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Sgr0</span>]));
 
             <span class='kw'>match</span> <span class='ident'>fg</span>.<span class='ident'>attr</span>() {
@@ -762,8 +810,8 @@
             } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>bg</span>.<span class='ident'>color</span>() <span class='op'>!=</span> <span class='ident'>Color</span>::<span class='ident'>Default</span> {
                 <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr_bg</span>(<span class='ident'>bg</span>.<span class='ident'>color</span>()))
             }
-            <span class='self'>self</span>.<span class='ident'>last_fg</span> <span class='op'>=</span> <span class='ident'>fg</span>;
-            <span class='self'>self</span>.<span class='ident'>last_bg</span> <span class='op'>=</span> <span class='ident'>bg</span>;
+            <span class='self'>self</span>.<span class='ident'>lastfg</span> <span class='op'>=</span> <span class='ident'>fg</span>;
+            <span class='self'>self</span>.<span class='ident'>lastbg</span> <span class='op'>=</span> <span class='ident'>bg</span>;
         }
         <span class='prelude-val'>Ok</span>(())
     }
@@ -795,23 +843,9 @@
         <span class='prelude-val'>Ok</span>(())
     }
 
-    <span class='kw'>fn</span> <span class='ident'>send_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>cx</span>, <span class='ident'>cy</span>) <span class='op'>=</span> <span class='ident'>cursor</span> {
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>lx</span>, <span class='ident'>ly</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cursor_last</span> {
-                <span class='kw'>if</span> (<span class='ident'>cx</span>, <span class='ident'>cy</span>) <span class='op'>!=</span> (<span class='ident'>lx</span> <span class='op'>+</span> <span class='number'>1</span>, <span class='ident'>ly</span>) {
-                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>(<span class='ident'>cursor</span>));
-                }
-            }
-        }
-        <span class='self'>self</span>.<span class='ident'>cursor_last</span> <span class='op'>=</span> <span class='ident'>cursor</span>;
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>ch</span>));
-        <span class='prelude-val'>Ok</span>(())
-    }
-
     <span class='kw'>fn</span> <span class='ident'>resize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>resize_with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>())
     }
-
 
     <span class='kw'>fn</span> <span class='ident'>resize_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>blank</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
@@ -856,10 +890,12 @@
     }
 }
 
+<span class='comment'>// Sigwinch handler to notify when window has resized.</span>
 <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>sigwinch_handler</span>(_: <span class='ident'>i32</span>) {
     <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>store</span>(<span class='boolval'>true</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
 }
 
+<span class='comment'>// Window size struct to pass to the kernel.</span>
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>struct</span> <span class='ident'>WindowSize</span> {
     <span class='ident'>ws_row</span>: <span class='ident'>u16</span>,
