@@ -351,8 +351,8 @@
                     <span class='ident'>col</span>.<span class='ident'>extend</span>(<span class='ident'>iter</span>::<span class='ident'>repeat</span>(<span class='ident'>blank</span>).<span class='ident'>take</span>(<span class='ident'>newrows</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>rows</span>));
                 }
             } <span class='kw'>else</span> {
-                <span class='kw'>for</span> <span class='ident'>row</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
-                    <span class='ident'>row</span>.<span class='ident'>truncate</span>(<span class='ident'>newrows</span>);
+                <span class='kw'>for</span> <span class='ident'>col</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
+                    <span class='ident'>col</span>.<span class='ident'>truncate</span>(<span class='ident'>newrows</span>);
                 }
             }
             <span class='self'>self</span>.<span class='ident'>cells</span>.<span class='ident'>extend</span>(<span class='ident'>iter</span>::<span class='ident'>repeat</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>blank</span>; <span class='ident'>newrows</span>]).<span class='ident'>take</span>(<span class='ident'>newcols</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>cols</span>));
@@ -369,8 +369,8 @@
             <span class='self'>self</span>.<span class='ident'>cells</span>.<span class='ident'>truncate</span>(<span class='ident'>newcols</span>);
         }
 
-        <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>=</span> <span class='ident'>newrows</span>;
         <span class='self'>self</span>.<span class='ident'>cols</span> <span class='op'>=</span> <span class='ident'>newcols</span>;
+        <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>=</span> <span class='ident'>newrows</span>;
     }
 }
 
