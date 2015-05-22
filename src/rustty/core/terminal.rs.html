@@ -632,7 +632,7 @@
                 }
                 <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>];
                 <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>cell</span>.<span class='ident'>bg</span>()));
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_char</span>(<span class='ident'>x</span>, <span class='ident'>y</span>, <span class='ident'>cell</span>.<span class='ident'>ch</span>()));
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_char</span>(<span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>x</span>, <span class='ident'>y</span>), <span class='ident'>cell</span>.<span class='ident'>ch</span>()));
             }
         }
 
@@ -736,42 +736,36 @@
     }
 
     <span class='kw'>fn</span> <span class='ident'>send_style</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Sgr0</span>]));
+        <span class='kw'>if</span> <span class='ident'>fg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>last_fg</span> <span class='op'>||</span> <span class='ident'>bg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>last_bg</span> {
+            <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Sgr0</span>]));
 
-        <span class='kw'>match</span> <span class='ident'>fg</span>.<span class='ident'>attr</span>() {
-            <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Bold</span>])),
-            <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Underline</span>])),
-            <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Reverse</span>])),
-            _ <span class='op'>=&gt;</span> {},
-        }
-
-        <span class='kw'>match</span> <span class='ident'>bg</span>.<span class='ident'>attr</span>() {
-            <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Blink</span>])),
-            <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> {},
-            <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Reverse</span>])),
-            _ <span class='op'>=&gt;</span> {},
-        }
-
-        <span class='kw'>if</span> <span class='ident'>fg</span>.<span class='ident'>color</span>() <span class='op'>!=</span> <span class='ident'>Color</span>::<span class='ident'>Default</span> {
-            <span class='kw'>if</span> <span class='ident'>bg</span>.<span class='ident'>color</span>() <span class='op'>!=</span> <span class='ident'>Color</span>::<span class='ident'>Default</span> {
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr</span>(<span class='ident'>fg</span>.<span class='ident'>color</span>(), <span class='ident'>bg</span>.<span class='ident'>color</span>()))
-            } <span class='kw'>else</span> {
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr_fg</span>(<span class='ident'>fg</span>.<span class='ident'>color</span>()))
+            <span class='kw'>match</span> <span class='ident'>fg</span>.<span class='ident'>attr</span>() {
+                <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Bold</span>])),
+                <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Underline</span>])),
+                <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Reverse</span>])),
+                _ <span class='op'>=&gt;</span> {},
             }
-        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>bg</span>.<span class='ident'>color</span>() <span class='op'>!=</span> <span class='ident'>Color</span>::<span class='ident'>Default</span> {
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr_bg</span>(<span class='ident'>bg</span>.<span class='ident'>color</span>()))
+
+            <span class='kw'>match</span> <span class='ident'>bg</span>.<span class='ident'>attr</span>() {
+                <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Blink</span>])),
+                <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> {},
+                <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Reverse</span>])),
+                _ <span class='op'>=&gt;</span> {},
+            }
+
+            <span class='kw'>if</span> <span class='ident'>fg</span>.<span class='ident'>color</span>() <span class='op'>!=</span> <span class='ident'>Color</span>::<span class='ident'>Default</span> {
+                <span class='kw'>if</span> <span class='ident'>bg</span>.<span class='ident'>color</span>() <span class='op'>!=</span> <span class='ident'>Color</span>::<span class='ident'>Default</span> {
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr</span>(<span class='ident'>fg</span>.<span class='ident'>color</span>(), <span class='ident'>bg</span>.<span class='ident'>color</span>()))
+                } <span class='kw'>else</span> {
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr_fg</span>(<span class='ident'>fg</span>.<span class='ident'>color</span>()))
+                }
+            } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>bg</span>.<span class='ident'>color</span>() <span class='op'>!=</span> <span class='ident'>Color</span>::<span class='ident'>Default</span> {
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr_bg</span>(<span class='ident'>bg</span>.<span class='ident'>color</span>()))
+            }
+            <span class='self'>self</span>.<span class='ident'>last_fg</span> <span class='op'>=</span> <span class='ident'>fg</span>;
+            <span class='self'>self</span>.<span class='ident'>last_bg</span> <span class='op'>=</span> <span class='ident'>bg</span>;
         }
         <span class='prelude-val'>Ok</span>(())
-    }
-
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) {
-        <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>cols</span>() {
-            <span class='kw'>return</span>;
-        }
-        <span class='kw'>if</span> <span class='ident'>y</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>rows</span>() {
-            <span class='kw'>return</span>;
-        }
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] <span class='op'>=</span> <span class='ident'>cell</span>;
     }
 
     <span class='kw'>fn</span> <span class='ident'>write_sgr_fg</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fgcol</span>: <span class='ident'>Color</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
@@ -801,9 +795,15 @@
         <span class='prelude-val'>Ok</span>(())
     }
 
-    <span class='kw'>fn</span> <span class='ident'>send_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>(<span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>x</span>, <span class='ident'>y</span>)));
-        <span class='self'>self</span>.<span class='ident'>cursor_last</span> <span class='op'>=</span> <span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>x</span>, <span class='ident'>y</span>);
+    <span class='kw'>fn</span> <span class='ident'>send_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>cx</span>, <span class='ident'>cy</span>) <span class='op'>=</span> <span class='ident'>cursor</span> {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Cursor</span>::<span class='ident'>Valid</span>(<span class='ident'>lx</span>, <span class='ident'>ly</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cursor_last</span> {
+                <span class='kw'>if</span> (<span class='ident'>cx</span>, <span class='ident'>cy</span>) <span class='op'>!=</span> (<span class='ident'>lx</span> <span class='op'>+</span> <span class='number'>1</span>, <span class='ident'>ly</span>) {
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>(<span class='ident'>cursor</span>));
+                }
+            }
+        }
+        <span class='self'>self</span>.<span class='ident'>cursor_last</span> <span class='op'>=</span> <span class='ident'>cursor</span>;
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='ident'>ch</span>));
         <span class='prelude-val'>Ok</span>(())
     }
