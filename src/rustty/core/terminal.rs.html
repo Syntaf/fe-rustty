@@ -499,6 +499,8 @@
 <span id="457">457</span>
 <span id="458">458</span>
 <span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -506,6 +508,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>io</span>::{<span class='ident'>AsRawFd</span>, <span class='ident'>RawFd</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>atomic</span>::{<span class='ident'>AtomicBool</span>, <span class='ident'>Ordering</span>, <span class='ident'>ATOMIC_BOOL_INIT</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>VecDeque</span>;
 
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>IGNBRK</span>, <span class='ident'>BRKINT</span>, <span class='ident'>PARMRK</span>, <span class='ident'>ISTRIP</span>, <span class='ident'>INLCR</span>, <span class='ident'>IGNCR</span>, <span class='ident'>ICRNL</span>, <span class='ident'>IXON</span>};
@@ -520,7 +523,6 @@
 <span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>device</span>::{<span class='ident'>Device</span>, <span class='ident'>DevFunc</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>bytebuffer</span>::<span class='ident'>ByteBuffer</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cursor</span>::<span class='ident'>Cursor</span>;
 
 <span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when buffers are resized.</span>
@@ -539,6 +541,8 @@
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;linux&quot;</span>)]</span>
 <span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x00005413</span>;
 
+<span class='kw'>type</span> <span class='ident'>OutBuffer</span> <span class='op'>=</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>;
+<span class='kw'>type</span> <span class='ident'>InBuffer</span> <span class='op'>=</span> <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>;
 
 <span class='doccomment'>/// A representation of the current terminal window.</span>
 <span class='doccomment'>///</span>
@@ -553,8 +557,8 @@
     <span class='ident'>device</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>Device</span>, <span class='comment'>// Underlying terminal device (xterm, gnome, etc.).</span>
     <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>, <span class='comment'>// Internal backbuffer.</span>
     <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>, <span class='comment'>// Internal frontbuffer.</span>
-    <span class='ident'>outbuffer</span>: <span class='ident'>ByteBuffer</span>, <span class='comment'>// Internal output buffer.</span>
-    <span class='ident'>inbuffer</span>: <span class='ident'>ByteBuffer</span>, <span class='comment'>// Internal input buffer.</span>
+    <span class='ident'>outbuffer</span>: <span class='ident'>OutBuffer</span>, <span class='comment'>// Internal output buffer.</span>
+    <span class='ident'>inbuffer</span>: <span class='ident'>InBuffer</span>, <span class='comment'>// Internal input buffer.</span>
     <span class='ident'>lastfg</span>: <span class='ident'>Style</span>, <span class='comment'>// Last foreground style written to the output buffer.</span>
     <span class='ident'>lastbg</span>: <span class='ident'>Style</span>, <span class='comment'>// Last background style written to the input buffer.</span>
     <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>, <span class='comment'>// Current cursor position.</span>
@@ -632,8 +636,8 @@
             <span class='ident'>device</span>: <span class='ident'>device</span>,
             <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>with_cell</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
             <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>with_cell</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
-            <span class='ident'>outbuffer</span>: <span class='ident'>ByteBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>32</span> <span class='op'>*</span> <span class='number'>1024</span>),
-            <span class='ident'>inbuffer</span>: <span class='ident'>ByteBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>128</span>),
+            <span class='ident'>outbuffer</span>: <span class='ident'>OutBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>32</span> <span class='op'>*</span> <span class='number'>1024</span>),
+            <span class='ident'>inbuffer</span>: <span class='ident'>InBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>128</span>),
             <span class='ident'>lastfg</span>: <span class='ident'>cell</span>.<span class='ident'>fg</span>(),
             <span class='ident'>lastbg</span>: <span class='ident'>cell</span>.<span class='ident'>bg</span>(),
             <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>::<span class='ident'>Invalid</span>,
