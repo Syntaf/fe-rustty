@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["cellbuffer",""],["cursor",""],["terminal",""]]});
+initSidebarItems({"mod":[["cellbuffer",""],["cursor",""],["input",""],["terminal",""]]});

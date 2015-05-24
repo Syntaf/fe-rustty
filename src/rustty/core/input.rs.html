@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `src/core/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `src/core/input.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
-    <title>mod.rs.html -- source</title>
+    <title>input.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
@@ -44,15 +44,11 @@
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
-<span id="5">5</span>
-<span id="6">6</span>
 </pre><pre class='rust '>
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>terminal</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>cellbuffer</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>device</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>cursor</span>;
-<span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>input</span>;
-
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Event</span> {
+    <span class='ident'>Key</span>(<span class='ident'>char</span>),
+}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>
