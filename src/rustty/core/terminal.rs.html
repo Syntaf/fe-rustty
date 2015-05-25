@@ -1021,11 +1021,11 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>events</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>EpollEvent</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
         <span class='ident'>events</span>.<span class='ident'>push</span>(<span class='ident'>EpollEvent</span> { <span class='ident'>events</span>: <span class='ident'>EpollEventKind</span>::<span class='ident'>empty</span>(), <span class='ident'>data</span>: <span class='number'>0</span> });
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nevents</span>: <span class='ident'>usize</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nepolls</span>: <span class='ident'>usize</span>;
         <span class='comment'>// Because the sigwinch handler will interrupt epoll, if epoll returns EINTR we loop</span>
         <span class='comment'>// and try again. All other errors will return normally.</span>
         <span class='kw'>loop</span> {
-            <span class='ident'>nevents</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>epoll_wait</span>(<span class='self'>self</span>.<span class='ident'>epfd</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>events</span>, <span class='ident'>timeout_ms</span>) {
+            <span class='ident'>nepolls</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>epoll_wait</span>(<span class='self'>self</span>.<span class='ident'>epfd</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>events</span>, <span class='ident'>timeout_ms</span>) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>n</span>,
                 <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='kw'>if</span> <span class='ident'>e</span>.<span class='ident'>errno</span>() <span class='op'>==</span> <span class='ident'>Errno</span>::<span class='ident'>EINTR</span> <span class='op'>=&gt;</span> {
                     <span class='comment'>// Errno is EINTR, loop and try again.</span>
@@ -1041,7 +1041,7 @@
             <span class='kw'>break</span>;
         }
 
-        <span class='kw'>if</span> <span class='ident'>nevents</span> <span class='op'>==</span> <span class='number'>0</span> {
+        <span class='kw'>if</span> <span class='ident'>nepolls</span> <span class='op'>==</span> <span class='number'>0</span> {
             <span class='comment'>// No input available. Return None.</span>
             <span class='prelude-val'>Ok</span>(<span class='number'>0</span>)
         } <span class='kw'>else</span> {
