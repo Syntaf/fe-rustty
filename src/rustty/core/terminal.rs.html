@@ -561,6 +561,26 @@
 <span id="519">519</span>
 <span id="520">520</span>
 <span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -582,6 +602,7 @@
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>::{<span class='ident'>epoll_create</span>, <span class='ident'>epoll_ctl</span>, <span class='ident'>epoll_wait</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>::{<span class='ident'>EpollOp</span>, <span class='ident'>EpollEvent</span>, <span class='ident'>EpollEventKind</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>;
+<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>errno</span>::<span class='ident'>Errno</span>;
 
 <span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>device</span>::{<span class='ident'>Device</span>, <span class='ident'>DevFunc</span>};
@@ -1002,7 +1023,26 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>events</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>EpollEvent</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
         <span class='ident'>events</span>.<span class='ident'>push</span>(<span class='ident'>EpollEvent</span> { <span class='ident'>events</span>: <span class='ident'>EpollEventKind</span>::<span class='ident'>empty</span>(), <span class='ident'>data</span>: <span class='number'>0</span> });
 
-        <span class='kw'>let</span> <span class='ident'>nevents</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>epoll_wait</span>(<span class='self'>self</span>.<span class='ident'>epfd</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>events</span>, <span class='ident'>timeout_ms</span>));
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nevents</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>0</span>;
+        <span class='comment'>// Because the sigwinch handler will interrupt epoll, if epoll returns EINTR we loop</span>
+        <span class='comment'>// and try again. All other errors will return normally.</span>
+        <span class='kw'>loop</span> {
+            <span class='ident'>nevents</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>epoll_wait</span>(<span class='self'>self</span>.<span class='ident'>epfd</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>events</span>, <span class='ident'>timeout_ms</span>) {
+                <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='ident'>n</span>,
+                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='kw'>if</span> <span class='ident'>e</span>.<span class='ident'>errno</span>() <span class='op'>==</span> <span class='ident'>Errno</span>::<span class='ident'>EINTR</span> <span class='op'>=&gt;</span> {
+                    <span class='comment'>// Errno is EINTR, loop and try again.</span>
+                    <span class='kw'>continue</span>;
+                },
+                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                    <span class='comment'>// Error that isn&#39;t EINTR, return up the stack.</span>
+                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>from</span>(<span class='ident'>e</span>));
+                },
+            };
+            <span class='comment'>// We will only reach this point if epoll_wait succeeds, therefore we have assigned</span>
+            <span class='comment'>// to nevents and can break.</span>
+            <span class='kw'>break</span>;
+        }
+
         <span class='kw'>if</span> <span class='ident'>nevents</span> <span class='op'>==</span> <span class='number'>0</span> {
             <span class='comment'>// No input available. Return None.</span>
             <span class='prelude-val'>Ok</span>(<span class='number'>0</span>)
