@@ -256,6 +256,13 @@
 <span id="214">214</span>
 <span id="215">215</span>
 <span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
@@ -327,7 +334,6 @@
         <span class='kw'>for</span> <span class='ident'>col</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
             <span class='ident'>col</span>.<span class='ident'>resize</span>(<span class='ident'>newrows</span>, <span class='ident'>blank</span>);
         }
-
         <span class='self'>self</span>.<span class='ident'>cols</span> <span class='op'>=</span> <span class='ident'>newcols</span>;
         <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>=</span> <span class='ident'>newrows</span>;
     }
@@ -381,27 +387,35 @@
         <span class='self'>self</span>.<span class='ident'>ch</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_ch</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_ch</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='self'>self</span>.<span class='ident'>ch</span> <span class='op'>=</span> <span class='ident'>newch</span>;
-        <span class='self'>self</span>
+        <span class='op'>*</span><span class='self'>self</span>
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>fg</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Style</span> {
         <span class='self'>self</span>.<span class='ident'>fg</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_fg</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newfg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>fg_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Style</span> {
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>fg</span>
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_fg</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newfg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='self'>self</span>.<span class='ident'>fg</span> <span class='op'>=</span> <span class='ident'>newfg</span>;
-        <span class='self'>self</span>
+        <span class='op'>*</span><span class='self'>self</span>
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>bg</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Style</span> {
         <span class='self'>self</span>.<span class='ident'>bg</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_bg</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newbg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>bg_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Style</span> {
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>bg</span>
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_bg</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newbg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='self'>self</span>.<span class='ident'>bg</span> <span class='op'>=</span> <span class='ident'>newbg</span>;
-        <span class='self'>self</span>
+        <span class='op'>*</span><span class='self'>self</span>
     }
 }
 
@@ -431,18 +445,18 @@
         <span class='self'>self</span>.<span class='number'>0</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_color</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newcolor</span>: <span class='ident'>Color</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Style</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_color</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newcolor</span>: <span class='ident'>Color</span>) <span class='op'>-&gt;</span> <span class='ident'>Style</span> {
         <span class='self'>self</span>.<span class='number'>0</span> <span class='op'>=</span> <span class='ident'>newcolor</span>;
-        <span class='self'>self</span>
+        <span class='op'>*</span><span class='self'>self</span>
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>attr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Attr</span> {
         <span class='self'>self</span>.<span class='number'>1</span>
     }
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_attr</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newattr</span>: <span class='ident'>Attr</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Style</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_attr</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newattr</span>: <span class='ident'>Attr</span>) <span class='op'>-&gt;</span> <span class='ident'>Style</span> {
         <span class='self'>self</span>.<span class='number'>1</span> <span class='op'>=</span> <span class='ident'>newattr</span>;
-        <span class='self'>self</span>
+        <span class='op'>*</span><span class='self'>self</span>
     }
 }
 
