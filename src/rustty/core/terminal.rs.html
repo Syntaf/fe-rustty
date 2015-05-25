@@ -579,6 +579,7 @@
 <span id="537">537</span>
 <span id="538">538</span>
 <span id="539">539</span>
+<span id="540">540</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -1006,6 +1007,7 @@
         <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>=</span> <span class='ident'>ws</span>.<span class='ident'>ws_row</span> <span class='kw'>as</span> <span class='ident'>usize</span>;
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
         <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
+        <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>clear_with_cell</span>(<span class='ident'>blank</span>);
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_clear</span>(<span class='ident'>blank</span>.<span class='ident'>fg</span>(), <span class='ident'>blank</span>.<span class='ident'>bg</span>()));
         <span class='prelude-val'>Ok</span>(())
     }

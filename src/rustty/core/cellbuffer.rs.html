@@ -256,29 +256,6 @@
 <span id="214">214</span>
 <span id="215">215</span>
 <span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
@@ -346,32 +323,9 @@
     }
 
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>resize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newcols</span>: <span class='ident'>usize</span>, <span class='ident'>newrows</span>: <span class='ident'>usize</span>, <span class='ident'>blank</span>: <span class='ident'>Cell</span>) {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cols</span> <span class='op'>==</span> <span class='ident'>newcols</span> <span class='op'>&amp;&amp;</span> <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>==</span> <span class='ident'>newrows</span> {
-            <span class='kw'>return</span>;
-        }
-
-        <span class='kw'>if</span> <span class='ident'>newcols</span> <span class='op'>&gt;</span> <span class='self'>self</span>.<span class='ident'>cols</span> {
-            <span class='kw'>if</span> <span class='ident'>newrows</span> <span class='op'>&gt;</span> <span class='self'>self</span>.<span class='ident'>rows</span> {
-                <span class='kw'>for</span> <span class='ident'>col</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
-                    <span class='ident'>col</span>.<span class='ident'>extend</span>(<span class='ident'>iter</span>::<span class='ident'>repeat</span>(<span class='ident'>blank</span>).<span class='ident'>take</span>(<span class='ident'>newrows</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>rows</span>));
-                }
-            } <span class='kw'>else</span> {
-                <span class='kw'>for</span> <span class='ident'>col</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
-                    <span class='ident'>col</span>.<span class='ident'>truncate</span>(<span class='ident'>newrows</span>);
-                }
-            }
-            <span class='self'>self</span>.<span class='ident'>cells</span>.<span class='ident'>extend</span>(<span class='ident'>iter</span>::<span class='ident'>repeat</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>blank</span>; <span class='ident'>newrows</span>]).<span class='ident'>take</span>(<span class='ident'>newcols</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>cols</span>));
-        } <span class='kw'>else</span> {
-            <span class='kw'>if</span> <span class='ident'>newrows</span> <span class='op'>&gt;</span> <span class='self'>self</span>.<span class='ident'>rows</span> {
-                <span class='kw'>for</span> <span class='ident'>col</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
-                    <span class='ident'>col</span>.<span class='ident'>extend</span>(<span class='ident'>iter</span>::<span class='ident'>repeat</span>(<span class='ident'>blank</span>).<span class='ident'>take</span>(<span class='ident'>newrows</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>rows</span>));
-                }
-            } <span class='kw'>else</span> {
-                <span class='kw'>for</span> <span class='ident'>col</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
-                    <span class='ident'>col</span>.<span class='ident'>truncate</span>(<span class='ident'>newrows</span>);
-                }
-            }
-            <span class='self'>self</span>.<span class='ident'>cells</span>.<span class='ident'>truncate</span>(<span class='ident'>newcols</span>);
+        <span class='self'>self</span>.<span class='ident'>cells</span>.<span class='ident'>resize</span>(<span class='ident'>newcols</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>blank</span>; <span class='ident'>newrows</span>]);
+        <span class='kw'>for</span> <span class='ident'>col</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>cells</span> {
+            <span class='ident'>col</span>.<span class='ident'>resize</span>(<span class='ident'>newrows</span>, <span class='ident'>blank</span>);
         }
 
         <span class='self'>self</span>.<span class='ident'>cols</span> <span class='op'>=</span> <span class='ident'>newcols</span>;
