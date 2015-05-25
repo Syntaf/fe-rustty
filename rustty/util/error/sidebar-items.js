@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Error","The error type for terminal operations."]]});
+initSidebarItems({"struct":[["Error","An error arising from terminal operations."]]});

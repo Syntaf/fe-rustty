@@ -45,16 +45,27 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-3470' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#97-101' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-3470' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#102-106' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Cell {
     // some fields omitted
-}</pre><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>, fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<h4 id='method.with_char' class='method'><code>fn <a href='#method.with_char' class='fnname'>with_char</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<h4 id='method.with_styles' class='method'><code>fn <a href='#method.with_styles' class='fnname'>with_styles</a>(fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<h4 id='method.ch' class='method'><code>fn <a href='#method.ch' class='fnname'>ch</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a></code></h4>
-<h4 id='method.set_ch' class='method'><code>fn <a href='#method.set_ch' class='fnname'>set_ch</a>(&amp;mut self, newch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<h4 id='method.fg' class='method'><code>fn <a href='#method.fg' class='fnname'>fg</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
-<h4 id='method.fg_mut' class='method'><code>fn <a href='#method.fg_mut' class='fnname'>fg_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+}</pre><div class='docblock'><p>A cell of a terminal display.</p>
+
+<p>A <code>Cell</code> contains a character and a set of foreground and background <code>Style</code>s; it represents a
+single point on a terminal display. A terminal is an array of cells, each having its own
+character and styles.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>, fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Creates a new <code>Cell</code> from the given <code>char</code> and styles.</p>
+</div><h4 id='method.with_char' class='method'><code>fn <a href='#method.with_char' class='fnname'>with_char</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Creates a new <code>Cell</code> from the given <code>char</code> and default styles.</p>
+</div><h4 id='method.with_styles' class='method'><code>fn <a href='#method.with_styles' class='fnname'>with_styles</a>(fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Creates a new <code>Cell</code> from the given styles and a blank <code>char</code>.</p>
+</div><h4 id='method.ch' class='method'><code>fn <a href='#method.ch' class='fnname'>ch</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a></code></h4>
+<div class='docblock'><p>Returns the <code>Cell</code>&#39;s character.</p>
+</div><h4 id='method.set_ch' class='method'><code>fn <a href='#method.set_ch' class='fnname'>set_ch</a>(&amp;mut self, newch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Sets the <code>Cell</code>&#39;s character to the given <code>char</code></p>
+</div><h4 id='method.fg' class='method'><code>fn <a href='#method.fg' class='fnname'>fg</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+<div class='docblock'><p>Returns the <code>Cell</code>&#39;s foreground <code>Style</code>.</p>
+</div><h4 id='method.fg_mut' class='method'><code>fn <a href='#method.fg_mut' class='fnname'>fg_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
 <h4 id='method.set_fg' class='method'><code>fn <a href='#method.set_fg' class='fnname'>set_fg</a>(&amp;mut self, newfg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
 <h4 id='method.bg' class='method'><code>fn <a href='#method.bg' class='fnname'>bg</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
 <h4 id='method.bg_mut' class='method'><code>fn <a href='#method.bg_mut' class='fnname'>bg_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>

@@ -281,6 +281,17 @@
 <span id="239">239</span>
 <span id="240">240</span>
 <span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
@@ -377,6 +388,11 @@
     }
 }
 
+<span class='doccomment'>/// A cell of a terminal display.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// A `Cell` contains a character and a set of foreground and background `Style`s; it represents a</span>
+<span class='doccomment'>/// single point on a terminal display. A terminal is an array of cells, each having its own</span>
+<span class='doccomment'>/// character and styles.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Cell</span> {
     <span class='ident'>ch</span>: <span class='ident'>char</span>,
@@ -385,6 +401,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Cell</span> {
+    <span class='doccomment'>/// Creates a new `Cell` from the given `char` and styles.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='ident'>Cell</span> {
             <span class='ident'>ch</span>: <span class='ident'>ch</span>,
@@ -393,23 +410,28 @@
         }
     }
 
+    <span class='doccomment'>/// Creates a new `Cell` from the given `char` and default styles.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_char</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='ident'>ch</span>, <span class='ident'>Style</span>::<span class='ident'>default</span>(), <span class='ident'>Style</span>::<span class='ident'>default</span>())
     }
 
+    <span class='doccomment'>/// Creates a new `Cell` from the given styles and a blank `char`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_styles</span>(<span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='ident'>Cell</span> {
         <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='string'>&#39; &#39;</span>, <span class='ident'>fg</span>, <span class='ident'>bg</span>)
     }
 
+    <span class='doccomment'>/// Returns the `Cell`&#39;s character.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ch</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>char</span> {
         <span class='self'>self</span>.<span class='ident'>ch</span>
     }
 
+    <span class='doccomment'>/// Sets the `Cell`&#39;s character to the given `char`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_ch</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>newch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
         <span class='self'>self</span>.<span class='ident'>ch</span> <span class='op'>=</span> <span class='ident'>newch</span>;
         <span class='self'>self</span>
     }
 
+    <span class='doccomment'>/// Returns the `Cell`&#39;s foreground `Style`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>fg</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Style</span> {
         <span class='self'>self</span>.<span class='ident'>fg</span>
     }

@@ -44,7 +44,15 @@
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
 </pre><pre class='rust '>
+<span class='doccomment'>/// An input event.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// An `Event` represents a single event from the underying terminal. At the moment no further</span>
+<span class='doccomment'>/// processing is done on events and raw escape sequences will also be passed as `Key`s.:wq</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Event</span> {
     <span class='ident'>Key</span>(<span class='ident'>char</span>),

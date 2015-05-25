@@ -107,6 +107,7 @@
 <span id="65">65</span>
 <span id="66">66</span>
 <span id="67">67</span>
+<span id="68">68</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>convert</span>::<span class='ident'>From</span>;
@@ -115,7 +116,7 @@
 
 <span class='kw'>use</span> <span class='ident'>nix</span>;
 
-<span class='doccomment'>/// The error type for terminal operations.</span>
+<span class='doccomment'>/// An error arising from terminal operations.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Error</span> {
     <span class='ident'>description</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>,
@@ -123,6 +124,7 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Error</span> {
+    <span class='doccomment'>/// Creates a new `Error` with the given description.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>desc</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='ident'>Error</span> {
         <span class='ident'>Error</span> {
             <span class='ident'>description</span>: <span class='ident'>desc</span>,

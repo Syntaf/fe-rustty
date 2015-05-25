@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Attr",""],["Color",""],["Event",""]],"struct":[["Cell",""],["Error","The error type for terminal operations."],["Style",""],["Terminal","A representation of the current terminal window."]]});
+initSidebarItems({"enum":[["Attr",""],["Color",""],["Event","An input event."]],"struct":[["Cell","A cell of a terminal display."],["Error","An error arising from terminal operations."],["Style",""],["Terminal","A representation of the current terminal window."]]});
