@@ -591,7 +591,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>VecDeque</span>;
 
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>;
-<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>IGNBRK</span>, <span class='ident'>BRKINT</span>, <span class='ident'>PARMRK</span>, <span class='ident'>ISTRIP</span>, <span class='ident'>INLCR</span>, <span class='ident'>IGNCR</span>, <span class='ident'>ICRNL</span>, <span class='ident'>IXON</span>, <span class='ident'>IUTF8</span>};
+<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>IGNBRK</span>, <span class='ident'>BRKINT</span>, <span class='ident'>PARMRK</span>, <span class='ident'>ISTRIP</span>, <span class='ident'>INLCR</span>, <span class='ident'>IGNCR</span>, <span class='ident'>ICRNL</span>, <span class='ident'>IXON</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>OPOST</span>, <span class='ident'>ECHO</span>, <span class='ident'>ECHONL</span>, <span class='ident'>ICANON</span>, <span class='ident'>ISIG</span>, <span class='ident'>IEXTEN</span>, <span class='ident'>CSIZE</span>, <span class='ident'>PARENB</span>, <span class='ident'>CS8</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>VMIN</span>, <span class='ident'>VTIME</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::<span class='ident'>SetArg</span>;
@@ -1023,7 +1023,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>events</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>EpollEvent</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
         <span class='ident'>events</span>.<span class='ident'>push</span>(<span class='ident'>EpollEvent</span> { <span class='ident'>events</span>: <span class='ident'>EpollEventKind</span>::<span class='ident'>empty</span>(), <span class='ident'>data</span>: <span class='number'>0</span> });
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nevents</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>0</span>;
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nevents</span>: <span class='ident'>usize</span>;
         <span class='comment'>// Because the sigwinch handler will interrupt epoll, if epoll returns EINTR we loop</span>
         <span class='comment'>// and try again. All other errors will return normally.</span>
         <span class='kw'>loop</span> {
@@ -1049,7 +1049,7 @@
         } <span class='kw'>else</span> {
             <span class='comment'>// Input is available from the terminal.</span>
             <span class='comment'>// Get an iterator of chars over the input stream.</span>
-            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>chars</span> <span class='op'>=</span> <span class='ident'>Read</span>::<span class='ident'>by_ref</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>tty</span>).<span class='ident'>chars</span>();
+            <span class='kw'>let</span> <span class='ident'>chars</span> <span class='op'>=</span> <span class='ident'>Read</span>::<span class='ident'>by_ref</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>tty</span>).<span class='ident'>chars</span>();
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0</span>;
             <span class='kw'>for</span> <span class='ident'>chr</span> <span class='kw'>in</span> <span class='ident'>chars</span> {
                 <span class='kw'>let</span> <span class='ident'>ch</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>chr</span>);
