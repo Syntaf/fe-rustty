@@ -579,8 +579,6 @@
 <span id="537">537</span>
 <span id="538">538</span>
 <span id="539">539</span>
-<span id="540">540</span>
-<span id="541">541</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -638,7 +636,6 @@
     <span class='ident'>tty</span>: <span class='ident'>File</span>, <span class='comment'>// Underlying terminal file.</span>
     <span class='ident'>rawtty</span>: <span class='ident'>RawFd</span>, <span class='comment'>// Raw file descriptor of underlying terminal file.</span>
     <span class='ident'>epfd</span>: <span class='ident'>RawFd</span>, <span class='comment'>// Epoll file descriptor.</span>
-    <span class='ident'>epev</span>: <span class='ident'>EpollEvent</span>, <span class='comment'>// Epoll event bound to /dev/tty.</span>
     <span class='ident'>cols</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of columns in the terminal window.</span>
     <span class='ident'>rows</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of rows in the terminal window.</span>
     <span class='ident'>device</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>Device</span>, <span class='comment'>// Underlying terminal device (xterm, gnome, etc.).</span>
@@ -726,7 +723,6 @@
             <span class='ident'>tty</span>: <span class='ident'>tty</span>,
             <span class='ident'>rawtty</span>: <span class='ident'>rawtty</span>,
             <span class='ident'>epfd</span>: <span class='ident'>epfd</span>,
-            <span class='ident'>epev</span>: <span class='ident'>epev</span>,
             <span class='ident'>cols</span>: <span class='number'>0</span>,
             <span class='ident'>rows</span>: <span class='number'>0</span>,
             <span class='ident'>device</span>: <span class='ident'>device</span>,
