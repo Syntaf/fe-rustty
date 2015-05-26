@@ -538,7 +538,6 @@
 <span id="496">496</span>
 <span id="497">497</span>
 <span id="498">498</span>
-<span id="499">499</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 
@@ -607,8 +606,7 @@
 
 <span class='doccomment'>/// A single point on a terminal display.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// A `Cell` contains a character and a set of foreground and background `Style`s; it represents a</span>
-<span class='doccomment'>/// single point on a terminal display.</span>
+<span class='doccomment'>/// A `Cell` contains a character and a set of foreground and background `Style`s.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Cell</span> {
     <span class='ident'>ch</span>: <span class='ident'>char</span>,
@@ -653,7 +651,7 @@
         <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='ident'>ch</span>, <span class='ident'>Style</span>::<span class='ident'>default</span>(), <span class='ident'>Style</span>::<span class='ident'>default</span>())
     }
 
-    <span class='doccomment'>/// Creates a new `Cell` with the given styles and a blank `char`.</span>
+    <span class='doccomment'>/// Creates a new `Cell` with the given `Style`s and a blank `char`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
@@ -675,7 +673,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>/// use rustty::Cell;</span>
-    <span class='doccomment'>/// </span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut cell = Cell::with_char(&#39;x&#39;);</span>
     <span class='doccomment'>/// assert_eq!(cell.ch(), &#39;x&#39;);</span>
     <span class='doccomment'>/// ```</span>
@@ -707,7 +705,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>/// use rustty::{Cell, Style, Attr};</span>
-    <span class='doccomment'>/// </span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut cell = Cell::with_styles(Style::with_attr(Attr::Bold), Style::default());</span>
     <span class='doccomment'>/// assert_eq!(cell.fg(), Style::with_attr(Attr::Bold));</span>
     <span class='doccomment'>/// ```</span>
@@ -721,7 +719,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```</span>
     <span class='doccomment'>/// use rustty::{Cell, Style};</span>
-    <span class='doccomment'>/// </span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut cell = Cell::default();</span>
     <span class='doccomment'>/// assert_eq!(cell.fg_mut(), &amp;mut Style::default());</span>
     <span class='doccomment'>/// ```</span>
@@ -920,7 +918,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut style = Style::with_attr(Attr::BoldReverse);</span>
     <span class='doccomment'>/// assert_eq!(style.attr(), Attr::BoldReverse);</span>
-    <span class='doccomment'>/// </span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// style.set_attr(Attr::Underline);</span>
     <span class='doccomment'>/// assert_eq!(style.attr(), Attr::Underline);</span>
     <span class='doccomment'>/// ```</span>
