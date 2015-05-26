@@ -72,7 +72,6 @@
 <span id="30">30</span>
 <span id="31">31</span>
 <span id="32">32</span>
-<span id="33">33</span>
 </pre><pre class='rust '>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>io</span>)]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>collections</span>)]</span>
@@ -80,16 +79,15 @@
 
 <span class='doccomment'>//! # Rustty</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Rustty is a terminal UI library that provides a simple and concise abstraction over an</span>
+<span class='doccomment'>//! Rustty is a terminal UI library that provides a simple, concise abstraction over an</span>
 <span class='doccomment'>//! underlying terminal device.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! Rustty is based on the concepts of cells and events. The terminal display is an array of cells,</span>
+<span class='doccomment'>//! Rustty is based on the concepts of cells and events. A terminal display is an array of cells,</span>
 <span class='doccomment'>//! each holding a character and a set of foreground and background styles. Events are how a</span>
-<span class='doccomment'>//! terminal communicates changes in its state; each event represents some form of action taken by</span>
-<span class='doccomment'>//! the user, such as a keypress. Each terminal has an event stream that receives input events and</span>
-<span class='doccomment'>//! buffers them until they are read.</span>
+<span class='doccomment'>//! terminal communicates changes in its state; events are received from a terminal, processed, and</span>
+<span class='doccomment'>//! pushed onto an input stream to be read and responded to.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! More on the concepts of Rustty can be found in the</span>
+<span class='doccomment'>//! Futher reading on the concepts behind Rustty can be found in the</span>
 <span class='doccomment'>//! [README](https://github.com/cpjreynolds/rustty/blob/master/README.md)</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>nix</span>;

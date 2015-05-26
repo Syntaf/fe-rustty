@@ -45,18 +45,42 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-4544' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#246-251' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-4541' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#489-498' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Attr {
     Default,
     Bold,
     Underline,
+    BoldUnderline,
     Reverse,
-}</pre><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Default'><code>Default</code></td><td></td></tr><tr><td id='variant.Bold'><code>Bold</code></td><td></td></tr><tr><td id='variant.Underline'><code>Underline</code></td><td></td></tr><tr><td id='variant.Reverse'><code>Reverse</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+    BoldReverse,
+    UnderlineReverse,
+    BoldReverseUnderline,
+}</pre><div class='docblock'><p>The attributes of a <code>Cell</code>.</p>
+
+<p><code>Attr</code> enumerates all combinations of attributes a given <code>Style</code> may have.</p>
+
+<p><code>Attr::Default</code> represents no attribute and may be used to reset a <code>Style</code>&#39;s <code>Attr</code>.</p>
+
+<h1 id="examples" class='section-header'><a
+                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Attr</span>;
+
+<span class='comment'>// Default attribute.</span>
+<span class='kw'>let</span> <span class='ident'>def</span> <span class='op'>=</span> <span class='ident'>Attr</span>::<span class='ident'>Default</span>;
+
+<span class='comment'>// Base attribute.</span>
+<span class='kw'>let</span> <span class='ident'>base</span> <span class='op'>=</span> <span class='ident'>Attr</span>::<span class='ident'>Bold</span>;
+
+<span class='comment'>// Combination.</span>
+<span class='kw'>let</span> <span class='ident'>comb</span> <span class='op'>=</span> <span class='ident'>Attr</span>::<span class='ident'>UnderlineReverse</span>;
+</pre>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.Default'><code>Default</code></td><td></td></tr><tr><td id='variant.Bold'><code>Bold</code></td><td></td></tr><tr><td id='variant.Underline'><code>Underline</code></td><td></td></tr><tr><td id='variant.BoldUnderline'><code>BoldUnderline</code></td><td></td></tr><tr><td id='variant.Reverse'><code>Reverse</code></td><td></td></tr><tr><td id='variant.BoldReverse'><code>BoldReverse</code></td><td></td></tr><tr><td id='variant.UnderlineReverse'><code>UnderlineReverse</code></td><td></td></tr><tr><td id='variant.BoldReverseUnderline'><code>BoldReverseUnderline</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.ne' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h4>
 <h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'></div></section>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

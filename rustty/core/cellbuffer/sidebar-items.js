@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Attr",""],["Color",""]],"struct":[["Cell","A cell of a terminal display."],["Style",""]]});
+initSidebarItems({"enum":[["Attr","The attributes of a `Cell`."],["Color","The color of a `Cell`."]],"struct":[["Cell","A single point on a terminal display."],["Style","The style of a `Cell`."]]});

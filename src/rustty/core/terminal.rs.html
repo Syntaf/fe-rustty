@@ -700,8 +700,8 @@
             <span class='ident'>cols</span>: <span class='number'>0</span>,
             <span class='ident'>rows</span>: <span class='number'>0</span>,
             <span class='ident'>device</span>: <span class='ident'>device</span>,
-            <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>with_cell</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
-            <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>with_cell</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
+            <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
+            <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
             <span class='ident'>outbuffer</span>: <span class='ident'>OutBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>32</span> <span class='op'>*</span> <span class='number'>1024</span>),
             <span class='ident'>eventbuffer</span>: <span class='ident'>EventBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>128</span>),
             <span class='ident'>lastfg</span>: <span class='ident'>cell</span>.<span class='ident'>fg</span>(),
@@ -777,7 +777,7 @@
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
         }
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>();
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>());
         <span class='prelude-val'>Ok</span>(())
     }
 
@@ -787,7 +787,7 @@
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
         }
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear_with_char</span>(<span class='ident'>ch</span>);
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>));
         <span class='prelude-val'>Ok</span>(())
     }
 
@@ -797,7 +797,7 @@
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
         }
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear_with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>);
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>));
         <span class='prelude-val'>Ok</span>(())
     }
 
@@ -807,7 +807,7 @@
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
         }
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear_with_cell</span>(<span class='ident'>cell</span>);
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>cell</span>);
         <span class='prelude-val'>Ok</span>(())
     }
 
@@ -956,7 +956,7 @@
         <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>=</span> <span class='ident'>ws</span>.<span class='ident'>ws_row</span> <span class='kw'>as</span> <span class='ident'>usize</span>;
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
         <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
-        <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>clear_with_cell</span>(<span class='ident'>blank</span>);
+        <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>blank</span>);
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_clear</span>(<span class='ident'>blank</span>.<span class='ident'>fg</span>(), <span class='ident'>blank</span>.<span class='ident'>bg</span>()));
         <span class='prelude-val'>Ok</span>(())
     }
