@@ -41,11 +41,9 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>nix</a>::<wbr><a href='../index.html'>sys</a>::<wbr><a href='index.html'>socket</a>::<wbr><a class='trait' href=''>SockOpt</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-20754' class='srclink' href='../../../src/nix/sys/socket/mod.rs.html#281-289' title='goto source code'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../../index.html'>nix</a>::<wbr><a href='../index.html'>sys</a>::<wbr><a href='index.html'>socket</a>::<wbr><a class='trait' href=''>SockOpt</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-20748' href='../../../src/nix/sys/socket/mod.rs.html#281-289'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait SockOpt: <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> + <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> {
     type Val;
 }</pre><div class='docblock'><p>Represents a socket option that can be accessed or set. Used as an argument
@@ -53,23 +51,23 @@ to <code>getsockopt</code> and <code>setsockopt</code>.</p>
 </div>
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
-        <h3 id='associatedtype.Val' class='method stab '><code>type Val</code></h3></div>
+        <h3 id='associatedtype.Val' class='method'><a class='stability Unmarked' title='No stability level'></a><code>type Val</code></h3></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.ReuseAddr.html' title='nix::sys::socket::sockopt::ReuseAddr'>ReuseAddr</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.ReusePort.html' title='nix::sys::socket::sockopt::ReusePort'>ReusePort</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.TcpNoDelay.html' title='nix::sys::socket::sockopt::TcpNoDelay'>TcpNoDelay</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Linger.html' title='nix::sys::socket::sockopt::Linger'>Linger</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpAddMembership.html' title='nix::sys::socket::sockopt::IpAddMembership'>IpAddMembership</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpDropMembership.html' title='nix::sys::socket::sockopt::IpDropMembership'>IpDropMembership</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Ipv6AddMembership.html' title='nix::sys::socket::sockopt::Ipv6AddMembership'>Ipv6AddMembership</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Ipv6DropMembership.html' title='nix::sys::socket::sockopt::Ipv6DropMembership'>Ipv6DropMembership</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpMulticastTtl.html' title='nix::sys::socket::sockopt::IpMulticastTtl'>IpMulticastTtl</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpMulticastLoop.html' title='nix::sys::socket::sockopt::IpMulticastLoop'>IpMulticastLoop</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.ReceiveTimeout.html' title='nix::sys::socket::sockopt::ReceiveTimeout'>ReceiveTimeout</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.SendTimeout.html' title='nix::sys::socket::sockopt::SendTimeout'>SendTimeout</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Broadcast.html' title='nix::sys::socket::sockopt::Broadcast'>Broadcast</a></code></li>
-<li><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.OobInline.html' title='nix::sys::socket::sockopt::OobInline'>OobInline</a></code></li>
+    <li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.ReuseAddr.html' title='nix::sys::socket::sockopt::ReuseAddr'>ReuseAddr</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.ReusePort.html' title='nix::sys::socket::sockopt::ReusePort'>ReusePort</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.TcpNoDelay.html' title='nix::sys::socket::sockopt::TcpNoDelay'>TcpNoDelay</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Linger.html' title='nix::sys::socket::sockopt::Linger'>Linger</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpAddMembership.html' title='nix::sys::socket::sockopt::IpAddMembership'>IpAddMembership</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpDropMembership.html' title='nix::sys::socket::sockopt::IpDropMembership'>IpDropMembership</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Ipv6AddMembership.html' title='nix::sys::socket::sockopt::Ipv6AddMembership'>Ipv6AddMembership</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Ipv6DropMembership.html' title='nix::sys::socket::sockopt::Ipv6DropMembership'>Ipv6DropMembership</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpMulticastTtl.html' title='nix::sys::socket::sockopt::IpMulticastTtl'>IpMulticastTtl</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.IpMulticastLoop.html' title='nix::sys::socket::sockopt::IpMulticastLoop'>IpMulticastLoop</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.ReceiveTimeout.html' title='nix::sys::socket::sockopt::ReceiveTimeout'>ReceiveTimeout</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.SendTimeout.html' title='nix::sys::socket::sockopt::SendTimeout'>SendTimeout</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.Broadcast.html' title='nix::sys::socket::sockopt::Broadcast'>Broadcast</a></code></li>
+<li><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='trait' href='../../../nix/sys/socket/trait.SockOpt.html' title='nix::sys::socket::SockOpt'>SockOpt</a> for <a class='struct' href='../../../nix/sys/socket/sockopt/struct.OobInline.html' title='nix::sys::socket::sockopt::OobInline'>OobInline</a></code></li>
 </ul><script type="text/javascript" async
                               src="../../../implementors/nix/sys/socket/trait.SockOpt.js">
                       </script></section>
@@ -104,10 +102,6 @@ to <code>getsockopt</code> and <code>setsockopt</code>.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
