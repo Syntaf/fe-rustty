@@ -879,6 +879,8 @@
 <span id="837">837</span>
 <span id="838">838</span>
 <span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -907,6 +909,7 @@
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>input</span>::<span class='ident'>Event</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>position</span>::{<span class='ident'>Position</span>, <span class='ident'>Coordinate</span>, <span class='ident'>Cursor</span>, <span class='ident'>Pair</span>};
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>chars</span>::<span class='ident'>CharStream</span>;
 
 <span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when buffers are resized.</span>
 <span class='kw'>static</span> <span class='ident'>SIGWINCH_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
@@ -1646,7 +1649,8 @@
         } <span class='kw'>else</span> {
             <span class='comment'>// Input is available from the terminal.</span>
             <span class='comment'>// Get an iterator of chars over the input stream.</span>
-            <span class='kw'>let</span> <span class='ident'>chars</span> <span class='op'>=</span> <span class='ident'>Read</span>::<span class='ident'>by_ref</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>tty</span>).<span class='ident'>chars</span>();
+            <span class='kw'>let</span> <span class='ident'>tmp_tty</span> <span class='op'>=</span> <span class='ident'>Read</span>::<span class='ident'>by_ref</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>tty</span>);
+            <span class='kw'>let</span> <span class='ident'>chars</span> <span class='op'>=</span> <span class='ident'>CharStream</span>::<span class='ident'>from_reader</span>(<span class='ident'>tmp_tty</span>);
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0</span>;
             <span class='kw'>for</span> <span class='ident'>chr</span> <span class='kw'>in</span> <span class='ident'>chars</span> {
                 <span class='kw'>let</span> <span class='ident'>ch</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>chr</span>);
