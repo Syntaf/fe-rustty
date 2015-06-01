@@ -838,46 +838,6 @@
 <span id="796">796</span>
 <span id="797">797</span>
 <span id="798">798</span>
-<span id="799">799</span>
-<span id="800">800</span>
-<span id="801">801</span>
-<span id="802">802</span>
-<span id="803">803</span>
-<span id="804">804</span>
-<span id="805">805</span>
-<span id="806">806</span>
-<span id="807">807</span>
-<span id="808">808</span>
-<span id="809">809</span>
-<span id="810">810</span>
-<span id="811">811</span>
-<span id="812">812</span>
-<span id="813">813</span>
-<span id="814">814</span>
-<span id="815">815</span>
-<span id="816">816</span>
-<span id="817">817</span>
-<span id="818">818</span>
-<span id="819">819</span>
-<span id="820">820</span>
-<span id="821">821</span>
-<span id="822">822</span>
-<span id="823">823</span>
-<span id="824">824</span>
-<span id="825">825</span>
-<span id="826">826</span>
-<span id="827">827</span>
-<span id="828">828</span>
-<span id="829">829</span>
-<span id="830">830</span>
-<span id="831">831</span>
-<span id="832">832</span>
-<span id="833">833</span>
-<span id="834">834</span>
-<span id="835">835</span>
-<span id="836">836</span>
-<span id="837">837</span>
-<span id="838">838</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -974,13 +934,11 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>())
@@ -991,13 +949,11 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_char(&#39;x&#39;).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_char</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>))
@@ -1007,7 +963,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell, Style, Color, Attr};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let style1 = Style::with_color(Color::Blue);</span>
@@ -1017,8 +973,6 @@
     <span class='doccomment'>/// assert_eq!(term[0][0].fg(), Style::with_color(Color::Blue));</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].bg(), Style::with_attr(Attr::Reverse));</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_styles</span>(<span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>))
@@ -1028,15 +982,13 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let cell = Cell::with_char(&#39;x&#39;);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_cell(cell).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_cell</span>(<span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Make sure there is only ever one instance.</span>
@@ -1128,13 +1080,11 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// term.swap_buffers().unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_buffers</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1169,13 +1119,11 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// let width = term.cols();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>cols</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
         <span class='self'>self</span>.<span class='ident'>cols</span>
@@ -1185,13 +1133,11 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// let height = term.rows();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rows</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
         <span class='self'>self</span>.<span class='ident'>rows</span>
@@ -1201,14 +1147,12 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// let size = term.size();</span>
     <span class='doccomment'>/// assert_eq!(size, (term.cols(), term.rows()));</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>usize</span>, <span class='ident'>usize</span>) {
         (<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>)
@@ -1218,7 +1162,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_char(&#39;x&#39;).unwrap();</span>
@@ -1226,8 +1170,6 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.clear().unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1242,7 +1184,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_char(&#39;x&#39;).unwrap();</span>
@@ -1250,8 +1192,6 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.clear_with_char(&#39;y&#39;).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;y&#39;);</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1266,7 +1206,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell, Style, Color};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut style1 = Style::with_color(Color::Blue);</span>
@@ -1279,8 +1219,6 @@
     <span class='doccomment'>/// term.clear_with_styles(style2, style1).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].fg(), Style::with_color(Color::Red));</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].bg(), Style::with_color(Color::Blue));</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1295,7 +1233,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let cell1 = Cell::with_char(&#39;x&#39;);</span>
@@ -1306,8 +1244,6 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.clear_with_cell(cell2).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;y&#39;);</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1325,7 +1261,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
@@ -1339,8 +1275,6 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// // Unless try_resize() is called.</span>
     <span class='doccomment'>/// term.try_resize().unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>check_resize</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>)
@@ -1360,7 +1294,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
@@ -1368,8 +1302,6 @@
     <span class='doccomment'>/// // If new_size == Some(T) then T is the new size of the terminal.</span>
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize().unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>try_resize_with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>())
@@ -1380,7 +1312,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
@@ -1388,8 +1320,6 @@
     <span class='doccomment'>/// // If new_size == Some(T) then T is the new size of the terminal.</span>
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize_with_char(&#39;x&#39;).unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize_with_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>try_resize_with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>))
@@ -1400,7 +1330,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Style, Color};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let style = Style::with_color(Color::Red);</span>
@@ -1410,8 +1340,6 @@
     <span class='doccomment'>/// // If new_size == Some(T) then T is the new size of the terminal.</span>
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize_with_styles(style, style).unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>,
                                   <span class='ident'>fg</span>: <span class='ident'>Style</span>,
@@ -1424,7 +1352,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let cell = Cell::with_char(&#39;x&#39;);</span>
@@ -1434,8 +1362,6 @@
     <span class='doccomment'>/// // If new_size == Some(T) then T is the new size of the terminal.</span>
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize_with_cell(cell).unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
@@ -1449,14 +1375,12 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.set_cursor(1, 1).unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_invalid</span>() {
@@ -1471,14 +1395,12 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.hide_cursor().unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hide_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_valid</span>() {
@@ -1495,15 +1417,13 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```</span>
+    <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// # use std::thread::sleep_ms;</span>
     <span class='doccomment'>/// use rustty::{Terminal, Event};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let evt = term.get_event(1).unwrap();</span>
-    <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_event</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>timeout_ms</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Event</span><span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check if the event buffer is empty.</span>
