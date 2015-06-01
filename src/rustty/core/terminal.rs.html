@@ -1151,18 +1151,18 @@
         <span class='comment'>// Invalidate the last cursor position.</span>
         <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>invalidate_last_pos</span>();
 
-        <span class='kw'>for</span> <span class='ident'>x</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>cols</span>() {
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>x</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>] {
+        <span class='kw'>for</span> <span class='ident'>y</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>rows</span>() {
+            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>y</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>y</span>] {
                 <span class='kw'>continue</span>; <span class='comment'>// Don&#39;t redraw draw columns that haven&#39;t changed.</span>
             }
-            <span class='kw'>for</span> <span class='ident'>y</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>rows</span>() {
-                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] {
+            <span class='kw'>for</span> <span class='ident'>x</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>cols</span>() {
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>] {
                     <span class='kw'>continue</span>; <span class='comment'>// Don&#39;t redraw cells that haven&#39;t changed.</span>
                 } <span class='kw'>else</span> {
-                    <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>];
+                    <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>];
                     <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>cell</span>.<span class='ident'>bg</span>()));
                     <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_char</span>(<span class='ident'>Coordinate</span>::<span class='ident'>Valid</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)), <span class='ident'>cell</span>.<span class='ident'>ch</span>()));
-                    <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>x</span>][<span class='ident'>y</span>] <span class='op'>=</span> <span class='ident'>cell</span>;
+                    <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>] <span class='op'>=</span> <span class='ident'>cell</span>;
                 }
             }
         }
