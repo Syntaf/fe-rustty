@@ -878,9 +878,6 @@
 <span id="836">836</span>
 <span id="837">837</span>
 <span id="838">838</span>
-<span id="839">839</span>
-<span id="840">840</span>
-<span id="841">841</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -932,12 +929,13 @@
 
 <span class='doccomment'>/// A representation of the current terminal window.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// Only one `Terminal` object can exist at any one time.</span>
+<span class='doccomment'>/// Only one `Terminal` object can exist at any one time, `Terminal::new()` will return an `Error`</span>
+<span class='doccomment'>/// if a `Terminal` object already exists.</span>
 <span class='doccomment'>/// When a `Terminal` goes out of scope it resets the underlying terminal to its original state.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// ```</span>
+<span class='doccomment'>/// ```no_run</span>
 <span class='doccomment'>/// use rustty::{Terminal, Cell, Style, Color};</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// // Construct a new Terminal.</span>
@@ -953,10 +951,6 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// term[0][2].fg_mut().set_color(Color::Blue);</span>
 <span class='doccomment'>/// assert_eq!(term[0][2].fg().color(), Color::Blue);</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// // Relinquish resources upon going out of scope.</span>
-<span class='doccomment'>/// drop(term);</span>
-<span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Terminal</span> {
     <span class='ident'>orig_tios</span>: <span class='ident'>termios</span>::<span class='ident'>Termios</span>, <span class='comment'>// Original underlying terminal state.</span>
@@ -986,7 +980,7 @@
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>())
@@ -1003,7 +997,7 @@
     <span class='doccomment'>/// let mut term = Terminal::with_char(&#39;x&#39;).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_char</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>))
@@ -1024,7 +1018,7 @@
     <span class='doccomment'>/// assert_eq!(term[0][0].bg(), Style::with_attr(Attr::Reverse));</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_styles</span>(<span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>))
@@ -1042,7 +1036,7 @@
     <span class='doccomment'>/// let mut term = Terminal::with_cell(cell).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_cell</span>(<span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Make sure there is only ever one instance.</span>
@@ -1140,7 +1134,7 @@
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// term.swap_buffers().unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_buffers</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1181,7 +1175,7 @@
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// let width = term.cols();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>cols</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
         <span class='self'>self</span>.<span class='ident'>cols</span>
@@ -1197,7 +1191,7 @@
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>/// let height = term.rows();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rows</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
         <span class='self'>self</span>.<span class='ident'>rows</span>
@@ -1214,7 +1208,7 @@
     <span class='doccomment'>/// let size = term.size();</span>
     <span class='doccomment'>/// assert_eq!(size, (term.cols(), term.rows()));</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>usize</span>, <span class='ident'>usize</span>) {
         (<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>)
@@ -1233,7 +1227,7 @@
     <span class='doccomment'>/// term.clear().unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1257,7 +1251,7 @@
     <span class='doccomment'>/// term.clear_with_char(&#39;y&#39;).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;y&#39;);</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1286,7 +1280,7 @@
     <span class='doccomment'>/// assert_eq!(term[0][0].fg(), Style::with_color(Color::Red));</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].bg(), Style::with_color(Color::Blue));</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1313,7 +1307,7 @@
     <span class='doccomment'>/// term.clear_with_cell(cell2).unwrap();</span>
     <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;y&#39;);</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1346,7 +1340,7 @@
     <span class='doccomment'>/// // Unless try_resize() is called.</span>
     <span class='doccomment'>/// term.try_resize().unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>check_resize</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>load</span>(<span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>)
@@ -1375,7 +1369,7 @@
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize().unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>try_resize_with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>())
@@ -1395,7 +1389,7 @@
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize_with_char(&#39;x&#39;).unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize_with_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>try_resize_with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>))
@@ -1417,7 +1411,7 @@
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize_with_styles(style, style).unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>,
                                   <span class='ident'>fg</span>: <span class='ident'>Style</span>,
@@ -1441,7 +1435,7 @@
     <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
     <span class='doccomment'>/// let new_size = term.try_resize_with_cell(cell).unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
@@ -1462,7 +1456,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.set_cursor(1, 1).unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_invalid</span>() {
@@ -1484,7 +1478,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.hide_cursor().unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hide_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_valid</span>() {
@@ -1509,7 +1503,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let evt = term.get_event(1).unwrap();</span>
     <span class='doccomment'>/// # drop(term);</span>
-    <span class='doccomment'>/// # ::std::thread::sleep_ms(100);</span>
+    <span class='doccomment'>/// # ::std::thread::sleep_ms(200);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_event</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>timeout_ms</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Event</span><span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check if the event buffer is empty.</span>
