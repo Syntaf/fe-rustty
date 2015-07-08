@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["IoVec",""]],"fn":[["readv",""],["writev",""]]});
+initSidebarItems({"fn":[["pread",""],["pwrite",""],["readv",""],["writev",""]],"struct":[["IoVec",""]]});

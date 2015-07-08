@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["flock",""]],"fn":[["fcntl",""],["open",""]]});
+initSidebarItems({"fn":[["fcntl",""],["open",""]],"struct":[["flock",""]]});

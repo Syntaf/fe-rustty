@@ -41,9 +41,11 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>rustty</a>::<wbr><a class='struct' href=''>Terminal</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-97' href='../src/rustty/core/terminal.rs.html#74-89'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>rustty</a>::<wbr><a class='struct' href=''>Terminal</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-97' class='srclink' href='../src/rustty/core/terminal.rs.html#74-89' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Terminal {
     // some fields omitted
 }</pre><div class='docblock'><p>A representation of the current terminal window.</p>
@@ -70,7 +72,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>2</span>].<span class='ident'>fg_mut</span>().<span class='ident'>set_color</span>(<span class='ident'>Color</span>::<span class='ident'>Blue</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>2</span>].<span class='ident'>fg</span>().<span class='ident'>color</span>(), <span class='ident'>Color</span>::<span class='ident'>Blue</span>);
 </pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Constructs a new <code>Terminal</code> using the default <code>Cell</code> as a blank.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -80,7 +82,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>ch</span>(), <span class='string'>&#39; &#39;</span>);
 </pre>
-</div><h4 id='method.with_char' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.with_char' class='fnname'>with_char</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.with_char' class='method'><code>fn <a href='#method.with_char' class='fnname'>with_char</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Constructs a new <code>Terminal</code> with each cell set to the given <code>char</code> and the default
 <code>Style</code>s.</p>
 
@@ -91,7 +93,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);
 </pre>
-</div><h4 id='method.with_styles' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.with_styles' class='fnname'>with_styles</a>(fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.with_styles' class='method'><code>fn <a href='#method.with_styles' class='fnname'>with_styles</a>(fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Constructs a new <code>Terminal</code> with each cell set to the given <code>Style</code>s and a blank <code>char</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -106,7 +108,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Reverse</span>));
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>ch</span>(), <span class='string'>&#39; &#39;</span>);
 </pre>
-</div><h4 id='method.with_cell' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.with_cell' class='fnname'>with_cell</a>(cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.with_cell' class='method'><code>fn <a href='#method.with_cell' class='fnname'>with_cell</a>(cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Creates a new <code>Terminal</code> using the given cell as a blank.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -118,7 +120,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>cell</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);
 </pre>
-</div><h4 id='method.swap_buffers' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.swap_buffers' class='fnname'>swap_buffers</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.swap_buffers' class='method'><code>fn <a href='#method.swap_buffers' class='fnname'>swap_buffers</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Swaps buffers to display the current backbuffer.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -128,7 +130,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='ident'>term</span>.<span class='ident'>swap_buffers</span>().<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.cols' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.cols' class='fnname'>cols</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+</div><h4 id='method.cols' class='method'><code>fn <a href='#method.cols' class='fnname'>cols</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
 <div class='docblock'><p>Returns the width of the terminal in columns.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -138,7 +140,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>width</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>cols</span>();
 </pre>
-</div><h4 id='method.rows' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.rows' class='fnname'>rows</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+</div><h4 id='method.rows' class='method'><code>fn <a href='#method.rows' class='fnname'>rows</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
 <div class='docblock'><p>Returns the height of the terminal in rows.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -148,7 +150,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>height</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>rows</span>();
 </pre>
-</div><h4 id='method.size' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.size' class='fnname'>size</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a></code></h4>
+</div><h4 id='method.size' class='method'><code>fn <a href='#method.size' class='fnname'>size</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a></code></h4>
 <div class='docblock'><p>Returns the size of the terminal as (cols, rows).</p>
 
 <h1 id="examples" class='section-header'><a
@@ -159,7 +161,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='kw'>let</span> <span class='ident'>size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>size</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>size</span>, (<span class='ident'>term</span>.<span class='ident'>cols</span>(), <span class='ident'>term</span>.<span class='ident'>rows</span>()));
 </pre>
-</div><h4 id='method.clear' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.clear' class='method'><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Clears the internal backbuffer with the default cell.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -172,7 +174,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='ident'>term</span>.<span class='ident'>clear</span>().<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>ch</span>(), <span class='string'>&#39; &#39;</span>);
 </pre>
-</div><h4 id='method.clear_with_char' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.clear_with_char' class='fnname'>clear_with_char</a>(&amp;mut self, ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.clear_with_char' class='method'><code>fn <a href='#method.clear_with_char' class='fnname'>clear_with_char</a>(&amp;mut self, ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Clears the internal backbuffer with the given <code>char</code> and the default <code>Style</code>s.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -185,7 +187,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='ident'>term</span>.<span class='ident'>clear_with_char</span>(<span class='string'>&#39;y&#39;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>ch</span>(), <span class='string'>&#39;y&#39;</span>);
 </pre>
-</div><h4 id='method.clear_with_styles' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.clear_with_styles' class='fnname'>clear_with_styles</a>(&amp;mut self, fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.clear_with_styles' class='method'><code>fn <a href='#method.clear_with_styles' class='fnname'>clear_with_styles</a>(&amp;mut self, fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Clears the internal backbuffer with the given <code>Style</code>s and a blank <code>char</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -203,7 +205,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>fg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Red</span>));
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Blue</span>));
 </pre>
-</div><h4 id='method.clear_with_cell' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.clear_with_cell' class='fnname'>clear_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.clear_with_cell' class='method'><code>fn <a href='#method.clear_with_cell' class='fnname'>clear_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Clears the internal backbuffer using the given <code>Cell</code> as a blank.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -219,7 +221,7 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 <span class='ident'>term</span>.<span class='ident'>clear_with_cell</span>(<span class='ident'>cell2</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[<span class='number'>0</span>][<span class='number'>0</span>].<span class='ident'>ch</span>(), <span class='string'>&#39;y&#39;</span>);
 </pre>
-</div><h4 id='method.check_resize' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.check_resize' class='fnname'>check_resize</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.check_resize' class='method'><code>fn <a href='#method.check_resize' class='fnname'>check_resize</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Checks whether the underlying window size has changed and the buffers have not been
 resized yet. If this method returns <code>true</code> the next call to <code>swap_buffers()</code> or a <code>clear()</code>
 method is guaranteed to resize the buffers unless a call to a <code>try_resize()</code> method is
@@ -241,7 +243,7 @@ made.</p>
 <span class='comment'>// Unless try_resize() is called.</span>
 <span class='ident'>term</span>.<span class='ident'>try_resize</span>().<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.try_resize' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.try_resize' class='fnname'>try_resize</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.try_resize' class='method'><code>fn <a href='#method.try_resize' class='fnname'>try_resize</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Resizes the buffers if the underlying terminal window size has changed, using the default
 <code>Cell</code> as a blank.</p>
 
@@ -264,7 +266,7 @@ performed.</p>
 <span class='comment'>// If new_size == None then the terminal has not resized.</span>
 <span class='kw'>let</span> <span class='ident'>new_size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>try_resize</span>().<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.try_resize_with_char' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.try_resize_with_char' class='fnname'>try_resize_with_char</a>(&amp;mut self, ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.try_resize_with_char' class='method'><code>fn <a href='#method.try_resize_with_char' class='fnname'>try_resize_with_char</a>(&amp;mut self, ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Resizes the buffers if the underlying terminal window size has changed, using the given
 <code>char</code> and the default <code>Style</code>s as a blank.</p>
 
@@ -278,7 +280,7 @@ performed.</p>
 <span class='comment'>// If new_size == None then the terminal has not resized.</span>
 <span class='kw'>let</span> <span class='ident'>new_size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>try_resize_with_char</span>(<span class='string'>&#39;x&#39;</span>).<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.try_resize_with_styles' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.try_resize_with_styles' class='fnname'>try_resize_with_styles</a>(&amp;mut self, fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.try_resize_with_styles' class='method'><code>fn <a href='#method.try_resize_with_styles' class='fnname'>try_resize_with_styles</a>(&amp;mut self, fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Resizes the buffers if the underlying terminal window size has changed, using the given
 <code>Style</code>s and a blank <code>char</code> as a blank.</p>
 
@@ -294,7 +296,7 @@ performed.</p>
 <span class='comment'>// If new_size == None then the terminal has not resized.</span>
 <span class='kw'>let</span> <span class='ident'>new_size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>try_resize_with_styles</span>(<span class='ident'>style</span>, <span class='ident'>style</span>).<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.try_resize_with_cell' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.try_resize_with_cell' class='fnname'>try_resize_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.try_resize_with_cell' class='method'><code>fn <a href='#method.try_resize_with_cell' class='fnname'>try_resize_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Resizes the buffers if the underlying terminal window size has changed, using the given
 <code>Cell</code> as a blank.</p>
 
@@ -310,7 +312,7 @@ performed.</p>
 <span class='comment'>// If new_size == None then the terminal has not resized.</span>
 <span class='kw'>let</span> <span class='ident'>new_size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>try_resize_with_cell</span>(<span class='ident'>cell</span>).<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.set_cursor' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_cursor' class='fnname'>set_cursor</a>(&amp;mut self, x: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.set_cursor' class='method'><code>fn <a href='#method.set_cursor' class='fnname'>set_cursor</a>(&amp;mut self, x: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Sets the cursor position to (x, y).</p>
 
 <h1 id="examples" class='section-header'><a
@@ -321,7 +323,7 @@ performed.</p>
 
 <span class='ident'>term</span>.<span class='ident'>set_cursor</span>(<span class='number'>1</span>, <span class='number'>1</span>).<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.hide_cursor' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.hide_cursor' class='fnname'>hide_cursor</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.hide_cursor' class='method'><code>fn <a href='#method.hide_cursor' class='fnname'>hide_cursor</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Hides the cursor.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -332,8 +334,11 @@ performed.</p>
 
 <span class='ident'>term</span>.<span class='ident'>hide_cursor</span>().<span class='ident'>unwrap</span>();
 </pre>
-</div><h4 id='method.get_event' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_event' class='fnname'>get_event</a>(&amp;mut self, timeout_ms: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../rustty/enum.Event.html' title='rustty::Event'>Event</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.get_event' class='method'><code>fn <a href='#method.get_event' class='fnname'>get_event</a>(&amp;mut self, timeout_ms: <a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../rustty/enum.Event.html' title='rustty::Event'>Event</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Gets an event from the event stream, waiting a maximum of <code>timeout_ms</code> milliseconds.</p>
+
+<p>Specifying a <code>timeout_ms</code> of -1 causes <code>get_event()</code> to block indefinitely, while
+specifying a <code>timeout_ms</code> of 0 causes <code>get_event()</code> to return immediately.</p>
 
 <p>Returns <code>Some(Event)</code> if an event was received within the specified timeout, or None
 otherwise.</p>
@@ -346,10 +351,10 @@ otherwise.</p>
 
 <span class='kw'>let</span> <span class='ident'>evt</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>get_event</span>(<span class='number'>1</span>).<span class='ident'>unwrap</span>();
 </pre>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Index.html' title='core::ops::Index'>Index</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='assoc_type.Output' class='type'><a class='stability Unmarked' title='No stability level'></a><code>type Output = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
-<h4 id='method.index' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Index.html#method.index' class='fnname'>index</a>(&amp;self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html' title='core::ops::IndexMut'>IndexMut</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.index_mut' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html#method.index_mut' class='fnname'>index_mut</a>(&amp;mut self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Index.html' title='core::ops::Index'>Index</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='assoc_type.Output' class='type'><code>type Output = <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<h4 id='method.index' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Index.html#method.index' class='fnname'>index</a>(&amp;self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html' title='core::ops::IndexMut'>IndexMut</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.index_mut' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html#method.index_mut' class='fnname'>index_mut</a>(&amp;mut self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -382,6 +387,10 @@ otherwise.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>

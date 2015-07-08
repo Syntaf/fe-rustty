@@ -41,14 +41,16 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>rustty</a>::<wbr><a class='struct' href=''>Style</a><wbr></span><span class='out-of-band'><span id='render-detail'>
-            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
-        </span><a id='src-3721' href='../src/rustty/core/cellbuffer.rs.html#289'>[src]</a></span></h1>
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>rustty</a>::<wbr><a class='struct' href=''>Style</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-3721' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#289' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Style(_, _);</pre><div class='docblock'><p>The style of a <code>Cell</code>.</p>
 
 <p>A <code>Style</code> has a <code>Color</code> and an <code>Attr</code> and represents either the foreground or background
 styling of a <code>Cell</code>.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.new' class='fnname'>new</a>(color: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>, attr: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(color: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>, attr: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
 <div class='docblock'><p>Constructs a new <code>Style</code> with the given <code>Color</code> and <code>Attr</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -59,7 +61,7 @@ styling of a <code>Cell</code>.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>color</span>(), <span class='ident'>Color</span>::<span class='ident'>Green</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>attr</span>(), <span class='ident'>Attr</span>::<span class='ident'>BoldUnderline</span>);
 </pre>
-</div><h4 id='method.with_color' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.with_color' class='fnname'>with_color</a>(c: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+</div><h4 id='method.with_color' class='method'><code>fn <a href='#method.with_color' class='fnname'>with_color</a>(c: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
 <div class='docblock'><p>Constructs a new <code>Style</code> with the given <code>Color</code> and the default <code>Attr</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -70,7 +72,7 @@ styling of a <code>Cell</code>.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>color</span>(), <span class='ident'>Color</span>::<span class='ident'>Cyan</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>attr</span>(), <span class='ident'>Attr</span>::<span class='ident'>Default</span>);
 </pre>
-</div><h4 id='method.with_attr' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.with_attr' class='fnname'>with_attr</a>(a: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+</div><h4 id='method.with_attr' class='method'><code>fn <a href='#method.with_attr' class='fnname'>with_attr</a>(a: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
 <div class='docblock'><p>Constructs a new <code>Style</code> with the given <code>Attr</code> and the default <code>Color</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -81,7 +83,7 @@ styling of a <code>Cell</code>.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>attr</span>(), <span class='ident'>Attr</span>::<span class='ident'>UnderlineReverse</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>color</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
 </pre>
-</div><h4 id='method.color' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.color' class='fnname'>color</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h4>
+</div><h4 id='method.color' class='method'><code>fn <a href='#method.color' class='fnname'>color</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h4>
 <div class='docblock'><p>Returns the <code>Style</code>&#39;s <code>Color</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -91,7 +93,7 @@ styling of a <code>Cell</code>.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>style</span> <span class='op'>=</span> <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Yellow</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>color</span>(), <span class='ident'>Color</span>::<span class='ident'>Yellow</span>);
 </pre>
-</div><h4 id='method.set_color' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_color' class='fnname'>set_color</a>(&amp;mut self, newcolor: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+</div><h4 id='method.set_color' class='method'><code>fn <a href='#method.set_color' class='fnname'>set_color</a>(&amp;mut self, newcolor: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
 <div class='docblock'><p>Sets the <code>Style</code>&#39;s <code>Color</code> to the given <code>Color</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -104,7 +106,7 @@ styling of a <code>Cell</code>.</p>
 <span class='ident'>style</span>.<span class='ident'>set_color</span>(<span class='ident'>Color</span>::<span class='ident'>Black</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>color</span>(), <span class='ident'>Color</span>::<span class='ident'>Black</span>);
 </pre>
-</div><h4 id='method.attr' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.attr' class='fnname'>attr</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h4>
+</div><h4 id='method.attr' class='method'><code>fn <a href='#method.attr' class='fnname'>attr</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h4>
 <div class='docblock'><p>Returns the <code>Style</code>&#39;s <code>Attr</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -114,7 +116,7 @@ styling of a <code>Cell</code>.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>style</span> <span class='op'>=</span> <span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Reverse</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>attr</span>(), <span class='ident'>Attr</span>::<span class='ident'>Reverse</span>);
 </pre>
-</div><h4 id='method.set_attr' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.set_attr' class='fnname'>set_attr</a>(&amp;mut self, newattr: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+</div><h4 id='method.set_attr' class='method'><code>fn <a href='#method.set_attr' class='fnname'>set_attr</a>(&amp;mut self, newattr: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
 <div class='docblock'><p>Sets the given <code>Style</code>&#39;s <code>Attr</code> to the given <code>Attr</code>.</p>
 
 <h1 id="examples" class='section-header'><a
@@ -127,22 +129,12 @@ styling of a <code>Cell</code>.</p>
 <span class='ident'>style</span>.<span class='ident'>set_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Underline</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>attr</span>(), <span class='ident'>Attr</span>::<span class='ident'>Underline</span>);
 </pre>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
-<div class='docblock'><p>Constructs a new <code>Style</code> with the default <code>Color</code> and <code>Attr</code>.</p>
-
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre id='rust-example-rendered' class='rust '>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
-
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>style</span> <span class='op'>=</span> <span class='ident'>Style</span>::<span class='ident'>default</span>();
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>color</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>style</span>.<span class='ident'>attr</span>(), <span class='ident'>Attr</span>::<span class='ident'>Default</span>);
-</pre>
-</div></div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'></div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
-<h4 id='method.clone_from' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'></div><h3 class='impl'><a class='stability Stable' title='Stable'></a><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><a class='stability Stable' title='Stable'></a><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -175,6 +167,10 @@ styling of a <code>Cell</code>.</p>
                 <code>struct</code>, <code>enum</code>,
                 <code>trait</code>, <code>typedef</code> (or
                 <code>tdef</code>).
+            </p>
+            <p>
+                Search functions by type signature (e.g.
+                <code>vec -> usize</code>)
             </p>
         </div>
     </div>
