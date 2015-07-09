@@ -834,13 +834,6 @@
 <span id="792">792</span>
 <span id="793">793</span>
 <span id="794">794</span>
-<span id="795">795</span>
-<span id="796">796</span>
-<span id="797">797</span>
-<span id="798">798</span>
-<span id="799">799</span>
-<span id="800">800</span>
-<span id="801">801</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -864,12 +857,14 @@
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>errno</span>::<span class='ident'>Errno</span>;
 
-<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>error</span>::<span class='ident'>Error</span>;
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>device</span>::{<span class='ident'>Device</span>, <span class='ident'>DevFunc</span>};
+<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>errors</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>input</span>::<span class='ident'>Event</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>position</span>::{<span class='ident'>Position</span>, <span class='ident'>Coordinate</span>, <span class='ident'>Cursor</span>, <span class='ident'>Pair</span>};
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>chars</span>::<span class='ident'>CharStream</span>;
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>driver</span>::{
+    <span class='ident'>Cap</span>,
+    <span class='ident'>Driver</span>,
+};
 
 <span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when buffers are resized.</span>
 <span class='kw'>static</span> <span class='ident'>SIGWINCH_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
@@ -879,11 +874,9 @@
 <span class='doccomment'>/// Reset to false when terminal object goes out of scope.</span>
 <span class='kw'>static</span> <span class='ident'>RUSTTY_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
 
-<span class='doccomment'>/// Constant for TIOCGWINSZ syscall on OS X.</span>
+<span class='doccomment'>/// TIOCGWINSZ constant.</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;macos&quot;</span>)]</span>
 <span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x40087468</span>;
-
-<span class='doccomment'>/// Constant for TIOCGWINSZ syscall on Linux.</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;linux&quot;</span>)]</span>
 <span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x00005413</span>;
 
@@ -922,7 +915,7 @@
     <span class='ident'>epfd</span>: <span class='ident'>RawFd</span>, <span class='comment'>// Epoll file descriptor.</span>
     <span class='ident'>cols</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of columns in the terminal window.</span>
     <span class='ident'>rows</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of rows in the terminal window.</span>
-    <span class='ident'>device</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>Device</span>, <span class='comment'>// Underlying terminal device (xterm, gnome, etc.).</span>
+    <span class='ident'>driver</span>: <span class='ident'>Driver</span>,
     <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>, <span class='comment'>// Internal backbuffer.</span>
     <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>, <span class='comment'>// Internal frontbuffer.</span>
     <span class='ident'>outbuffer</span>: <span class='ident'>OutBuffer</span>, <span class='comment'>// Internal output buffer.</span>
@@ -999,8 +992,7 @@
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>new</span>(<span class='string'>&quot;Rustty already initialized&quot;</span>))
         }
 
-        <span class='comment'>// Return the device for the user&#39;s terminal.</span>
-        <span class='kw'>let</span> <span class='ident'>device</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Device</span>::<span class='ident'>new</span>());
+        <span class='kw'>let</span> <span class='ident'>driver</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Driver</span>::<span class='ident'>new</span>());
 
         <span class='comment'>// Open the terminal file for the controlling process.</span>
         <span class='kw'>let</span> <span class='ident'>tty</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>OpenOptions</span>::<span class='ident'>new</span>()
@@ -1052,7 +1044,7 @@
             <span class='ident'>epfd</span>: <span class='ident'>epfd</span>,
             <span class='ident'>cols</span>: <span class='number'>0</span>,
             <span class='ident'>rows</span>: <span class='number'>0</span>,
-            <span class='ident'>device</span>: <span class='ident'>device</span>,
+            <span class='ident'>driver</span>: <span class='ident'>driver</span>,
             <span class='ident'>backbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
             <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
             <span class='ident'>outbuffer</span>: <span class='ident'>OutBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>32</span> <span class='op'>*</span> <span class='number'>1024</span>),
@@ -1063,13 +1055,10 @@
         };
 
         <span class='comment'>// Switch to alternate screen buffer. Writes the control code to the output buffer.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>terminal</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='ident'>terminal</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>EnterCa</span>]));
-
-        <span class='comment'>// Enter keypad. Writes the control code to the output buffer.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>terminal</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='ident'>terminal</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>EnterKeypad</span>]));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>terminal</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='ident'>terminal</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>EnterCa</span>)));
 
         <span class='comment'>// Hide cursor. Writes the control code to the output buffer.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>terminal</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='ident'>terminal</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>HideCursor</span>]));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>terminal</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='ident'>terminal</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>HideCursor</span>)));
 
         <span class='comment'>// Resize the buffers to the size of the underlying terminals. Using the given cell as a</span>
         <span class='comment'>// blank.</span>
@@ -1387,7 +1376,7 @@
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_invalid</span>() {
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ShowCursor</span>]));
+            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>ShowCursor</span>)));
         }
         <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>set_pos</span>(<span class='ident'>Coordinate</span>::<span class='ident'>Valid</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)));
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>());
@@ -1407,7 +1396,7 @@
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hide_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_valid</span>() {
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>HideCursor</span>]));
+            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>HideCursor</span>)));
         }
         <span class='prelude-val'>Ok</span>(())
     }
@@ -1467,7 +1456,7 @@
 
     <span class='kw'>fn</span> <span class='ident'>send_clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>));
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ClearScreen</span>]));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Clear</span>)));
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>());
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>flush</span>());
         <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>invalidate_last_pos</span>();
@@ -1476,19 +1465,19 @@
 
     <span class='kw'>fn</span> <span class='ident'>send_style</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='ident'>fg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>lastfg</span> <span class='op'>||</span> <span class='ident'>bg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>lastbg</span> {
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Sgr0</span>]));
+            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Reset</span>)));
 
             <span class='kw'>match</span> <span class='ident'>fg</span>.<span class='ident'>attr</span>() {
-                <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Bold</span>])),
-                <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Underline</span>])),
-                <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Reverse</span>])),
+                <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Bold</span>))),
+                <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Underline</span>))),
+                <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Reverse</span>))),
                 _ <span class='op'>=&gt;</span> {},
             }
 
             <span class='kw'>match</span> <span class='ident'>bg</span>.<span class='ident'>attr</span>() {
-                <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Blink</span>])),
+                <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Blink</span>))),
                 <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> {},
-                <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Reverse</span>])),
+                <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Reverse</span>))),
                 _ <span class='op'>=&gt;</span> {},
             }
 
@@ -1503,13 +1492,13 @@
         <span class='kw'>match</span> <span class='ident'>fgcol</span> {
             <span class='ident'>Color</span>::<span class='ident'>Default</span> <span class='op'>=&gt;</span> {},
             <span class='ident'>fgc</span> <span class='kw-2'>@</span> _ <span class='op'>=&gt;</span> {
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;\x1b[38;5;{}m&quot;</span>, <span class='ident'>fgc</span>.<span class='ident'>as_byte</span>()));
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>SetFg</span>(<span class='ident'>fgc</span>.<span class='ident'>as_byte</span>()))));
             },
         }
         <span class='kw'>match</span> <span class='ident'>bgcol</span> {
             <span class='ident'>Color</span>::<span class='ident'>Default</span> <span class='op'>=&gt;</span> {},
             <span class='ident'>bgc</span> <span class='kw-2'>@</span> _ <span class='op'>=&gt;</span> {
-                <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;\x1b[48;5;{}m&quot;</span>, <span class='ident'>bgc</span>.<span class='ident'>as_byte</span>()));
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>SetBg</span>(<span class='ident'>bgc</span>.<span class='ident'>as_byte</span>()))));
             },
         }
         <span class='prelude-val'>Ok</span>(())
@@ -1569,11 +1558,10 @@
         } <span class='kw'>else</span> {
             <span class='comment'>// Input is available from the terminal.</span>
             <span class='comment'>// Get an iterator of chars over the input stream.</span>
-            <span class='kw'>let</span> <span class='ident'>tmp_tty</span> <span class='op'>=</span> <span class='ident'>Read</span>::<span class='ident'>by_ref</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>tty</span>);
-            <span class='kw'>let</span> <span class='ident'>chars</span> <span class='op'>=</span> <span class='ident'>CharStream</span>::<span class='ident'>from_reader</span>(<span class='ident'>tmp_tty</span>);
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buf</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>new</span>();
+            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>tty</span>.<span class='ident'>read_to_string</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>buf</span>));
             <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='number'>0</span>;
-            <span class='kw'>for</span> <span class='ident'>chr</span> <span class='kw'>in</span> <span class='ident'>chars</span> {
-                <span class='kw'>let</span> <span class='ident'>ch</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>chr</span>);
+            <span class='kw'>for</span> <span class='ident'>ch</span> <span class='kw'>in</span> <span class='ident'>buf</span>.<span class='ident'>chars</span>() {
                 <span class='comment'>// Push each character onto the event queue and increment the count.</span>
                 <span class='self'>self</span>.<span class='ident'>eventbuffer</span>.<span class='ident'>push_back</span>(<span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>ch</span>));
                 <span class='ident'>n</span> <span class='op'>+=</span> <span class='number'>1</span>;
@@ -1605,12 +1593,10 @@
 
 <span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ShowCursor</span>]).<span class='ident'>unwrap</span>();
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>Sgr0</span>]).<span class='ident'>unwrap</span>();
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ClearScreen</span>]).<span class='ident'>unwrap</span>();
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ExitCa</span>]).<span class='ident'>unwrap</span>();
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ExitKeypad</span>]).<span class='ident'>unwrap</span>();
-        <span class='macro'>write</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>device</span>[<span class='ident'>DevFunc</span>::<span class='ident'>ExitMouse</span>]).<span class='ident'>unwrap</span>();
+        <span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>ShowCursor</span>)).<span class='ident'>unwrap</span>();
+        <span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Reset</span>)).<span class='ident'>unwrap</span>();
+        <span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>Clear</span>)).<span class='ident'>unwrap</span>();
+        <span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>Cap</span>::<span class='ident'>ExitCa</span>)).<span class='ident'>unwrap</span>();
         <span class='self'>self</span>.<span class='ident'>flush</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>termios</span>::<span class='ident'>tcsetattr</span>(<span class='self'>self</span>.<span class='ident'>rawtty</span>, <span class='ident'>SetArg</span>::<span class='ident'>TCSAFLUSH</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>orig_tios</span>).<span class='ident'>unwrap</span>();
         <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>store</span>(<span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
