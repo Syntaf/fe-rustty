@@ -834,6 +834,20 @@
 <span id="792">792</span>
 <span id="793">793</span>
 <span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
+<span id="798">798</span>
+<span id="799">799</span>
+<span id="800">800</span>
+<span id="801">801</span>
+<span id="802">802</span>
+<span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
@@ -898,15 +912,15 @@
 <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// // Terminals can be indexed to access specific cells.</span>
-<span class='doccomment'>/// // Indices are by column then row, corresponding to a cell&#39;s x and y coordinates.</span>
-<span class='doccomment'>/// term[0][0] = Cell::with_char(&#39;x&#39;);</span>
-<span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
+<span class='doccomment'>/// // Indices are by row then column, corresponding to a cell&#39;s y and x coordinates.</span>
+<span class='doccomment'>/// term[(0, 0)] = Cell::with_char(&#39;x&#39;);</span>
+<span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;x&#39;);</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// term[0][1].set_bg(Style::with_color(Color::Red));</span>
-<span class='doccomment'>/// assert_eq!(term[0][1].bg(), Style::with_color(Color::Red));</span>
+<span class='doccomment'>/// term[(0, 1)].set_bg(Style::with_color(Color::Red));</span>
+<span class='doccomment'>/// assert_eq!(term[(0, 1)].bg(), Style::with_color(Color::Red));</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// term[0][2].fg_mut().set_color(Color::Blue);</span>
-<span class='doccomment'>/// assert_eq!(term[0][2].fg().color(), Color::Blue);</span>
+<span class='doccomment'>/// term[(0, 2)].fg_mut().set_color(Color::Blue);</span>
+<span class='doccomment'>/// assert_eq!(term[(0, 2)].fg().color(), Color::Blue);</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Terminal</span> {
     <span class='ident'>orig_tios</span>: <span class='ident'>termios</span>::<span class='ident'>Termios</span>, <span class='comment'>// Original underlying terminal state.</span>
@@ -1585,8 +1599,22 @@
     }
 }
 
+<span class='kw'>impl</span> <span class='ident'>Index</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+    <span class='kw'>type</span> <span class='ident'>Output</span> <span class='op'>=</span> <span class='ident'>Cell</span>;
+
+    <span class='kw'>fn</span> <span class='ident'>index</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>, <span class='ident'>index</span>: (<span class='ident'>usize</span>, <span class='ident'>usize</span>)) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>Cell</span> {
+        <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
+    }
+}
+
 <span class='kw'>impl</span> <span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
     <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;</span> {
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>IndexMut</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+    <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: (<span class='ident'>usize</span>, <span class='ident'>usize</span>)) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
         <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
     }
 }
