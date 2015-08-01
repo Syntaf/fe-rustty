@@ -848,8 +848,47 @@
 <span id="806">806</span>
 <span id="807">807</span>
 <span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{<span class='ident'>Index</span>, <span class='ident'>IndexMut</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{
+    <span class='ident'>Index</span>,
+    <span class='ident'>IndexMut</span>,
+    <span class='ident'>Deref</span>,
+    <span class='ident'>DerefMut</span>,
+};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>OpenOptions</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fs</span>::<span class='ident'>File</span>;
@@ -948,7 +987,7 @@
     <span class='doccomment'>/// use rustty::Terminal;</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39; &#39;);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>default</span>())
@@ -963,7 +1002,7 @@
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_char(&#39;x&#39;).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;x&#39;);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_char</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>))
@@ -980,9 +1019,9 @@
     <span class='doccomment'>/// let style2 = Style::with_attr(Attr::Reverse);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_styles(style1, style2).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].fg(), Style::with_color(Color::Blue));</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].bg(), Style::with_attr(Attr::Reverse));</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].fg(), Style::with_color(Color::Blue));</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].bg(), Style::with_attr(Attr::Reverse));</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39; &#39;);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_styles</span>(<span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>))
@@ -998,7 +1037,7 @@
     <span class='doccomment'>/// let cell = Cell::with_char(&#39;x&#39;);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_cell(cell).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;x&#39;);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_cell</span>(<span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Make sure there is only ever one instance.</span>
@@ -1102,17 +1141,14 @@
         <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>invalidate_last_pos</span>();
 
         <span class='kw'>for</span> <span class='ident'>y</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>rows</span>() {
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>y</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>y</span>] {
-                <span class='kw'>continue</span>; <span class='comment'>// Don&#39;t redraw draw columns that haven&#39;t changed.</span>
-            }
             <span class='kw'>for</span> <span class='ident'>x</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='self'>self</span>.<span class='ident'>cols</span>() {
-                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>] {
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)] <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)] {
                     <span class='kw'>continue</span>; <span class='comment'>// Don&#39;t redraw cells that haven&#39;t changed.</span>
                 } <span class='kw'>else</span> {
-                    <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>];
+                    <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)];
                     <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>cell</span>.<span class='ident'>bg</span>()));
                     <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_char</span>(<span class='ident'>Coordinate</span>::<span class='ident'>Valid</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)), <span class='ident'>cell</span>.<span class='ident'>ch</span>()));
-                    <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[<span class='ident'>y</span>][<span class='ident'>x</span>] <span class='op'>=</span> <span class='ident'>cell</span>;
+                    <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)] <span class='op'>=</span> <span class='ident'>cell</span>;
                 }
             }
         }
@@ -1172,10 +1208,10 @@
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_char(&#39;x&#39;).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;x&#39;);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.clear().unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39; &#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39; &#39;);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1194,10 +1230,10 @@
     <span class='doccomment'>/// use rustty::{Terminal, Cell};</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_char(&#39;x&#39;).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;x&#39;);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.clear_with_char(&#39;y&#39;).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;y&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;y&#39;);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1219,12 +1255,12 @@
     <span class='doccomment'>/// let mut style2 = Style::with_color(Color::Red);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_styles(style1, style2).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].fg(), Style::with_color(Color::Blue));</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].bg(), Style::with_color(Color::Red));</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].fg(), Style::with_color(Color::Blue));</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].bg(), Style::with_color(Color::Red));</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.clear_with_styles(style2, style1).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].fg(), Style::with_color(Color::Red));</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].bg(), Style::with_color(Color::Blue));</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].fg(), Style::with_color(Color::Red));</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].bg(), Style::with_color(Color::Blue));</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1246,10 +1282,10 @@
     <span class='doccomment'>/// let cell2 = Cell::with_char(&#39;y&#39;);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::with_cell(cell1).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;x&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;x&#39;);</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// term.clear_with_cell(cell2).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[0][0].ch(), &#39;y&#39;);</span>
+    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;y&#39;);</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
@@ -1258,6 +1294,38 @@
         }
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>cell</span>);
         <span class='prelude-val'>Ok</span>(())
+    }
+
+    <span class='doccomment'>/// Returns a reference to the `Cell` at the given coordinates, or `None` if the index is out of</span>
+    <span class='doccomment'>/// bounds.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```no_run</span>
+    <span class='doccomment'>/// use rustty::Terminal;</span>
+    <span class='doccomment'>/// </span>
+    <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let a_cell = term.get(5, 5);</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>Cell</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>get</span>(<span class='ident'>x</span>, <span class='ident'>y</span>)
+    }
+
+    <span class='doccomment'>/// Returns a mutable reference to the `Cell` at the given coordinates, or `None` if the index</span>
+    <span class='doccomment'>/// is out of bounds.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```no_run</span>
+    <span class='doccomment'>/// use rustty::Terminal;</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let a_mut_cell = term.get_mut(5, 5);</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>Cell</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>get_mut</span>(<span class='ident'>x</span>, <span class='ident'>y</span>)
     }
 
     <span class='doccomment'>/// Checks whether the underlying window size has changed and the buffers have not been</span>
@@ -1546,7 +1614,7 @@
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>events</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>EpollEvent</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
         <span class='ident'>events</span>.<span class='ident'>push</span>(<span class='ident'>EpollEvent</span> { <span class='ident'>events</span>: <span class='ident'>EpollEventKind</span>::<span class='ident'>empty</span>(), <span class='ident'>data</span>: <span class='number'>0</span> });
 
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>nepolls</span>: <span class='ident'>usize</span>;
+        <span class='kw'>let</span> <span class='ident'>nepolls</span>: <span class='ident'>usize</span>;
         <span class='comment'>// Because the sigwinch handler will interrupt epoll, if epoll returns EINTR we loop</span>
         <span class='comment'>// and try again. All other errors will return normally.</span>
         <span class='kw'>loop</span> {
@@ -1591,11 +1659,17 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>Index</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
-    <span class='kw'>type</span> <span class='ident'>Output</span> <span class='op'>=</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;</span>;
+<span class='kw'>impl</span> <span class='ident'>Deref</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+    <span class='kw'>type</span> <span class='ident'>Target</span> <span class='op'>=</span> [<span class='ident'>Cell</span>];
 
-    <span class='kw'>fn</span> <span class='ident'>index</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;</span> {
-        <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
+    <span class='kw'>fn</span> <span class='ident'>deref</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>Cell</span>] {
+        <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>backbuffer</span>
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>DerefMut</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+    <span class='kw'>fn</span> <span class='ident'>deref_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> [<span class='ident'>Cell</span>] {
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>
     }
 }
 
@@ -1607,14 +1681,8 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
-    <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;</span> {
-        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
-    }
-}
-
 <span class='kw'>impl</span> <span class='ident'>IndexMut</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
-    <span class='kw'>fn</span> <span class='ident'>index_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: (<span class='ident'>usize</span>, <span class='ident'>usize</span>)) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
+    <span class='kw'>fn</span> <span class='ident'>index_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: (<span class='ident'>usize</span>, <span class='ident'>usize</span>)) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
         <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
     }
 }
