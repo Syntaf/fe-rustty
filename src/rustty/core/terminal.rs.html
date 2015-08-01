@@ -829,59 +829,6 @@
 <span id="787">787</span>
 <span id="788">788</span>
 <span id="789">789</span>
-<span id="790">790</span>
-<span id="791">791</span>
-<span id="792">792</span>
-<span id="793">793</span>
-<span id="794">794</span>
-<span id="795">795</span>
-<span id="796">796</span>
-<span id="797">797</span>
-<span id="798">798</span>
-<span id="799">799</span>
-<span id="800">800</span>
-<span id="801">801</span>
-<span id="802">802</span>
-<span id="803">803</span>
-<span id="804">804</span>
-<span id="805">805</span>
-<span id="806">806</span>
-<span id="807">807</span>
-<span id="808">808</span>
-<span id="809">809</span>
-<span id="810">810</span>
-<span id="811">811</span>
-<span id="812">812</span>
-<span id="813">813</span>
-<span id="814">814</span>
-<span id="815">815</span>
-<span id="816">816</span>
-<span id="817">817</span>
-<span id="818">818</span>
-<span id="819">819</span>
-<span id="820">820</span>
-<span id="821">821</span>
-<span id="822">822</span>
-<span id="823">823</span>
-<span id="824">824</span>
-<span id="825">825</span>
-<span id="826">826</span>
-<span id="827">827</span>
-<span id="828">828</span>
-<span id="829">829</span>
-<span id="830">830</span>
-<span id="831">831</span>
-<span id="832">832</span>
-<span id="833">833</span>
-<span id="834">834</span>
-<span id="835">835</span>
-<span id="836">836</span>
-<span id="837">837</span>
-<span id="838">838</span>
-<span id="839">839</span>
-<span id="840">840</span>
-<span id="841">841</span>
-<span id="842">842</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{
     <span class='ident'>Index</span>,
@@ -896,21 +843,14 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>atomic</span>::{<span class='ident'>AtomicBool</span>, <span class='ident'>Ordering</span>, <span class='ident'>ATOMIC_BOOL_INIT</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>VecDeque</span>;
 
-<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>;
-<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>IGNBRK</span>, <span class='ident'>BRKINT</span>, <span class='ident'>PARMRK</span>, <span class='ident'>ISTRIP</span>, <span class='ident'>INLCR</span>, <span class='ident'>IGNCR</span>, <span class='ident'>ICRNL</span>, <span class='ident'>IXON</span>};
-<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>OPOST</span>, <span class='ident'>ECHO</span>, <span class='ident'>ECHONL</span>, <span class='ident'>ICANON</span>, <span class='ident'>ISIG</span>, <span class='ident'>IEXTEN</span>, <span class='ident'>CSIZE</span>, <span class='ident'>PARENB</span>, <span class='ident'>CS8</span>};
-<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::{<span class='ident'>VMIN</span>, <span class='ident'>VTIME</span>};
-<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>termios</span>::<span class='ident'>SetArg</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>signal</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>signal</span>::{<span class='ident'>SockFlag</span>, <span class='ident'>SigSet</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>signal</span>::<span class='ident'>signal</span>::<span class='ident'>SIGWINCH</span>;
-<span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>ioctl</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>::{<span class='ident'>epoll_create</span>, <span class='ident'>epoll_ctl</span>, <span class='ident'>epoll_wait</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>::{<span class='ident'>EpollOp</span>, <span class='ident'>EpollEvent</span>, <span class='ident'>EpollEventKind</span>};
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>errno</span>::<span class='ident'>Errno</span>;
 
-<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>errors</span>::<span class='ident'>Error</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>input</span>::<span class='ident'>Event</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>position</span>::{<span class='ident'>Position</span>, <span class='ident'>Coordinate</span>, <span class='ident'>Cursor</span>, <span class='ident'>Pair</span>};
@@ -918,6 +858,8 @@
     <span class='ident'>DevFn</span>,
     <span class='ident'>Driver</span>,
 };
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>termctl</span>::<span class='ident'>TermCtl</span>;
+<span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>errors</span>::<span class='ident'>Error</span>;
 
 <span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when buffers are resized.</span>
 <span class='kw'>static</span> <span class='ident'>SIGWINCH_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
@@ -926,12 +868,6 @@
 <span class='doccomment'>/// Set to true on creation of a Terminal object.</span>
 <span class='doccomment'>/// Reset to false when terminal object goes out of scope.</span>
 <span class='kw'>static</span> <span class='ident'>RUSTTY_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
-
-<span class='doccomment'>/// TIOCGWINSZ constant.</span>
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;macos&quot;</span>)]</span>
-<span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x40087468</span>;
-<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>target_os</span><span class='op'>=</span><span class='string'>&quot;linux&quot;</span>)]</span>
-<span class='kw'>const</span> <span class='ident'>TIOCGWINSZ</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='number'>0x00005413</span>;
 
 <span class='kw'>type</span> <span class='ident'>OutBuffer</span> <span class='op'>=</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>;
 <span class='kw'>type</span> <span class='ident'>EventBuffer</span> <span class='op'>=</span> <span class='ident'>VecDeque</span><span class='op'>&lt;</span><span class='ident'>Event</span><span class='op'>&gt;</span>;
@@ -962,9 +898,8 @@
 <span class='doccomment'>/// assert_eq!(term[(0, 2)].fg().color(), Color::Blue);</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Terminal</span> {
-    <span class='ident'>orig_tios</span>: <span class='ident'>termios</span>::<span class='ident'>Termios</span>, <span class='comment'>// Original underlying terminal state.</span>
+    <span class='ident'>termctl</span>: <span class='ident'>TermCtl</span>,
     <span class='ident'>tty</span>: <span class='ident'>File</span>, <span class='comment'>// Underlying terminal file.</span>
-    <span class='ident'>rawtty</span>: <span class='ident'>RawFd</span>, <span class='comment'>// Raw file descriptor of underlying terminal file.</span>
     <span class='ident'>epfd</span>: <span class='ident'>RawFd</span>, <span class='comment'>// Epoll file descriptor.</span>
     <span class='ident'>cols</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of columns in the terminal window.</span>
     <span class='ident'>rows</span>: <span class='ident'>usize</span>, <span class='comment'>// Number of rows in the terminal window.</span>
@@ -1053,7 +988,6 @@
             .<span class='ident'>read</span>(<span class='boolval'>true</span>)
             .<span class='ident'>open</span>(<span class='string'>&quot;/dev/tty&quot;</span>));
 
-        <span class='comment'>// Get the raw file descriptor for the terminal file to use with system calls.</span>
         <span class='kw'>let</span> <span class='ident'>rawtty</span> <span class='op'>=</span> <span class='ident'>tty</span>.<span class='ident'>as_raw_fd</span>();
 
         <span class='comment'>// Set up the signal handler for SIGWINCH, which will notify us when the window size has</span>
@@ -1063,25 +997,6 @@
             <span class='ident'>signal</span>::<span class='ident'>sigaction</span>(<span class='ident'>SIGWINCH</span>, <span class='kw-2'>&amp;</span><span class='ident'>sa_winch</span>)
         });
 
-        <span class='comment'>// Get the original state of the terminal so we can restore it on drop.</span>
-        <span class='kw'>let</span> <span class='ident'>orig_tios</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>termios</span>::<span class='ident'>tcgetattr</span>(<span class='ident'>rawtty</span>));
-
-        <span class='comment'>// Make a mutable clone of the terminal state so we can modify parameters.</span>
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>tios</span> <span class='op'>=</span> <span class='ident'>orig_tios</span>.<span class='ident'>clone</span>();
-
-        <span class='comment'>// Set required terminal parameters.</span>
-        <span class='ident'>tios</span>.<span class='ident'>c_iflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_iflag</span> <span class='kw-2'>&amp;</span> <span class='op'>!</span>(<span class='ident'>IGNBRK</span> <span class='op'>|</span> <span class='ident'>BRKINT</span> <span class='op'>|</span> <span class='ident'>PARMRK</span> <span class='op'>|</span> <span class='ident'>ISTRIP</span> <span class='op'>|</span>
-                                        <span class='ident'>INLCR</span> <span class='op'>|</span> <span class='ident'>IGNCR</span> <span class='op'>|</span> <span class='ident'>ICRNL</span> <span class='op'>|</span> <span class='ident'>IXON</span>);
-        <span class='ident'>tios</span>.<span class='ident'>c_oflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_oflag</span> <span class='kw-2'>&amp;</span> <span class='op'>!</span><span class='ident'>OPOST</span>;
-        <span class='ident'>tios</span>.<span class='ident'>c_lflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_lflag</span> <span class='kw-2'>&amp;</span> <span class='op'>!</span>(<span class='ident'>ECHO</span> <span class='op'>|</span> <span class='ident'>ECHONL</span> <span class='op'>|</span> <span class='ident'>ICANON</span> <span class='op'>|</span> <span class='ident'>ISIG</span> <span class='op'>|</span> <span class='ident'>IEXTEN</span>);
-        <span class='ident'>tios</span>.<span class='ident'>c_cflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_cflag</span> <span class='kw-2'>&amp;</span> <span class='op'>!</span>(<span class='ident'>CSIZE</span> <span class='op'>|</span> <span class='ident'>PARENB</span>);
-        <span class='ident'>tios</span>.<span class='ident'>c_cflag</span> <span class='op'>=</span> <span class='ident'>tios</span>.<span class='ident'>c_cflag</span> <span class='op'>|</span> <span class='ident'>CS8</span>;
-        <span class='ident'>tios</span>.<span class='ident'>c_cc</span>[<span class='ident'>VMIN</span>] <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='ident'>tios</span>.<span class='ident'>c_cc</span>[<span class='ident'>VTIME</span>] <span class='op'>=</span> <span class='number'>0</span>;
-
-        <span class='comment'>// Make the system call to change terminal parameters.</span>
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>termios</span>::<span class='ident'>tcsetattr</span>(<span class='ident'>rawtty</span>, <span class='ident'>SetArg</span>::<span class='ident'>TCSAFLUSH</span>, <span class='kw-2'>&amp;</span><span class='ident'>tios</span>));
-
         <span class='kw'>let</span> <span class='ident'>epfd</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>epoll_create</span>());
         <span class='kw'>let</span> <span class='ident'>epev</span> <span class='op'>=</span> <span class='ident'>EpollEvent</span> {
             <span class='ident'>events</span>: <span class='ident'>epoll</span>::<span class='ident'>EPOLLIN</span>,
@@ -1089,11 +1004,14 @@
         };
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>epoll_ctl</span>(<span class='ident'>epfd</span>, <span class='ident'>EpollOp</span>::<span class='ident'>EpollCtlAdd</span>, <span class='ident'>rawtty</span>, <span class='kw-2'>&amp;</span><span class='ident'>epev</span>));
 
+
+        <span class='kw'>let</span> <span class='ident'>termctl</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>TermCtl</span>::<span class='ident'>new</span>(<span class='ident'>rawtty</span>));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>termctl</span>.<span class='ident'>set</span>());
+
         <span class='comment'>// Create the terminal object to hold all of our required state.</span>
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>terminal</span> <span class='op'>=</span> <span class='ident'>Terminal</span> {
-            <span class='ident'>orig_tios</span>: <span class='ident'>orig_tios</span>,
+            <span class='ident'>termctl</span>: <span class='ident'>termctl</span>,
             <span class='ident'>tty</span>: <span class='ident'>tty</span>,
-            <span class='ident'>rawtty</span>: <span class='ident'>rawtty</span>,
             <span class='ident'>epfd</span>: <span class='ident'>epfd</span>,
             <span class='ident'>cols</span>: <span class='number'>0</span>,
             <span class='ident'>rows</span>: <span class='number'>0</span>,
@@ -1303,7 +1221,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// ```no_run</span>
     <span class='doccomment'>/// use rustty::Terminal;</span>
-    <span class='doccomment'>/// </span>
+    <span class='doccomment'>///</span>
     <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// let a_cell = term.get(5, 5);</span>
@@ -1483,7 +1401,6 @@
         <span class='prelude-val'>Ok</span>(())
     }
 
-
     <span class='doccomment'>/// Gets an event from the event stream, waiting a maximum of `timeout_ms` milliseconds.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Specifying a `timeout_ms` of -1 causes `get_event()` to block indefinitely, while</span>
@@ -1592,12 +1509,9 @@
 
     <span class='doccomment'>/// Updates the size of the Terminal object to reflect that of the underlying terminal.</span>
     <span class='kw'>fn</span> <span class='ident'>resize_with_cell</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>blank</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>ws</span> <span class='op'>=</span> <span class='ident'>WindowSize</span>::<span class='ident'>new</span>();
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='kw'>unsafe</span> {
-            <span class='ident'>ioctl</span>::<span class='ident'>read_into</span>::<span class='op'>&lt;</span><span class='ident'>WindowSize</span><span class='op'>&gt;</span>(<span class='self'>self</span>.<span class='ident'>rawtty</span>, <span class='ident'>TIOCGWINSZ</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ws</span>)
-        });
-        <span class='self'>self</span>.<span class='ident'>cols</span> <span class='op'>=</span> <span class='ident'>ws</span>.<span class='ident'>ws_col</span> <span class='kw'>as</span> <span class='ident'>usize</span>;
-        <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>=</span> <span class='ident'>ws</span>.<span class='ident'>ws_row</span> <span class='kw'>as</span> <span class='ident'>usize</span>;
+        <span class='kw'>let</span> (<span class='ident'>cols</span>, <span class='ident'>rows</span>) <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>termctl</span>.<span class='ident'>window_size</span>());
+        <span class='self'>self</span>.<span class='ident'>cols</span> <span class='op'>=</span> <span class='ident'>cols</span>;
+        <span class='self'>self</span>.<span class='ident'>rows</span> <span class='op'>=</span> <span class='ident'>rows</span>;
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
         <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
         <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>blank</span>);
@@ -1694,7 +1608,7 @@
         <span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Clear</span>)).<span class='ident'>unwrap</span>();
         <span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>ExitCa</span>)).<span class='ident'>unwrap</span>();
         <span class='self'>self</span>.<span class='ident'>flush</span>().<span class='ident'>unwrap</span>();
-        <span class='ident'>termios</span>::<span class='ident'>tcsetattr</span>(<span class='self'>self</span>.<span class='ident'>rawtty</span>, <span class='ident'>SetArg</span>::<span class='ident'>TCSAFLUSH</span>, <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>orig_tios</span>).<span class='ident'>unwrap</span>();
+        <span class='self'>self</span>.<span class='ident'>termctl</span>.<span class='ident'>reset</span>().<span class='ident'>unwrap</span>();
         <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>store</span>(<span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
         <span class='ident'>RUSTTY_STATUS</span>.<span class='ident'>store</span>(<span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
     }
@@ -1703,26 +1617,6 @@
 <span class='comment'>// Sigwinch handler to notify when window has resized.</span>
 <span class='kw'>extern</span> <span class='kw'>fn</span> <span class='ident'>sigwinch_handler</span>(_: <span class='ident'>i32</span>) {
     <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>store</span>(<span class='boolval'>true</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>);
-}
-
-<span class='comment'>// Window size struct to pass to the kernel.</span>
-<span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>struct</span> <span class='ident'>WindowSize</span> {
-    <span class='ident'>ws_row</span>: <span class='ident'>u16</span>,
-    <span class='ident'>ws_col</span>: <span class='ident'>u16</span>,
-    <span class='ident'>ws_xpixel</span>: <span class='ident'>u16</span>,
-    <span class='ident'>ws_ypixel</span>: <span class='ident'>u16</span>,
-}
-
-<span class='kw'>impl</span> <span class='ident'>WindowSize</span> {
-    <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='ident'>WindowSize</span> {
-        <span class='ident'>WindowSize</span> {
-            <span class='ident'>ws_row</span>: <span class='number'>0</span>,
-            <span class='ident'>ws_col</span>: <span class='number'>0</span>,
-            <span class='ident'>ws_xpixel</span>: <span class='number'>0</span>,
-            <span class='ident'>ws_ypixel</span>: <span class='number'>0</span>,
-        }
-    }
 }
 
 </pre>
