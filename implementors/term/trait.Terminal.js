@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors['term'] = [];implementors['rustty'] = [];implementors['rustty'] = [];
+implementors['term'] = [];implementors['rustty'] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);
