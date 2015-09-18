@@ -24,10 +24,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../../index.html'>nix</a>::<wbr><a href='../index.html'>sys</a>::<wbr><a href='index.html'>ioctl</a></p><script>window.sidebarCurrent = {name: 'read_into_ptr', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -46,7 +46,7 @@
                 [<span class='inner'>&#x2212;</span>]
             </a>
         </span><a id='src-12774' class='srclink' href='../../../src/nix/sys/ioctl.rs.html#203-205' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe fn read_into_ptr&lt;T&gt;(fd: <a class='type' href='http://doc.rust-lang.org/nightly/std/sys/ext/io/type.RawFd.html' title='std::sys::ext::io::RawFd'>RawFd</a>, op: <a class='type' href='../../../nix/sys/ioctl/type.ioctl_op_t.html' title='nix::sys::ioctl::ioctl_op_t'>ioctl_op_t</a>, data_ptr: <a href='http://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut T</a>) -&gt; <a class='type' href='../../../nix/type.Result.html' title='nix::Result'>Result</a>&lt;<a class='type' href='../../../nix/type.c_int.html' title='nix::c_int'>c_int</a>&gt;</pre><div class='docblock'><p>Ioctl where the result from the kernel will be written to the
+<pre class='rust fn'>pub unsafe fn read_into_ptr&lt;T&gt;(fd: <a class='type' href='https://doc.rust-lang.org/nightly/std/sys/ext/io/type.RawFd.html' title='std::sys::ext::io::RawFd'>RawFd</a>, op: <a class='type' href='../../../nix/sys/ioctl/type.ioctl_op_t.html' title='nix::sys::ioctl::ioctl_op_t'>ioctl_op_t</a>, data_ptr: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut T</a>) -&gt; <a class='type' href='../../../nix/type.Result.html' title='nix::Result'>Result</a>&lt;<a class='type' href='../../../nix/type.c_int.html' title='nix::c_int'>c_int</a>&gt;</pre><div class='docblock'><p>Ioctl where the result from the kernel will be written to the
 provided pointer</p>
 
 <p>The refernced data may also contain information that will be consumed
@@ -56,10 +56,12 @@ by the kernel.</p>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -76,7 +78,7 @@ by the kernel.</p>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -86,8 +88,8 @@ by the kernel.</p>
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -96,7 +98,7 @@ by the kernel.</p>
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 

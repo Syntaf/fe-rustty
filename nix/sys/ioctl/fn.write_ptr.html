@@ -24,10 +24,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../../index.html'>nix</a>::<wbr><a href='../index.html'>sys</a>::<wbr><a href='index.html'>ioctl</a></p><script>window.sidebarCurrent = {name: 'write_ptr', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -46,17 +46,19 @@
                 [<span class='inner'>&#x2212;</span>]
             </a>
         </span><a id='src-12823' class='srclink' href='../../../src/nix/sys/ioctl.rs.html#215-217' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe fn write_ptr&lt;T&gt;(fd: <a class='type' href='http://doc.rust-lang.org/nightly/std/sys/ext/io/type.RawFd.html' title='std::sys::ext::io::RawFd'>RawFd</a>, op: <a class='type' href='../../../nix/sys/ioctl/type.ioctl_op_t.html' title='nix::sys::ioctl::ioctl_op_t'>ioctl_op_t</a>, data: <a href='http://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const T</a>) -&gt; <a class='type' href='../../../nix/type.Result.html' title='nix::Result'>Result</a>&lt;<a class='type' href='../../../nix/type.c_int.html' title='nix::c_int'>c_int</a>&gt;</pre><div class='docblock'><p>Ioctl call that sends a value to the kernel but
+<pre class='rust fn'>pub unsafe fn write_ptr&lt;T&gt;(fd: <a class='type' href='https://doc.rust-lang.org/nightly/std/sys/ext/io/type.RawFd.html' title='std::sys::ext::io::RawFd'>RawFd</a>, op: <a class='type' href='../../../nix/sys/ioctl/type.ioctl_op_t.html' title='nix::sys::ioctl::ioctl_op_t'>ioctl_op_t</a>, data: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const T</a>) -&gt; <a class='type' href='../../../nix/type.Result.html' title='nix::Result'>Result</a>&lt;<a class='type' href='../../../nix/type.c_int.html' title='nix::c_int'>c_int</a>&gt;</pre><div class='docblock'><p>Ioctl call that sends a value to the kernel but
 does not return anything (pure side effect).</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -73,7 +75,7 @@ does not return anything (pure side effect).</p>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -83,8 +85,8 @@ does not return anything (pure side effect).</p>
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -93,7 +95,7 @@ does not return anything (pure side effect).</p>
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
