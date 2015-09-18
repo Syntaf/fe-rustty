@@ -34,7 +34,7 @@
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -751,84 +751,6 @@
 <span id="709">709</span>
 <span id="710">710</span>
 <span id="711">711</span>
-<span id="712">712</span>
-<span id="713">713</span>
-<span id="714">714</span>
-<span id="715">715</span>
-<span id="716">716</span>
-<span id="717">717</span>
-<span id="718">718</span>
-<span id="719">719</span>
-<span id="720">720</span>
-<span id="721">721</span>
-<span id="722">722</span>
-<span id="723">723</span>
-<span id="724">724</span>
-<span id="725">725</span>
-<span id="726">726</span>
-<span id="727">727</span>
-<span id="728">728</span>
-<span id="729">729</span>
-<span id="730">730</span>
-<span id="731">731</span>
-<span id="732">732</span>
-<span id="733">733</span>
-<span id="734">734</span>
-<span id="735">735</span>
-<span id="736">736</span>
-<span id="737">737</span>
-<span id="738">738</span>
-<span id="739">739</span>
-<span id="740">740</span>
-<span id="741">741</span>
-<span id="742">742</span>
-<span id="743">743</span>
-<span id="744">744</span>
-<span id="745">745</span>
-<span id="746">746</span>
-<span id="747">747</span>
-<span id="748">748</span>
-<span id="749">749</span>
-<span id="750">750</span>
-<span id="751">751</span>
-<span id="752">752</span>
-<span id="753">753</span>
-<span id="754">754</span>
-<span id="755">755</span>
-<span id="756">756</span>
-<span id="757">757</span>
-<span id="758">758</span>
-<span id="759">759</span>
-<span id="760">760</span>
-<span id="761">761</span>
-<span id="762">762</span>
-<span id="763">763</span>
-<span id="764">764</span>
-<span id="765">765</span>
-<span id="766">766</span>
-<span id="767">767</span>
-<span id="768">768</span>
-<span id="769">769</span>
-<span id="770">770</span>
-<span id="771">771</span>
-<span id="772">772</span>
-<span id="773">773</span>
-<span id="774">774</span>
-<span id="775">775</span>
-<span id="776">776</span>
-<span id="777">777</span>
-<span id="778">778</span>
-<span id="779">779</span>
-<span id="780">780</span>
-<span id="781">781</span>
-<span id="782">782</span>
-<span id="783">783</span>
-<span id="784">784</span>
-<span id="785">785</span>
-<span id="786">786</span>
-<span id="787">787</span>
-<span id="788">788</span>
-<span id="789">789</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{
     <span class='ident'>Index</span>,
@@ -851,7 +773,7 @@
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>errno</span>::<span class='ident'>Errno</span>;
 
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>input</span>::<span class='ident'>Event</span>;
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>position</span>::{<span class='ident'>Position</span>, <span class='ident'>Coordinate</span>, <span class='ident'>Cursor</span>, <span class='ident'>Pair</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>driver</span>::{
@@ -881,7 +803,7 @@
 <span class='doccomment'>/// # Examples</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// ```no_run</span>
-<span class='doccomment'>/// use rustty::{Terminal, Cell, Style, Color};</span>
+<span class='doccomment'>/// use rustty::{Terminal, Cell, Color};</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// // Construct a new Terminal.</span>
 <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
@@ -891,11 +813,11 @@
 <span class='doccomment'>/// term[(0, 0)] = Cell::with_char(&#39;x&#39;);</span>
 <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39;x&#39;);</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// term[(0, 1)].set_bg(Style::with_color(Color::Red));</span>
-<span class='doccomment'>/// assert_eq!(term[(0, 1)].bg(), Style::with_color(Color::Red));</span>
+<span class='doccomment'>/// term[(0, 1)].set_bg(Color::Red);</span>
+<span class='doccomment'>/// assert_eq!(term[(0, 1)].bg(), Color::Red);</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// term[(0, 2)].fg_mut().set_color(Color::Blue);</span>
-<span class='doccomment'>/// assert_eq!(term[(0, 2)].fg().color(), Color::Blue);</span>
+<span class='doccomment'>/// term[(0, 2)].set_fg(Color::Blue);</span>
+<span class='doccomment'>/// assert_eq!(term[(0, 2)].fg(), Color::Blue);</span>
 <span class='doccomment'>/// ```</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Terminal</span> {
     <span class='ident'>termctl</span>: <span class='ident'>TermCtl</span>,
@@ -908,8 +830,7 @@
     <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>, <span class='comment'>// Internal frontbuffer.</span>
     <span class='ident'>outbuffer</span>: <span class='ident'>OutBuffer</span>, <span class='comment'>// Internal output buffer.</span>
     <span class='ident'>eventbuffer</span>: <span class='ident'>EventBuffer</span>, <span class='comment'>// Event buffer.</span>
-    <span class='ident'>lastfg</span>: <span class='ident'>Style</span>, <span class='comment'>// Last foreground style written to the output buffer.</span>
-    <span class='ident'>lastbg</span>: <span class='ident'>Style</span>, <span class='comment'>// Last background style written to the input buffer.</span>
+    <span class='ident'>laststyle</span>: <span class='ident'>Cell</span>, <span class='comment'>// Last cell to have its style (fg, bg, attrs) written to the output buffer.</span>
     <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>, <span class='comment'>// Current cursor position.</span>
 }
 
@@ -941,25 +862,6 @@
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_char</span>(<span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>))
-    }
-
-    <span class='doccomment'>/// Constructs a new `Terminal` with each cell set to the given `Style`s and a blank `char`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use rustty::{Terminal, Cell, Style, Color, Attr};</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let style1 = Style::with_color(Color::Blue);</span>
-    <span class='doccomment'>/// let style2 = Style::with_attr(Attr::Reverse);</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut term = Terminal::with_styles(style1, style2).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[(0, 0)].fg(), Style::with_color(Color::Blue));</span>
-    <span class='doccomment'>/// assert_eq!(term[(0, 0)].bg(), Style::with_attr(Attr::Reverse));</span>
-    <span class='doccomment'>/// assert_eq!(term[(0, 0)].ch(), &#39; &#39;);</span>
-    <span class='doccomment'>/// ```</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>with_styles</span>(<span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Terminal</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>))
     }
 
     <span class='doccomment'>/// Creates a new `Terminal` using the given cell as a blank.</span>
@@ -1020,8 +922,7 @@
             <span class='ident'>frontbuffer</span>: <span class='ident'>CellBuffer</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='number'>0</span>, <span class='ident'>cell</span>),
             <span class='ident'>outbuffer</span>: <span class='ident'>OutBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>32</span> <span class='op'>*</span> <span class='number'>1024</span>),
             <span class='ident'>eventbuffer</span>: <span class='ident'>EventBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>128</span>),
-            <span class='ident'>lastfg</span>: <span class='ident'>cell</span>.<span class='ident'>fg</span>(),
-            <span class='ident'>lastbg</span>: <span class='ident'>cell</span>.<span class='ident'>bg</span>(),
+            <span class='ident'>laststyle</span>: <span class='ident'>cell</span>,
             <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>::<span class='ident'>new</span>(),
         };
 
@@ -1064,7 +965,7 @@
                     <span class='kw'>continue</span>; <span class='comment'>// Don&#39;t redraw cells that haven&#39;t changed.</span>
                 } <span class='kw'>else</span> {
                     <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)];
-                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>cell</span>.<span class='ident'>bg</span>()));
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>cell</span>));
                     <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_char</span>(<span class='ident'>Coordinate</span>::<span class='ident'>Valid</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)), <span class='ident'>cell</span>.<span class='ident'>ch</span>()));
                     <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)] <span class='op'>=</span> <span class='ident'>cell</span>;
                 }
@@ -1159,33 +1060,6 @@
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
         }
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='ident'>ch</span>));
-        <span class='prelude-val'>Ok</span>(())
-    }
-
-    <span class='doccomment'>/// Clears the internal backbuffer with the given `Style`s and a blank `char`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use rustty::{Terminal, Cell, Style, Color};</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut style1 = Style::with_color(Color::Blue);</span>
-    <span class='doccomment'>/// let mut style2 = Style::with_color(Color::Red);</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut term = Terminal::with_styles(style1, style2).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[(0, 0)].fg(), Style::with_color(Color::Blue));</span>
-    <span class='doccomment'>/// assert_eq!(term[(0, 0)].bg(), Style::with_color(Color::Red));</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// term.clear_with_styles(style2, style1).unwrap();</span>
-    <span class='doccomment'>/// assert_eq!(term[(0, 0)].fg(), Style::with_color(Color::Red));</span>
-    <span class='doccomment'>/// assert_eq!(term[(0, 0)].bg(), Style::with_color(Color::Blue));</span>
-    <span class='doccomment'>/// ```</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>clear_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='comment'>// Check whether the window has been resized; if it has then update and resize the buffers.</span>
-        <span class='kw'>if</span> <span class='ident'>SIGWINCH_STATUS</span>.<span class='ident'>compare_and_swap</span>(<span class='boolval'>true</span>, <span class='boolval'>false</span>, <span class='ident'>Ordering</span>::<span class='ident'>SeqCst</span>) {
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>resize</span>());
-        }
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>));
         <span class='prelude-val'>Ok</span>(())
     }
 
@@ -1318,28 +1192,6 @@
     }
 
     <span class='doccomment'>/// Resizes the buffers if the underlying terminal window size has changed, using the given</span>
-    <span class='doccomment'>/// `Style`s and a blank `char` as a blank.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use rustty::{Terminal, Style, Color};</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let style = Style::with_color(Color::Red);</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// // If new_size == Some(T) then T is the new size of the terminal.</span>
-    <span class='doccomment'>/// // If new_size == None then the terminal has not resized.</span>
-    <span class='doccomment'>/// let new_size = term.try_resize_with_styles(style, style).unwrap();</span>
-    <span class='doccomment'>/// ```</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>try_resize_with_styles</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>,
-                                  <span class='ident'>fg</span>: <span class='ident'>Style</span>,
-                                  <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span>, <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>try_resize_with_cell</span>(<span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>))
-    }
-
-    <span class='doccomment'>/// Resizes the buffers if the underlying terminal window size has changed, using the given</span>
     <span class='doccomment'>/// `Cell` as a blank.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
@@ -1453,8 +1305,7 @@
         <span class='prelude-val'>Ok</span>(())
     }
 
-    <span class='kw'>fn</span> <span class='ident'>send_clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>fg</span>, <span class='ident'>bg</span>));
+    <span class='kw'>fn</span> <span class='ident'>send_clear</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Clear</span>)));
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>());
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>flush</span>());
@@ -1462,27 +1313,19 @@
         <span class='prelude-val'>Ok</span>(())
     }
 
-    <span class='kw'>fn</span> <span class='ident'>send_style</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fg</span>: <span class='ident'>Style</span>, <span class='ident'>bg</span>: <span class='ident'>Style</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='ident'>fg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>lastfg</span> <span class='op'>||</span> <span class='ident'>bg</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>lastbg</span> {
+    <span class='kw'>fn</span> <span class='ident'>send_style</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>cell</span>: <span class='ident'>Cell</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='ident'>cell</span>.<span class='ident'>fg</span>() <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>laststyle</span>.<span class='ident'>fg</span>() <span class='op'>||</span> <span class='ident'>cell</span>.<span class='ident'>bg</span>() <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>laststyle</span>.<span class='ident'>bg</span>() <span class='op'>||</span> <span class='ident'>cell</span>.<span class='ident'>attrs</span>() <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>laststyle</span>.<span class='ident'>attrs</span>() {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Reset</span>)));
 
-            <span class='kw'>match</span> <span class='ident'>fg</span>.<span class='ident'>attr</span>() {
+            <span class='kw'>match</span> <span class='ident'>cell</span>.<span class='ident'>attrs</span>() {
                 <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Bold</span>))),
                 <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Underline</span>))),
                 <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Reverse</span>))),
                 _ <span class='op'>=&gt;</span> {},
             }
 
-            <span class='kw'>match</span> <span class='ident'>bg</span>.<span class='ident'>attr</span>() {
-                <span class='ident'>Attr</span>::<span class='ident'>Bold</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Blink</span>))),
-                <span class='ident'>Attr</span>::<span class='ident'>Underline</span> <span class='op'>=&gt;</span> {},
-                <span class='ident'>Attr</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>Reverse</span>))),
-                _ <span class='op'>=&gt;</span> {},
-            }
-
-            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr</span>(<span class='ident'>fg</span>.<span class='ident'>color</span>(), <span class='ident'>bg</span>.<span class='ident'>color</span>()));
-            <span class='self'>self</span>.<span class='ident'>lastfg</span> <span class='op'>=</span> <span class='ident'>fg</span>;
-            <span class='self'>self</span>.<span class='ident'>lastbg</span> <span class='op'>=</span> <span class='ident'>bg</span>;
+            <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>write_sgr</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>cell</span>.<span class='ident'>bg</span>()));
+            <span class='self'>self</span>.<span class='ident'>laststyle</span> <span class='op'>=</span> <span class='ident'>cell</span>;
         }
         <span class='prelude-val'>Ok</span>(())
     }
@@ -1515,7 +1358,8 @@
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
         <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>resize</span>(<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>, <span class='ident'>blank</span>);
         <span class='self'>self</span>.<span class='ident'>frontbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>blank</span>);
-        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_clear</span>(<span class='ident'>blank</span>.<span class='ident'>fg</span>(), <span class='ident'>blank</span>.<span class='ident'>bg</span>()));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>blank</span>));
+        <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_clear</span>());
         <span class='prelude-val'>Ok</span>(())
     }
 
@@ -1626,37 +1470,44 @@
     <section class="footer"></section>
 
     <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
-        </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
-            </p>
+        <div>
+            <div class="shortcuts">
+                <h1>Keyboard Shortcuts</h1>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h1>Search Tricks</h1>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>typedef</code> (or
+                    <code>tdef</code>).
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
     </div>
 

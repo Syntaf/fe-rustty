@@ -34,7 +34,7 @@
             <div class="search-container">
                 <input class="search-input" name="search"
                        autocomplete="off"
-                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
                        type="search">
             </div>
         </form>
@@ -45,48 +45,48 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-2859' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#116-120' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-2693' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#116-121' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Cell {
     // some fields omitted
 }</pre><div class='docblock'><p>A single point on a terminal display.</p>
 
-<p>A <code>Cell</code> contains a character and a set of foreground and background <code>Style</code>s.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>, fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<div class='docblock'><p>Creates a new <code>Cell</code> with the given <code>char</code> and <code>Style</code>s.</p>
+<p>A <code>Cell</code> contains a character and style.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>, fg: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>, bg: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>, attrs: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Creates a new <code>Cell</code> with the given <code>char</code>, <code>Color</code>s and <code>Attr</code>.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>};
+<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='string'>&#39;x&#39;</span>, <span class='ident'>Style</span>::<span class='ident'>default</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Green</span>));
+<span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>new</span>(<span class='string'>&#39;x&#39;</span>, <span class='ident'>Color</span>::<span class='ident'>Default</span>, <span class='ident'>Color</span>::<span class='ident'>Green</span>, <span class='ident'>Attr</span>::<span class='ident'>Default</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Style</span>::<span class='ident'>default</span>());
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Green</span>));
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Color</span>::<span class='ident'>Green</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>attrs</span>(), <span class='ident'>Attr</span>::<span class='ident'>Default</span>);</pre>
 </div><h4 id='method.with_char' class='method'><code>fn <a href='#method.with_char' class='fnname'>with_char</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<div class='docblock'><p>Creates a new <code>Cell</code> with the given <code>char</code> and default <code>Style</code>s.</p>
+<div class='docblock'><p>Creates a new <code>Cell</code> with the given <code>char</code> and default style.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>};
+<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Style</span>::<span class='ident'>default</span>());
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>default</span>());
-</pre>
-</div><h4 id='method.with_styles' class='method'><code>fn <a href='#method.with_styles' class='fnname'>with_styles</a>(fg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>, bg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<div class='docblock'><p>Creates a new <code>Cell</code> with the given <code>Style</code>s and a blank <code>char</code>.</p>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>attrs</span>(), <span class='ident'>Attr</span>::<span class='ident'>Default</span>);</pre>
+</div><h4 id='method.with_style' class='method'><code>fn <a href='#method.with_style' class='fnname'>with_style</a>(fg: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>, bg: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>, attr: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Creates a new <code>Cell</code> with the given style and a blank <code>char</code>.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>};
+<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>Style</span>::<span class='ident'>default</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Red</span>));
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Style</span>::<span class='ident'>default</span>());
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Red</span>));
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39; &#39;</span>);
-</pre>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_style</span>(<span class='ident'>Color</span>::<span class='ident'>Default</span>, <span class='ident'>Color</span>::<span class='ident'>Red</span>, <span class='ident'>Attr</span>::<span class='ident'>Bold</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Color</span>::<span class='ident'>Red</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>attrs</span>(), <span class='ident'>Attr</span>::<span class='ident'>Bold</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39; &#39;</span>);</pre>
 </div><h4 id='method.ch' class='method'><code>fn <a href='#method.ch' class='fnname'>ch</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a></code></h4>
 <div class='docblock'><p>Returns the <code>Cell</code>&#39;s character.</p>
 
@@ -95,8 +95,7 @@
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Cell</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);
-</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);</pre>
 </div><h4 id='method.set_ch' class='method'><code>fn <a href='#method.set_ch' class='fnname'>set_ch</a>(&amp;mut self, newch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
 <div class='docblock'><p>Sets the <code>Cell</code>&#39;s character to the given <code>char</code></p>
 
@@ -108,75 +107,52 @@
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);
 
 <span class='ident'>cell</span>.<span class='ident'>set_ch</span>(<span class='string'>&#39;y&#39;</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39;y&#39;</span>);
-</pre>
-</div><h4 id='method.fg' class='method'><code>fn <a href='#method.fg' class='fnname'>fg</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
-<div class='docblock'><p>Returns the <code>Cell</code>&#39;s foreground <code>Style</code>.</p>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>ch</span>(), <span class='string'>&#39;y&#39;</span>);</pre>
+</div><h4 id='method.fg' class='method'><code>fn <a href='#method.fg' class='fnname'>fg</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h4>
+<div class='docblock'><p>Returns the <code>Cell</code>&#39;s foreground <code>Color</code>.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Attr</span>};
+<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Bold</span>), <span class='ident'>Style</span>::<span class='ident'>default</span>());
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Bold</span>));
-</pre>
-</div><h4 id='method.fg_mut' class='method'><code>fn <a href='#method.fg_mut' class='fnname'>fg_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
-<div class='docblock'><p>Returns a mutable reference to the <code>Cell</code>&#39;s foreground <code>Style</code>.</p>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_style</span>(<span class='ident'>Color</span>::<span class='ident'>Blue</span>, <span class='ident'>Color</span>::<span class='ident'>Default</span>, <span class='ident'>Attr</span>::<span class='ident'>Default</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Color</span>::<span class='ident'>Blue</span>);</pre>
+</div><h4 id='method.set_fg' class='method'><code>fn <a href='#method.set_fg' class='fnname'>set_fg</a>(&amp;mut self, newfg: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Sets the <code>Cell</code>&#39;s foreground <code>Color</code> to the given <code>Color</code>.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>};
+<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>default</span>();
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg_mut</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Style</span>::<span class='ident'>default</span>());
-</pre>
-</div><h4 id='method.set_fg' class='method'><code>fn <a href='#method.set_fg' class='fnname'>set_fg</a>(&amp;mut self, newfg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<div class='docblock'><p>Sets the <code>Cell</code>&#39;s foreground <code>Style</code> to the given <code>Style</code>.</p>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
+
+<span class='ident'>cell</span>.<span class='ident'>set_fg</span>(<span class='ident'>Color</span>::<span class='ident'>White</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Color</span>::<span class='ident'>White</span>);</pre>
+</div><h4 id='method.bg' class='method'><code>fn <a href='#method.bg' class='fnname'>bg</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h4>
+<div class='docblock'><p>Returns the <code>Cell</code>&#39;s background <code>Color</code>.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
+<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Green</span>), <span class='ident'>Style</span>::<span class='ident'>default</span>());
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Green</span>));
-
-<span class='ident'>cell</span>.<span class='ident'>set_fg</span>(<span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Underline</span>));
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>fg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Underline</span>));
-</pre>
-</div><h4 id='method.bg' class='method'><code>fn <a href='#method.bg' class='fnname'>bg</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
-<div class='docblock'><p>Returns the <code>Cell</code>&#39;s background <code>Style</code>.</p>
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_style</span>(<span class='ident'>Color</span>::<span class='ident'>Default</span>, <span class='ident'>Color</span>::<span class='ident'>Green</span>, <span class='ident'>Attr</span>::<span class='ident'>Default</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Color</span>::<span class='ident'>Green</span>);</pre>
+</div><h4 id='method.set_bg' class='method'><code>fn <a href='#method.set_bg' class='fnname'>set_bg</a>(&amp;mut self, newbg: <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<div class='docblock'><p>Sets the <code>Cell</code>&#39;s background <code>Color</code> to the given <code>Color</code>.</p>
 
 <h1 id="examples" class='section-header'><a
                            href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Attr</span>};
-
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>Style</span>::<span class='ident'>default</span>(), <span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Bold</span>));
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Bold</span>));
-</pre>
-</div><h4 id='method.bg_mut' class='method'><code>fn <a href='#method.bg_mut' class='fnname'>bg_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a></code></h4>
-<div class='docblock'><p>Returns a mutable reference to the <code>Cell</code>&#39;s background <code>Style</code>.</p>
-
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>};
+<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>default</span>();
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg_mut</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Style</span>::<span class='ident'>default</span>());
-</pre>
-</div><h4 id='method.set_bg' class='method'><code>fn <a href='#method.set_bg' class='fnname'>set_bg</a>(&amp;mut self, newbg: <a class='struct' href='../rustty/struct.Style.html' title='rustty::Style'>Style</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<div class='docblock'><p>Sets the <code>Cell</code>&#39;s background <code>Style</code> to the given <code>Style</code>.</p>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Color</span>::<span class='ident'>Default</span>);
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Cell</span>, <span class='ident'>Style</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
-
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_styles</span>(<span class='ident'>Style</span>::<span class='ident'>default</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Green</span>));
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_color</span>(<span class='ident'>Color</span>::<span class='ident'>Green</span>));
-
-<span class='ident'>cell</span>.<span class='ident'>set_bg</span>(<span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Underline</span>));
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Style</span>::<span class='ident'>with_attr</span>(<span class='ident'>Attr</span>::<span class='ident'>Underline</span>));
-</pre>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<span class='ident'>cell</span>.<span class='ident'>set_bg</span>(<span class='ident'>Color</span>::<span class='ident'>Black</span>);
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>cell</span>.<span class='ident'>bg</span>(), <span class='ident'>Color</span>::<span class='ident'>Black</span>);</pre>
+</div><h4 id='method.attrs' class='method'><code>fn <a href='#method.attrs' class='fnname'>attrs</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a></code></h4>
+<h4 id='method.set_attrs' class='method'><code>fn <a href='#method.set_attrs' class='fnname'>set_attrs</a>(&amp;mut self, newattrs: <a class='enum' href='../rustty/enum.Attr.html' title='rustty::Attr'>Attr</a>) -&gt; &amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
 </div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <h4 id='method.ne' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 </div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
@@ -188,37 +164,44 @@
     <section class="footer"></section>
 
     <div id="help" class="hidden">
-        <div class="shortcuts">
-            <h1>Keyboard shortcuts</h1>
-            <dl>
-                <dt>?</dt>
-                <dd>Show this help dialog</dd>
-                <dt>S</dt>
-                <dd>Focus the search field</dd>
-                <dt>&larrb;</dt>
-                <dd>Move up in search results</dd>
-                <dt>&rarrb;</dt>
-                <dd>Move down in search results</dd>
-                <dt>&#9166;</dt>
-                <dd>Go to active search result</dd>
-            </dl>
-        </div>
-        <div class="infos">
-            <h1>Search tricks</h1>
-            <p>
-                Prefix searches with a type followed by a colon (e.g.
-                <code>fn:</code>) to restrict the search to a given type.
-            </p>
-            <p>
-                Accepted types are: <code>fn</code>, <code>mod</code>,
-                <code>struct</code>, <code>enum</code>,
-                <code>trait</code>, <code>typedef</code> (or
-                <code>tdef</code>).
-            </p>
-            <p>
-                Search functions by type signature (e.g.
-                <code>vec -> usize</code>)
-            </p>
+        <div>
+            <div class="shortcuts">
+                <h1>Keyboard Shortcuts</h1>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h1>Search Tricks</h1>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>typedef</code> (or
+                    <code>tdef</code>).
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
         </div>
     </div>
 
