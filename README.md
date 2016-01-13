@@ -1,6 +1,6 @@
-# rustty: a terminal UI library
+# ruik: a rustty UI kit
 
-[![Build Status](https://travis-ci.org/cpjreynolds/rustty.svg?branch=master)](https://travis-ci.org/cpjreynolds/rustty) [![Crates.io](https://img.shields.io/crates/v/rustty.svg)](https://crates.io/crates/rustty) [![Crates.io](https://img.shields.io/crates/l/rustty.svg)](https://crates.io/crates/rustty)
+[![Build Status](https://travis-ci.org/syntaf/ruik.svg?branch=widget_redesign)](https://travis-ci.org/syntaf/ruik) [![Crates.io](https://img.shields.io/crates/v/rustty.svg)](https://crates.io/crates/rustty) [![Crates.io](https://img.shields.io/crates/l/rustty.svg)](https://crates.io/crates/rustty)
 
 - [API Documentation][1]
 - [Intro](#intro)
@@ -14,8 +14,9 @@
 
 ## Intro
 
-Rustty is a terminal UI library that provides a simple, concise abstraction over an
-underlying terminal device.
+ruik is a fork of rustty that focuses on a terminal UI library that provides a widget based API.
+
+-------------
 
 Rustty is based on the concepts of cells and events. A terminal display is an array of cells,
 each holding a character and a set of foreground and background styles. Events are how a
