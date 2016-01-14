@@ -1,6 +1,6 @@
 # ruik: a rustty UI kit
 
-[![Build Status](https://travis-ci.org/syntaf/ruik.svg?branch=widget_redesign)](https://travis-ci.org/syntaf/ruik) [![Crates.io](https://img.shields.io/crates/v/rustty.svg)](https://crates.io/crates/rustty) [![Crates.io](https://img.shields.io/crates/l/rustty.svg)](https://crates.io/crates/rustty)
+[![Build Status](https://travis-ci.org/Syntaf/ruik.svg?branch=widget_redesign)](https://travis-ci.org/Syntaf/ruik) [![Crates.io](https://img.shields.io/crates/v/rustty.svg)](https://crates.io/crates/rustty) [![Crates.io](https://img.shields.io/crates/l/rustty.svg)](https://crates.io/crates/rustty)
 
 - [API Documentation][1]
 - [Intro](#intro)
