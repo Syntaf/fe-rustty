@@ -1,6 +1,6 @@
 # ruik: a rustty UI kit
 
-[![Build Status](https://travis-ci.org/Syntaf/ruik.svg?branch=widget_redesign)](https://travis-ci.org/Syntaf/ruik) [![Crates.io](https://img.shields.io/crates/v/rustty.svg)](https://crates.io/crates/rustty) [![Crates.io](https://img.shields.io/crates/l/rustty.svg)](https://crates.io/crates/rustty)
+[![Build Status](https://travis-ci.org/Syntaf/ruik.svg?branch=widget_redesign)](https://travis-ci.org/Syntaf/ruik)
 
 - [API Documentation][1]
 - [Intro](#intro)
@@ -14,34 +14,29 @@
 
 ## Intro
 
-ruik is a fork of rustty that focuses on a terminal UI library that provides a widget based API.
+ruik is a fork of [rustty](https://github.com/cpjreynolds/rustty) that provides a widget based API for building terminal UI applications.
 
 -------------
 
-Rustty is based on the concepts of cells and events. A terminal display is an array of cells,
+Ruik's backend, Rustty, is based on the concepts of cells and events. A terminal display is an array of cells,
 each holding a character and a set of foreground and background styles. Events are how a
 terminal communicates changes in its state; events are received from a terminal, processed, and
 pushed onto an input stream to be read and responded to.
 
 ## Installation
 
-Installation is simple, to use `rustty`, first add this to your `Cargo.toml`:
+To use `ruik` within your project, first add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-rustty = "*"
+ruik = { git = "https://github.com/Syntaf/ruik.git" }
 ```
 
 Then, add this to your crate root:
 
 ```rust
-extern crate rustty;
+extern crate ruik;
 ```
-
-## Concepts
-
-The purpose of this section is to introduce and explain the main concepts of
-rustty and the decisions behind its design.
 
 ### Terminal
 
@@ -85,11 +80,7 @@ documentation][1].
 
 ## Contact
 
-If you encounter any issues with the library or have suggestions,
-please report them with the [issue tracker](https://github.com/cpjreynolds/rustty/issues).
-
-If you have any further questions, please don't hesitate to 
-[email me](mailto:cpjreynolds@gmail.com), and I respond as soon as
+[email me](mailto:syntaf@gmail.com)
 I am able.
 
-[1]: http://cpjreynolds.github.io/rustty
+[1]: http://syntaf.github.io/ruik
