@@ -85,7 +85,7 @@ To get started with widgets, your most basic and most widely used container will
 mesh widgets together and act as a aggregator, a widget which *takes in* other widgets for easier management. Creation
 of a dialog is simple:
 
-```
+```rust
 let mut dlg = Dialog::new(60, 10);	// create dialog 60 columns wide, 10 rows long
 dlg.draw_box();				// draw border
 ```
@@ -93,7 +93,7 @@ dlg.draw_box();				// draw border
 This dialog will now allow us to aggregate widgets we wish to bundle together, say labels or buttons:
 
 
-```
+```rust
 let mut b1 = StdButton::new("Quit", 'q', ButtonResult::Ok);		// Create button
 b1.pack(&maindlg, HorizontalAlign::Left, VerticalAlign::Bottom, (4,2));	// Align button within dialog
 
@@ -102,7 +102,7 @@ dlg.add_button(b1);	// dlg now takes ownership of b1
 
 Great! now when we want to poll events, we can use dialogs to forward events to our buttons
 
-```
+```rust
 // Poll events
 while let Some(Event::Key(ch)) = terminal.get_event(0).unwrap() {
     match dlg.result_for_key(ch) {
@@ -120,7 +120,7 @@ and perform actions based on that specliazation. At their core, widgets implemen
 specialization. Take for example a label:
 
 
-```
+```rust
 pub struct Label {
     frame: Frame,
     text: Vec<String>
