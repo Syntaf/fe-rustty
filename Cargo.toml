@@ -1,11 +1,11 @@
 [package]
-name = "rustty"
+name = "fe-rustty"
 version = "0.1.9"
-authors = ["Cole Reynolds <cpjreynolds@gmail.com>"]
-description = "A terminal UI library"
-documentation = "https://cpjreynolds.github.io/rustty"
-repository = "https://github.com/cpjreynolds/rustty"
-homepage = "https://github.com/cpjreynolds/rustty"
+authors = ["Grant Mercer (gmercer015@gmail.com), Cole Reynolds <cpjreynolds@gmail.com>"]
+description = "rustty with widgets"
+documentation = "https://syntaf.github.io/fe-rustty"
+repository = "https://github.com/syntaf/fe-rustty"
+homepage = "https://github.com/syntaf/fe-rustty"
 readme = "README.md"
 license = "MIT"
 keywords = ["terminal", "ui", "tui", "console", "tty"]
