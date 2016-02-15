@@ -4,14 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-0a35038f75765ae4/term-0.2.11/src/terminfo/parser/compiled.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-88ac128001ac3a9a/term-0.2.14/src/terminfo/parser/compiled.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>compiled.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../../main.css">
 
-    <link rel="shortcut icon" href="http://www.rust-lang.org/favicon.ico">
+    <link rel="shortcut icon" href="https://www.rust-lang.org/favicon.ico">
     
 </head>
 <body class="rustdoc">
@@ -24,10 +25,10 @@
 
     
 
-    <section class="sidebar">
-        <a href='../../../../term/index.html'><img src='http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
+    <nav class="sidebar">
+        <a href='../../../../term/index.html'><img src='https://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png' alt='' width='100'></a>
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -399,6 +400,8 @@
 <span id="357">357</span>
 <span id="358">358</span>
 <span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013 The Rust Project Developers. See the COPYRIGHT</span>
 <span class='comment'>// file at the top-level directory of this distribution and at</span>
@@ -657,23 +660,25 @@
                    for names section&quot;</span>.<span class='ident'>to_string</span>());
     }
 
-    <span class='kw'>let</span> <span class='ident'>bools_map</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>bool</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(
+    <span class='kw'>let</span> <span class='ident'>bools_map</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>bool</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span> {
         (<span class='number'>0</span>..<span class='ident'>bools_bytes</span>).<span class='ident'>filter_map</span>(<span class='op'>|</span><span class='ident'>i</span><span class='op'>|</span> <span class='kw'>match</span> <span class='ident'>read_byte</span>(<span class='ident'>file</span>) {
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Err</span>(<span class='ident'>e</span>)),
             <span class='prelude-val'>Ok</span>(<span class='number'>1</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Ok</span>((<span class='ident'>bnames</span>[<span class='ident'>i</span>].<span class='ident'>to_string</span>(), <span class='boolval'>true</span>))),
             <span class='prelude-val'>Ok</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>
-        }).<span class='ident'>collect</span>());
+        }).<span class='ident'>collect</span>()
+    };
 
     <span class='kw'>if</span> (<span class='ident'>bools_bytes</span> <span class='op'>+</span> <span class='ident'>names_bytes</span>) <span class='op'>%</span> <span class='number'>2</span> <span class='op'>==</span> <span class='number'>1</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>read_byte</span>(<span class='ident'>file</span>)); <span class='comment'>// compensate for padding</span>
     }
 
-    <span class='kw'>let</span> <span class='ident'>numbers_map</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>u16</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(
+    <span class='kw'>let</span> <span class='ident'>numbers_map</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>u16</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span> {
         (<span class='number'>0</span>..<span class='ident'>numbers_count</span>).<span class='ident'>filter_map</span>(<span class='op'>|</span><span class='ident'>i</span><span class='op'>|</span> <span class='kw'>match</span> <span class='ident'>read_le_u16</span>(<span class='ident'>file</span>) {
             <span class='prelude-val'>Ok</span>(<span class='number'>0xFFFF</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
             <span class='prelude-val'>Ok</span>(<span class='ident'>n</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Ok</span>((<span class='ident'>nnames</span>[<span class='ident'>i</span>].<span class='ident'>to_string</span>(), <span class='ident'>n</span>))),
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='prelude-val'>Err</span>(<span class='ident'>e</span>))
-        }).<span class='ident'>collect</span>());
+        }).<span class='ident'>collect</span>()
+    };
 
     <span class='kw'>let</span> <span class='ident'>string_map</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>String</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;&gt;</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>string_offsets_count</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
         <span class='kw'>let</span> <span class='ident'>string_offsets</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u16</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>((<span class='number'>0</span>..<span class='ident'>string_offsets_count</span>).<span class='ident'>map</span>(<span class='op'>|</span>_<span class='op'>|</span> {
@@ -765,10 +770,12 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -785,7 +792,7 @@
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -795,8 +802,8 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -805,7 +812,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -817,6 +824,6 @@
     <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     <script src="../../../../playpen.js"></script>
-    <script async src="../../../../search-index.js"></script>
+    <script defer src="../../../../search-index.js"></script>
 </body>
 </html>

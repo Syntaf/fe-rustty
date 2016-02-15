@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Position","A trait for objects which have a position that can be expressed as coordinates."]]});
+initSidebarItems({"trait":[["HasPosition",""],["HasSize",""]],"type":[["Pos","A `(x, y)` position on screen."],["Size","A `(cols, rows)` size."]]});

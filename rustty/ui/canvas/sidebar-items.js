@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Canvas","Logical clone of Frame that exposes backend functionality for users without breaking the API rules"]]});

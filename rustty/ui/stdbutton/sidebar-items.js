@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["StdButton","Standard button that returns some result based on whether a key is pressed"]]});

@@ -9,6 +9,7 @@
 
     <title>terminal.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -24,10 +25,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -740,17 +741,6 @@
 <span id="698">698</span>
 <span id="699">699</span>
 <span id="700">700</span>
-<span id="701">701</span>
-<span id="702">702</span>
-<span id="703">703</span>
-<span id="704">704</span>
-<span id="705">705</span>
-<span id="706">706</span>
-<span id="707">707</span>
-<span id="708">708</span>
-<span id="709">709</span>
-<span id="710">710</span>
-<span id="711">711</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ops</span>::{
     <span class='ident'>Index</span>,
@@ -764,6 +754,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>os</span>::<span class='ident'>unix</span>::<span class='ident'>io</span>::{<span class='ident'>AsRawFd</span>, <span class='ident'>RawFd</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>atomic</span>::{<span class='ident'>AtomicBool</span>, <span class='ident'>Ordering</span>, <span class='ident'>ATOMIC_BOOL_INIT</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>VecDeque</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
 
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>signal</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>signal</span>::{<span class='ident'>SockFlag</span>, <span class='ident'>SigSet</span>};
@@ -773,15 +764,16 @@
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>sys</span>::<span class='ident'>epoll</span>;
 <span class='kw'>use</span> <span class='ident'>nix</span>::<span class='ident'>errno</span>::<span class='ident'>Errno</span>;
 
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>cellbuffer</span>::{<span class='ident'>CellAccessor</span>, <span class='ident'>CellBuffer</span>, <span class='ident'>Cell</span>, <span class='ident'>Color</span>, <span class='ident'>Attr</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>input</span>::<span class='ident'>Event</span>;
-<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>position</span>::{<span class='ident'>Position</span>, <span class='ident'>Coordinate</span>, <span class='ident'>Cursor</span>, <span class='ident'>Pair</span>};
+<span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>position</span>::{<span class='ident'>Cursor</span>, <span class='ident'>Pos</span>, <span class='ident'>Size</span>, <span class='ident'>HasSize</span>};
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>driver</span>::{
     <span class='ident'>DevFn</span>,
     <span class='ident'>Driver</span>,
 };
 <span class='kw'>use</span> <span class='ident'>core</span>::<span class='ident'>termctl</span>::<span class='ident'>TermCtl</span>;
 <span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>errors</span>::<span class='ident'>Error</span>;
+<span class='kw'>use</span> <span class='ident'>gag</span>::<span class='ident'>BufferRedirect</span>;
 
 <span class='doccomment'>/// Set to true by the sigwinch handler. Reset to false when buffers are resized.</span>
 <span class='kw'>static</span> <span class='ident'>SIGWINCH_STATUS</span>: <span class='ident'>AtomicBool</span> <span class='op'>=</span> <span class='ident'>ATOMIC_BOOL_INIT</span>;
@@ -832,6 +824,7 @@
     <span class='ident'>eventbuffer</span>: <span class='ident'>EventBuffer</span>, <span class='comment'>// Event buffer.</span>
     <span class='ident'>laststyle</span>: <span class='ident'>Cell</span>, <span class='comment'>// Last cell to have its style (fg, bg, attrs) written to the output buffer.</span>
     <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>, <span class='comment'>// Current cursor position.</span>
+    <span class='ident'>stderr_handle</span>: <span class='ident'>BufferRedirect</span>
 }
 
 <span class='kw'>impl</span> <span class='ident'>Terminal</span> {
@@ -924,6 +917,7 @@
             <span class='ident'>eventbuffer</span>: <span class='ident'>EventBuffer</span>::<span class='ident'>with_capacity</span>(<span class='number'>128</span>),
             <span class='ident'>laststyle</span>: <span class='ident'>cell</span>,
             <span class='ident'>cursor</span>: <span class='ident'>Cursor</span>::<span class='ident'>new</span>(),
+            <span class='ident'>stderr_handle</span>: <span class='ident'>BufferRedirect</span>::<span class='ident'>stderr</span>().<span class='ident'>unwrap</span>()
         };
 
         <span class='comment'>// Switch to alternate screen buffer. Writes the control code to the output buffer.</span>
@@ -966,7 +960,7 @@
                 } <span class='kw'>else</span> {
                     <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)];
                     <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_style</span>(<span class='ident'>cell</span>));
-                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_char</span>(<span class='ident'>Coordinate</span>::<span class='ident'>Valid</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)), <span class='ident'>cell</span>.<span class='ident'>ch</span>()));
+                    <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_char</span>(<span class='prelude-val'>Some</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)), <span class='ident'>cell</span>.<span class='ident'>ch</span>()));
                     <span class='self'>self</span>.<span class='ident'>frontbuffer</span>[(<span class='ident'>x</span>, <span class='ident'>y</span>)] <span class='op'>=</span> <span class='ident'>cell</span>;
                 }
             }
@@ -1002,21 +996,6 @@
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rows</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
         <span class='self'>self</span>.<span class='ident'>rows</span>
-    }
-
-    <span class='doccomment'>/// Returns the size of the terminal as (cols, rows).</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use rustty::Terminal;</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
-    <span class='doccomment'>/// let size = term.size();</span>
-    <span class='doccomment'>/// assert_eq!(size, (term.cols(), term.rows()));</span>
-    <span class='doccomment'>/// ```</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>usize</span>, <span class='ident'>usize</span>) {
-        (<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>)
     }
 
     <span class='doccomment'>/// Clears the internal backbuffer with the default cell.</span>
@@ -1086,38 +1065,6 @@
         }
         <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>clear</span>(<span class='ident'>cell</span>);
         <span class='prelude-val'>Ok</span>(())
-    }
-
-    <span class='doccomment'>/// Returns a reference to the `Cell` at the given coordinates, or `None` if the index is out of</span>
-    <span class='doccomment'>/// bounds.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use rustty::Terminal;</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let a_cell = term.get(5, 5);</span>
-    <span class='doccomment'>/// ```</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>Cell</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>get</span>(<span class='ident'>x</span>, <span class='ident'>y</span>)
-    }
-
-    <span class='doccomment'>/// Returns a mutable reference to the `Cell` at the given coordinates, or `None` if the index</span>
-    <span class='doccomment'>/// is out of bounds.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// # Examples</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// ```no_run</span>
-    <span class='doccomment'>/// use rustty::Terminal;</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// let a_mut_cell = term.get_mut(5, 5);</span>
-    <span class='doccomment'>/// ```</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>Cell</span><span class='op'>&gt;</span> {
-        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>get_mut</span>(<span class='ident'>x</span>, <span class='ident'>y</span>)
     }
 
     <span class='doccomment'>/// Checks whether the underlying window size has changed and the buffers have not been</span>
@@ -1227,10 +1174,10 @@
     <span class='doccomment'>/// term.set_cursor(1, 1).unwrap();</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>x</span>: <span class='ident'>usize</span>, <span class='ident'>y</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_invalid</span>() {
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_none</span>() {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>ShowCursor</span>)));
         }
-        <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>set_pos</span>(<span class='ident'>Coordinate</span>::<span class='ident'>Valid</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)));
+        <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>set_pos</span>(<span class='prelude-val'>Some</span>((<span class='ident'>x</span>, <span class='ident'>y</span>)));
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>());
         <span class='prelude-val'>Ok</span>(())
     }
@@ -1247,7 +1194,7 @@
     <span class='doccomment'>/// term.hide_cursor().unwrap();</span>
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>hide_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_valid</span>() {
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>().<span class='ident'>is_some</span>() {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>HideCursor</span>)));
         }
         <span class='prelude-val'>Ok</span>(())
@@ -1290,13 +1237,13 @@
     }
 
     <span class='kw'>fn</span> <span class='ident'>send_cursor</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Coordinate</span>::<span class='ident'>Valid</span>((<span class='ident'>cx</span>, <span class='ident'>cy</span>)) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>() {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>((<span class='ident'>cx</span>, <span class='ident'>cy</span>)) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>pos</span>() {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>driver</span>.<span class='ident'>get</span>(<span class='ident'>DevFn</span>::<span class='ident'>SetCursor</span>(<span class='ident'>cx</span>, <span class='ident'>cy</span>))));
         }
         <span class='prelude-val'>Ok</span>(())
     }
 
-    <span class='kw'>fn</span> <span class='ident'>send_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>coord</span>: <span class='ident'>Coordinate</span><span class='op'>&lt;</span><span class='ident'>Pair</span><span class='op'>&gt;</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>send_char</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>coord</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Pos</span><span class='op'>&gt;</span>, <span class='ident'>ch</span>: <span class='ident'>char</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>set_pos</span>(<span class='ident'>coord</span>);
         <span class='kw'>if</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>cursor</span>.<span class='ident'>is_seq</span>() {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>send_cursor</span>());
@@ -1413,7 +1360,39 @@
     <span class='kw'>fn</span> <span class='ident'>flush</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>Error</span><span class='op'>&gt;</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>tty</span>.<span class='ident'>write_all</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>outbuffer</span>));
         <span class='self'>self</span>.<span class='ident'>outbuffer</span>.<span class='ident'>clear</span>();
+        <span class='kw'>if</span> <span class='ident'>thread</span>::<span class='ident'>panicking</span>() {
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>error</span> <span class='op'>=</span> <span class='ident'>String</span>::<span class='ident'>new</span>();
+            <span class='self'>self</span>.<span class='ident'>stderr_handle</span>.<span class='ident'>read_to_string</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>error</span>).<span class='ident'>unwrap</span>();
+            <span class='macro'>print</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>error</span>);
+        }
         <span class='prelude-val'>Ok</span>(())
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>HasSize</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+    <span class='doccomment'>/// Returns the size of the terminal as (cols, rows).</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// # Examples</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// ```no_run</span>
+    <span class='doccomment'>/// use rustty::{Terminal, CellAccessor, HasSize};</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// let mut term = Terminal::new().unwrap();</span>
+    <span class='doccomment'>/// let size = term.size();</span>
+    <span class='doccomment'>/// assert_eq!(size, (term.cols(), term.rows()));</span>
+    <span class='doccomment'>/// ```</span>
+    <span class='kw'>fn</span> <span class='ident'>size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Size</span> {
+        (<span class='self'>self</span>.<span class='ident'>cols</span>, <span class='self'>self</span>.<span class='ident'>rows</span>)
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>CellAccessor</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+    <span class='kw'>fn</span> <span class='ident'>cellvec</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>cellvec</span>()
+    }
+
+    <span class='kw'>fn</span> <span class='ident'>cellvec_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Cell</span><span class='op'>&gt;</span> {
+        <span class='self'>self</span>.<span class='ident'>backbuffer</span>.<span class='ident'>cellvec_mut</span>()
     }
 }
 
@@ -1431,16 +1410,16 @@
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>Index</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+<span class='kw'>impl</span> <span class='ident'>Index</span><span class='op'>&lt;</span><span class='ident'>Pos</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
     <span class='kw'>type</span> <span class='ident'>Output</span> <span class='op'>=</span> <span class='ident'>Cell</span>;
 
-    <span class='kw'>fn</span> <span class='ident'>index</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>, <span class='ident'>index</span>: (<span class='ident'>usize</span>, <span class='ident'>usize</span>)) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>Cell</span> {
+    <span class='kw'>fn</span> <span class='ident'>index</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>Pos</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>Cell</span> {
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
     }
 }
 
-<span class='kw'>impl</span> <span class='ident'>IndexMut</span><span class='op'>&lt;</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>)<span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
-    <span class='kw'>fn</span> <span class='ident'>index_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: (<span class='ident'>usize</span>, <span class='ident'>usize</span>)) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
+<span class='kw'>impl</span> <span class='ident'>IndexMut</span><span class='op'>&lt;</span><span class='ident'>Pos</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Terminal</span> {
+    <span class='kw'>fn</span> <span class='ident'>index_mut</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>Pos</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='kw-2'>mut</span> <span class='ident'>Cell</span> {
         <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>backbuffer</span>[<span class='ident'>index</span>]
     }
 }
@@ -1469,10 +1448,12 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -1489,7 +1470,7 @@
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -1499,8 +1480,8 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -1509,7 +1490,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -1521,6 +1502,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

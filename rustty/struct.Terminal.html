@@ -9,6 +9,7 @@
 
     <title>rustty::Terminal - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -24,10 +25,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>rustty</a></p><script>window.sidebarCurrent = {name: 'Terminal', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-73' class='srclink' href='../src/rustty/core/terminal.rs.html#68-81' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-39' class='srclink' href='../src/rustty/core/terminal.rs.html#70-84' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Terminal {
     // some fields omitted
 }</pre><div class='docblock'><p>A representation of the current terminal window.</p>
@@ -54,8 +55,7 @@
 if a <code>Terminal</code> object already exists.
 When a <code>Terminal</code> goes out of scope it resets the underlying terminal to its original state.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>, <span class='ident'>Color</span>};
 
 <span class='comment'>// Construct a new Terminal.</span>
@@ -71,78 +71,61 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 
 <span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>2</span>)].<span class='ident'>set_fg</span>(<span class='ident'>Color</span>::<span class='ident'>Blue</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>2</span>)].<span class='ident'>fg</span>(), <span class='ident'>Color</span>::<span class='ident'>Blue</span>);</pre>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Constructs a new <code>Terminal</code> using the default <code>Cell</code> as a blank.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>0</span>)].<span class='ident'>ch</span>(), <span class='string'>&#39; &#39;</span>);</pre>
-</div><h4 id='method.with_char' class='method'><code>fn <a href='#method.with_char' class='fnname'>with_char</a>(ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.with_char' class='method'><code>fn <a href='#method.with_char' class='fnname'>with_char</a>(ch: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Constructs a new <code>Terminal</code> with each cell set to the given <code>char</code> and the default
 <code>Style</code>s.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>0</span>)].<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);</pre>
-</div><h4 id='method.with_cell' class='method'><code>fn <a href='#method.with_cell' class='fnname'>with_cell</a>(cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.with_cell' class='method'><code>fn <a href='#method.with_cell' class='fnname'>with_cell</a>(cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Creates a new <code>Terminal</code> using the given cell as a blank.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-3' class='section-header'><a href='#examples-3'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>};
 
 <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>);
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>with_cell</span>(<span class='ident'>cell</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>0</span>)].<span class='ident'>ch</span>(), <span class='string'>&#39;x&#39;</span>);</pre>
-</div><h4 id='method.swap_buffers' class='method'><code>fn <a href='#method.swap_buffers' class='fnname'>swap_buffers</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.swap_buffers' class='method'><code>fn <a href='#method.swap_buffers' class='fnname'>swap_buffers</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Swaps buffers to display the current backbuffer.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-4' class='section-header'><a href='#examples-4'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='ident'>term</span>.<span class='ident'>swap_buffers</span>().<span class='ident'>unwrap</span>();</pre>
-</div><h4 id='method.cols' class='method'><code>fn <a href='#method.cols' class='fnname'>cols</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+</div><h4 id='method.cols' class='method'><code>fn <a href='#method.cols' class='fnname'>cols</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
 <div class='docblock'><p>Returns the width of the terminal in columns.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-5' class='section-header'><a href='#examples-5'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>width</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>cols</span>();</pre>
-</div><h4 id='method.rows' class='method'><code>fn <a href='#method.rows' class='fnname'>rows</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+</div><h4 id='method.rows' class='method'><code>fn <a href='#method.rows' class='fnname'>rows</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
 <div class='docblock'><p>Returns the height of the terminal in rows.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-6' class='section-header'><a href='#examples-6'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 <span class='kw'>let</span> <span class='ident'>height</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>rows</span>();</pre>
-</div><h4 id='method.size' class='method'><code>fn <a href='#method.size' class='fnname'>size</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a></code></h4>
-<div class='docblock'><p>Returns the size of the terminal as (cols, rows).</p>
-
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
-
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
-<span class='kw'>let</span> <span class='ident'>size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>size</span>();
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>size</span>, (<span class='ident'>term</span>.<span class='ident'>cols</span>(), <span class='ident'>term</span>.<span class='ident'>rows</span>()));</pre>
-</div><h4 id='method.clear' class='method'><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.clear' class='method'><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Clears the internal backbuffer with the default cell.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-7' class='section-header'><a href='#examples-7'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>).<span class='ident'>unwrap</span>();
@@ -150,11 +133,10 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 
 <span class='ident'>term</span>.<span class='ident'>clear</span>().<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>0</span>)].<span class='ident'>ch</span>(), <span class='string'>&#39; &#39;</span>);</pre>
-</div><h4 id='method.clear_with_char' class='method'><code>fn <a href='#method.clear_with_char' class='fnname'>clear_with_char</a>(&amp;mut self, ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.clear_with_char' class='method'><code>fn <a href='#method.clear_with_char' class='fnname'>clear_with_char</a>(&amp;mut self, ch: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Clears the internal backbuffer with the given <code>char</code> and the default <code>Style</code>s.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-8' class='section-header'><a href='#examples-8'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>).<span class='ident'>unwrap</span>();
@@ -162,11 +144,10 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 
 <span class='ident'>term</span>.<span class='ident'>clear_with_char</span>(<span class='string'>&#39;y&#39;</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>0</span>)].<span class='ident'>ch</span>(), <span class='string'>&#39;y&#39;</span>);</pre>
-</div><h4 id='method.clear_with_cell' class='method'><code>fn <a href='#method.clear_with_cell' class='fnname'>clear_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.clear_with_cell' class='method'><code>fn <a href='#method.clear_with_cell' class='fnname'>clear_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Clears the internal backbuffer using the given <code>Cell</code> as a blank.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-9' class='section-header'><a href='#examples-9'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>};
 
 <span class='kw'>let</span> <span class='ident'>cell1</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>);
@@ -177,36 +158,13 @@ When a <code>Terminal</code> goes out of scope it resets the underlying terminal
 
 <span class='ident'>term</span>.<span class='ident'>clear_with_cell</span>(<span class='ident'>cell2</span>).<span class='ident'>unwrap</span>();
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>term</span>[(<span class='number'>0</span>, <span class='number'>0</span>)].<span class='ident'>ch</span>(), <span class='string'>&#39;y&#39;</span>);</pre>
-</div><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>&lt;'a&gt;(&amp;'a self, x: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
-<div class='docblock'><p>Returns a reference to the <code>Cell</code> at the given coordinates, or <code>None</code> if the index is out of
-bounds.</p>
-
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
-
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
-
-<span class='kw'>let</span> <span class='ident'>a_cell</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>get</span>(<span class='number'>5</span>, <span class='number'>5</span>);</pre>
-</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>&lt;'a&gt;(&amp;'a mut self, x: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;'a mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
-<div class='docblock'><p>Returns a mutable reference to the <code>Cell</code> at the given coordinates, or <code>None</code> if the index
-is out of bounds.</p>
-
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
-
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
-
-<span class='kw'>let</span> <span class='ident'>a_mut_cell</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>get_mut</span>(<span class='number'>5</span>, <span class='number'>5</span>);</pre>
-</div><h4 id='method.check_resize' class='method'><code>fn <a href='#method.check_resize' class='fnname'>check_resize</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.check_resize' class='method'><code>fn <a href='#method.check_resize' class='fnname'>check_resize</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Checks whether the underlying window size has changed and the buffers have not been
 resized yet. If this method returns <code>true</code> the next call to <code>swap_buffers()</code> or a <code>clear()</code>
 method is guaranteed to resize the buffers unless a call to a <code>try_resize()</code> method is
 made.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-10' class='section-header'><a href='#examples-10'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
@@ -220,7 +178,7 @@ made.</p>
 
 <span class='comment'>// Unless try_resize() is called.</span>
 <span class='ident'>term</span>.<span class='ident'>try_resize</span>().<span class='ident'>unwrap</span>();</pre>
-</div><h4 id='method.try_resize' class='method'><code>fn <a href='#method.try_resize' class='fnname'>try_resize</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.try_resize' class='method'><code>fn <a href='#method.try_resize' class='fnname'>try_resize</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Resizes the buffers if the underlying terminal window size has changed, using the default
 <code>Cell</code> as a blank.</p>
 
@@ -233,8 +191,7 @@ method.</p>
 <p>Returns <code>Some((cols, rows))</code> if the buffers were resized and <code>None</code> if no resize was
 performed.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-11' class='section-header'><a href='#examples-11'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
@@ -242,12 +199,11 @@ performed.</p>
 <span class='comment'>// If new_size == Some(T) then T is the new size of the terminal.</span>
 <span class='comment'>// If new_size == None then the terminal has not resized.</span>
 <span class='kw'>let</span> <span class='ident'>new_size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>try_resize</span>().<span class='ident'>unwrap</span>();</pre>
-</div><h4 id='method.try_resize_with_char' class='method'><code>fn <a href='#method.try_resize_with_char' class='fnname'>try_resize_with_char</a>(&amp;mut self, ch: <a href='http://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.try_resize_with_char' class='method'><code>fn <a href='#method.try_resize_with_char' class='fnname'>try_resize_with_char</a>(&amp;mut self, ch: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Resizes the buffers if the underlying terminal window size has changed, using the given
 <code>char</code> and the default <code>Style</code>s as a blank.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-12' class='section-header'><a href='#examples-12'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
@@ -255,12 +211,11 @@ performed.</p>
 <span class='comment'>// If new_size == Some(T) then T is the new size of the terminal.</span>
 <span class='comment'>// If new_size == None then the terminal has not resized.</span>
 <span class='kw'>let</span> <span class='ident'>new_size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>try_resize_with_char</span>(<span class='string'>&#39;x&#39;</span>).<span class='ident'>unwrap</span>();</pre>
-</div><h4 id='method.try_resize_with_cell' class='method'><code>fn <a href='#method.try_resize_with_cell' class='fnname'>try_resize_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.try_resize_with_cell' class='method'><code>fn <a href='#method.try_resize_with_cell' class='fnname'>try_resize_with_cell</a>(&amp;mut self, cell: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Resizes the buffers if the underlying terminal window size has changed, using the given
 <code>Cell</code> as a blank.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-13' class='section-header'><a href='#examples-13'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Cell</span>};
 
 <span class='kw'>let</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>Cell</span>::<span class='ident'>with_char</span>(<span class='string'>&#39;x&#39;</span>);
@@ -270,27 +225,25 @@ performed.</p>
 <span class='comment'>// If new_size == Some(T) then T is the new size of the terminal.</span>
 <span class='comment'>// If new_size == None then the terminal has not resized.</span>
 <span class='kw'>let</span> <span class='ident'>new_size</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>try_resize_with_cell</span>(<span class='ident'>cell</span>).<span class='ident'>unwrap</span>();</pre>
-</div><h4 id='method.set_cursor' class='method'><code>fn <a href='#method.set_cursor' class='fnname'>set_cursor</a>(&amp;mut self, x: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.set_cursor' class='method'><code>fn <a href='#method.set_cursor' class='fnname'>set_cursor</a>(&amp;mut self, x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Sets the cursor position to (x, y).</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-14' class='section-header'><a href='#examples-14'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 
 <span class='ident'>term</span>.<span class='ident'>set_cursor</span>(<span class='number'>1</span>, <span class='number'>1</span>).<span class='ident'>unwrap</span>();</pre>
-</div><h4 id='method.hide_cursor' class='method'><code>fn <a href='#method.hide_cursor' class='fnname'>hide_cursor</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.hide_cursor' class='method'><code>fn <a href='#method.hide_cursor' class='fnname'>hide_cursor</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Hides the cursor.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-15' class='section-header'><a href='#examples-15'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Terminal</span>;
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 
 <span class='ident'>term</span>.<span class='ident'>hide_cursor</span>().<span class='ident'>unwrap</span>();</pre>
-</div><h4 id='method.get_event' class='method'><code>fn <a href='#method.get_event' class='fnname'>get_event</a>(&amp;mut self, timeout_ms: <a href='http://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../rustty/enum.Event.html' title='rustty::Event'>Event</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
+</div><h4 id='method.get_event' class='method'><code>fn <a href='#method.get_event' class='fnname'>get_event</a>(&amp;mut self, timeout_ms: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.isize.html'>isize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='enum' href='../rustty/enum.Event.html' title='rustty::Event'>Event</a>&gt;, <a class='struct' href='../rustty/struct.Error.html' title='rustty::Error'>Error</a>&gt;</code></h4>
 <div class='docblock'><p>Gets an event from the event stream, waiting a maximum of <code>timeout_ms</code> milliseconds.</p>
 
 <p>Specifying a <code>timeout_ms</code> of -1 causes <code>get_event()</code> to block indefinitely, while
@@ -299,92 +252,71 @@ specifying a <code>timeout_ms</code> of 0 causes <code>get_event()</code> to ret
 <p>Returns <code>Some(Event)</code> if an event was received within the specified timeout, or None
 otherwise.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-16' class='section-header'><a href='#examples-16'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::{<span class='ident'>Terminal</span>, <span class='ident'>Event</span>};
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>term</span> <span class='op'>=</span> <span class='ident'>Terminal</span>::<span class='ident'>new</span>().<span class='ident'>unwrap</span>();
 
 <span class='kw'>let</span> <span class='ident'>evt</span> <span class='op'>=</span> <span class='ident'>term</span>.<span class='ident'>get_event</span>(<span class='number'>1</span>).<span class='ident'>unwrap</span>();</pre>
-</div></div><h2 id='deref-methods'>Methods from <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>[<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>]</a>&gt;</h2><div class='impl-items'><h4 id='method.len' class='method'><code>fn <a href='#method.len' class='fnname'>len</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+</div></div><h2 id='deref-methods'>Methods from <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a>&lt;Target=<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>[<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>]</a>&gt;</h2><div class='impl-items'><h4 id='method.len' class='method'><code>fn <a href='#method.len' class='fnname'>len</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
 <div class='docblock'><p>Returns the number of elements in the slice.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example' class='section-header'><a href='#example'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>a</span>.<span class='ident'>len</span>(), <span class='number'>3</span>);</pre>
-</div><h4 id='method.is_empty' class='method'><code>fn <a href='#method.is_empty' class='fnname'>is_empty</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.is_empty' class='method'><code>fn <a href='#method.is_empty' class='fnname'>is_empty</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Returns true if the slice has a length of 0</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example-1' class='section-header'><a href='#example-1'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>a</span>.<span class='ident'>is_empty</span>());</pre>
-</div><h4 id='method.first' class='method'><code>fn <a href='#method.first' class='fnname'>first</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;T&gt;</code></h4>
+</div><h4 id='method.first' class='method'><code>fn <a href='#method.first' class='fnname'>first</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;T&gt;</code></h4>
 <div class='docblock'><p>Returns the first element of a slice, or <code>None</code> if it is empty.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-17' class='section-header'><a href='#examples-17'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>40</span>, <span class='number'>30</span>];
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='number'>10</span>), <span class='ident'>v</span>.<span class='ident'>first</span>());
 
 <span class='kw'>let</span> <span class='ident'>w</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>i32</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[];
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='ident'>w</span>.<span class='ident'>first</span>());</pre>
-</div><h4 id='method.first_mut' class='method'><code>fn <a href='#method.first_mut' class='fnname'>first_mut</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
+</div><h4 id='method.first_mut' class='method'><code>fn <a href='#method.first_mut' class='fnname'>first_mut</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
 <div class='docblock'><p>Returns a mutable pointer to the first element of a slice, or <code>None</code> if it is empty</p>
-</div><h4 id='method.tail' class='method'><code>fn <a href='#method.tail' class='fnname'>tail</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.3.0<p>: superseded by split_first</p>
-</em></div><div class='docblock'><p>Returns all but the first element of a slice.</p>
-</div><h4 id='method.split_first' class='method'><code>fn <a href='#method.split_first' class='fnname'>split_first</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;T, <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>)</a>&gt;</code></h4>
-<div class='stability'><em class='stab unstable'>Unstable<p>: new API</p>
-</em></div><div class='docblock'><p>Returns the first and all the rest of the elements of a slice.</p>
-</div><h4 id='method.tail_mut' class='method'><code>fn <a href='#method.tail_mut' class='fnname'>tail_mut</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.3.0<p>: superseded by split_first_mut</p>
-</em></div><div class='docblock'><p>Returns all but the first element of a mutable slice</p>
-</div><h4 id='method.split_first_mut' class='method'><code>fn <a href='#method.split_first_mut' class='fnname'>split_first_mut</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;mut T, <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>)</a>&gt;</code></h4>
-<div class='stability'><em class='stab unstable'>Unstable<p>: new API</p>
-</em></div><div class='docblock'><p>Returns the first and all the rest of the elements of a slice.</p>
-</div><h4 id='method.init' class='method'><code>fn <a href='#method.init' class='fnname'>init</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.3.0<p>: superseded by split_last</p>
-</em></div><div class='docblock'><p>Returns all but the last element of a slice.</p>
-</div><h4 id='method.split_last' class='method'><code>fn <a href='#method.split_last' class='fnname'>split_last</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;T, <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>)</a>&gt;</code></h4>
-<div class='stability'><em class='stab unstable'>Unstable<p>: new API</p>
-</em></div><div class='docblock'><p>Returns the last and all the rest of the elements of a slice.</p>
-</div><h4 id='method.init_mut' class='method'><code>fn <a href='#method.init_mut' class='fnname'>init_mut</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.3.0<p>: superseded by split_last_mut</p>
-</em></div><div class='docblock'><p>Returns all but the last element of a mutable slice</p>
-</div><h4 id='method.split_last_mut' class='method'><code>fn <a href='#method.split_last_mut' class='fnname'>split_last_mut</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;mut T, <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>)</a>&gt;</code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Returns the last and all the rest of the elements of a slice.</p>
-</div><h4 id='method.last' class='method'><code>fn <a href='#method.last' class='fnname'>last</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;T&gt;</code></h4>
+</div><h4 id='method.split_first' class='method'><code>fn <a href='#method.split_first' class='fnname'>split_first</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;T, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>)</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the first and all the rest of the elements of a slice.</p>
+</div><h4 id='method.split_first_mut' class='method'><code>fn <a href='#method.split_first_mut' class='fnname'>split_first_mut</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;mut T, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>)</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the first and all the rest of the elements of a slice.</p>
+</div><h4 id='method.split_last' class='method'><code>fn <a href='#method.split_last' class='fnname'>split_last</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;T, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>)</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the last and all the rest of the elements of a slice.</p>
+</div><h4 id='method.split_last_mut' class='method'><code>fn <a href='#method.split_last_mut' class='fnname'>split_last_mut</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(&amp;mut T, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>)</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the last and all the rest of the elements of a slice.</p>
+</div><h4 id='method.last' class='method'><code>fn <a href='#method.last' class='fnname'>last</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;T&gt;</code></h4>
 <div class='docblock'><p>Returns the last element of a slice, or <code>None</code> if it is empty.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-18' class='section-header'><a href='#examples-18'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>40</span>, <span class='number'>30</span>];
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='number'>30</span>), <span class='ident'>v</span>.<span class='ident'>last</span>());
 
 <span class='kw'>let</span> <span class='ident'>w</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>i32</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[];
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='ident'>w</span>.<span class='ident'>last</span>());</pre>
-</div><h4 id='method.last_mut' class='method'><code>fn <a href='#method.last_mut' class='fnname'>last_mut</a>(&amp;mut self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
+</div><h4 id='method.last_mut' class='method'><code>fn <a href='#method.last_mut' class='fnname'>last_mut</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
 <div class='docblock'><p>Returns a mutable pointer to the last item in the slice.</p>
-</div><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;T&gt;</code></h4>
+</div><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;T&gt;</code></h4>
 <div class='docblock'><p>Returns the element of a slice at the given index, or <code>None</code> if the
 index is out of bounds.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-19' class='section-header'><a href='#examples-19'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>40</span>, <span class='number'>30</span>];
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='kw-2'>&amp;</span><span class='number'>40</span>), <span class='ident'>v</span>.<span class='ident'>get</span>(<span class='number'>1</span>));
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='ident'>v</span>.<span class='ident'>get</span>(<span class='number'>3</span>));</pre>
-</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
+</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut T&gt;</code></h4>
 <div class='docblock'><p>Returns a mutable reference to the element at the given index,
 or <code>None</code> if the index is out of bounds</p>
-</div><h4 id='method.get_unchecked' class='method'><code>unsafe fn <a href='#method.get_unchecked' class='fnname'>get_unchecked</a>(&amp;self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;T</code></h4>
+</div><h4 id='method.get_unchecked' class='method'><code>unsafe fn <a href='#method.get_unchecked' class='fnname'>get_unchecked</a>(&amp;self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;T</code></h4>
 <div class='docblock'><p>Returns a pointer to the element at the given index, without doing
 bounds checking.</p>
-</div><h4 id='method.get_unchecked_mut' class='method'><code>unsafe fn <a href='#method.get_unchecked_mut' class='fnname'>get_unchecked_mut</a>(&amp;mut self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut T</code></h4>
+</div><h4 id='method.get_unchecked_mut' class='method'><code>unsafe fn <a href='#method.get_unchecked_mut' class='fnname'>get_unchecked_mut</a>(&amp;mut self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut T</code></h4>
 <div class='docblock'><p>Returns an unsafe mutable pointer to the element in index</p>
-</div><h4 id='method.as_ptr' class='method'><code>fn <a href='#method.as_ptr' class='fnname'>as_ptr</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const T</a></code></h4>
+</div><h4 id='method.as_ptr' class='method'><code>fn <a href='#method.as_ptr' class='fnname'>as_ptr</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const T</a></code></h4>
 <div class='docblock'><p>Returns an raw pointer to the slice&#39;s buffer</p>
 
 <p>The caller must ensure that the slice outlives the pointer this
@@ -392,7 +324,7 @@ function returns, or else it will end up pointing to garbage.</p>
 
 <p>Modifying the slice may cause its buffer to be reallocated, which
 would also make any pointers to it invalid.</p>
-</div><h4 id='method.as_mut_ptr' class='method'><code>fn <a href='#method.as_mut_ptr' class='fnname'>as_mut_ptr</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut T</a></code></h4>
+</div><h4 id='method.as_mut_ptr' class='method'><code>fn <a href='#method.as_mut_ptr' class='fnname'>as_mut_ptr</a>(&amp;mut self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut T</a></code></h4>
 <div class='docblock'><p>Returns an unsafe mutable pointer to the slice&#39;s buffer.</p>
 
 <p>The caller must ensure that the slice outlives the pointer this
@@ -400,48 +332,42 @@ function returns, or else it will end up pointing to garbage.</p>
 
 <p>Modifying the slice may cause its buffer to be reallocated, which
 would also make any pointers to it invalid.</p>
-</div><h4 id='method.swap' class='method'><code>fn <a href='#method.swap' class='fnname'>swap</a>(&amp;mut self, a: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, b: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
+</div><h4 id='method.swap' class='method'><code>fn <a href='#method.swap' class='fnname'>swap</a>(&amp;mut self, a: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, b: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></h4>
 <div class='docblock'><p>Swaps two elements in a slice.</p>
 
-<h1 id="arguments" class='section-header'><a
-                           href="#arguments">Arguments</a></h1>
+<h1 id='arguments' class='section-header'><a href='#arguments'>Arguments</a></h1>
 <ul>
 <li>a - The index of the first element</li>
 <li>b - The index of the second element</li>
 </ul>
 
-<h1 id="panics" class='section-header'><a
-                           href="#panics">Panics</a></h1>
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
 <p>Panics if <code>a</code> or <code>b</code> are out of bounds.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example-2' class='section-header'><a href='#example-2'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='string'>&quot;a&quot;</span>, <span class='string'>&quot;b&quot;</span>, <span class='string'>&quot;c&quot;</span>, <span class='string'>&quot;d&quot;</span>];
 <span class='ident'>v</span>.<span class='ident'>swap</span>(<span class='number'>1</span>, <span class='number'>3</span>);
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> [<span class='string'>&quot;a&quot;</span>, <span class='string'>&quot;d&quot;</span>, <span class='string'>&quot;c&quot;</span>, <span class='string'>&quot;b&quot;</span>]);</pre>
 </div><h4 id='method.reverse' class='method'><code>fn <a href='#method.reverse' class='fnname'>reverse</a>(&amp;mut self)</code></h4>
 <div class='docblock'><p>Reverse the order of elements in a slice, in place.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example-3' class='section-header'><a href='#example-3'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
 <span class='ident'>v</span>.<span class='ident'>reverse</span>();
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> [<span class='number'>3</span>, <span class='number'>2</span>, <span class='number'>1</span>]);</pre>
-</div><h4 id='method.iter' class='method'><code>fn <a href='#method.iter' class='fnname'>iter</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.Iter.html' title='core::slice::Iter'>Iter</a>&lt;T&gt;</code></h4>
+</div><h4 id='method.iter' class='method'><code>fn <a href='#method.iter' class='fnname'>iter</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.Iter.html' title='core::slice::Iter'>Iter</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator over the slice.</p>
-</div><h4 id='method.iter_mut' class='method'><code>fn <a href='#method.iter_mut' class='fnname'>iter_mut</a>(&amp;mut self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.IterMut.html' title='core::slice::IterMut'>IterMut</a>&lt;T&gt;</code></h4>
+</div><h4 id='method.iter_mut' class='method'><code>fn <a href='#method.iter_mut' class='fnname'>iter_mut</a>(&amp;mut self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.IterMut.html' title='core::slice::IterMut'>IterMut</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator that allows modifying each value</p>
-</div><h4 id='method.windows' class='method'><code>fn <a href='#method.windows' class='fnname'>windows</a>(&amp;self, size: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.Windows.html' title='core::slice::Windows'>Windows</a>&lt;T&gt;</code></h4>
+</div><h4 id='method.windows' class='method'><code>fn <a href='#method.windows' class='fnname'>windows</a>(&amp;self, size: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.Windows.html' title='core::slice::Windows'>Windows</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator over all contiguous windows of length
 <code>size</code>. The windows overlap. If the slice is shorter than
 <code>size</code>, the iterator returns no values.</p>
 
-<h1 id="panics" class='section-header'><a
-                           href="#panics">Panics</a></h1>
+<h1 id='panics-1' class='section-header'><a href='#panics-1'>Panics</a></h1>
 <p>Panics if <code>size</code> is 0.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1>
+<h1 id='example-4' class='section-header'><a href='#example-4'>Example</a></h1>
 <p>Print the adjacent pairs of a slice (i.e. <code>[1,2]</code>, <code>[2,3]</code>,
 <code>[3,4]</code>):</p>
 <pre class='rust rust-example-rendered'>
@@ -449,18 +375,16 @@ would also make any pointers to it invalid.</p>
 <span class='kw'>for</span> <span class='ident'>win</span> <span class='kw'>in</span> <span class='ident'>v</span>.<span class='ident'>windows</span>(<span class='number'>2</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>win</span>);
 }</pre>
-</div><h4 id='method.chunks' class='method'><code>fn <a href='#method.chunks' class='fnname'>chunks</a>(&amp;self, size: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.Chunks.html' title='core::slice::Chunks'>Chunks</a>&lt;T&gt;</code></h4>
+</div><h4 id='method.chunks' class='method'><code>fn <a href='#method.chunks' class='fnname'>chunks</a>(&amp;self, size: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.Chunks.html' title='core::slice::Chunks'>Chunks</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator over <code>size</code> elements of the slice at a
 time. The chunks do not overlap. If <code>size</code> does not divide the
 length of the slice, then the last chunk will not have length
 <code>size</code>.</p>
 
-<h1 id="panics" class='section-header'><a
-                           href="#panics">Panics</a></h1>
+<h1 id='panics-2' class='section-header'><a href='#panics-2'>Panics</a></h1>
 <p>Panics if <code>size</code> is 0.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1>
+<h1 id='example-5' class='section-header'><a href='#example-5'>Example</a></h1>
 <p>Print the slice two elements at a time (i.e. <code>[1,2]</code>,
 <code>[3,4]</code>, <code>[5]</code>):</p>
 <pre class='rust rust-example-rendered'>
@@ -468,43 +392,40 @@ length of the slice, then the last chunk will not have length
 <span class='kw'>for</span> <span class='ident'>win</span> <span class='kw'>in</span> <span class='ident'>v</span>.<span class='ident'>chunks</span>(<span class='number'>2</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>win</span>);
 }</pre>
-</div><h4 id='method.chunks_mut' class='method'><code>fn <a href='#method.chunks_mut' class='fnname'>chunks_mut</a>(&amp;mut self, chunk_size: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.ChunksMut.html' title='core::slice::ChunksMut'>ChunksMut</a>&lt;T&gt;</code></h4>
+</div><h4 id='method.chunks_mut' class='method'><code>fn <a href='#method.chunks_mut' class='fnname'>chunks_mut</a>(&amp;mut self, chunk_size: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.ChunksMut.html' title='core::slice::ChunksMut'>ChunksMut</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator over <code>chunk_size</code> elements of the slice at a time.
 The chunks are mutable and do not overlap. If <code>chunk_size</code> does
 not divide the length of the slice, then the last chunk will not
 have length <code>chunk_size</code>.</p>
 
-<h1 id="panics" class='section-header'><a
-                           href="#panics">Panics</a></h1>
+<h1 id='panics-3' class='section-header'><a href='#panics-3'>Panics</a></h1>
 <p>Panics if <code>chunk_size</code> is 0.</p>
-</div><h4 id='method.split_at' class='method'><code>fn <a href='#method.split_at' class='fnname'>split_at</a>(&amp;self, mid: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>)</a></code></h4>
+</div><h4 id='method.split_at' class='method'><code>fn <a href='#method.split_at' class='fnname'>split_at</a>(&amp;self, mid: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>)</a></code></h4>
 <div class='docblock'><p>Divides one slice into two at an index.</p>
 
 <p>The first will contain all indices from <code>[0, mid)</code> (excluding
 the index <code>mid</code> itself) and the second will contain all
 indices from <code>[mid, len)</code> (excluding the index <code>len</code> itself).</p>
 
+<h1 id='panics-4' class='section-header'><a href='#panics-4'>Panics</a></h1>
 <p>Panics if <code>mid &gt; len</code>.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-20' class='section-header'><a href='#examples-20'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>40</span>, <span class='number'>30</span>, <span class='number'>20</span>, <span class='number'>50</span>];
 <span class='kw'>let</span> (<span class='ident'>v1</span>, <span class='ident'>v2</span>) <span class='op'>=</span> <span class='ident'>v</span>.<span class='ident'>split_at</span>(<span class='number'>2</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>([<span class='number'>10</span>, <span class='number'>40</span>], <span class='ident'>v1</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>([<span class='number'>30</span>, <span class='number'>20</span>, <span class='number'>50</span>], <span class='ident'>v2</span>);</pre>
-</div><h4 id='method.split_at_mut' class='method'><code>fn <a href='#method.split_at_mut' class='fnname'>split_at_mut</a>(&amp;mut self, mid: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>)</a></code></h4>
+</div><h4 id='method.split_at_mut' class='method'><code>fn <a href='#method.split_at_mut' class='fnname'>split_at_mut</a>(&amp;mut self, mid: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [T]</a>)</a></code></h4>
 <div class='docblock'><p>Divides one <code>&amp;mut</code> into two at an index.</p>
 
 <p>The first will contain all indices from <code>[0, mid)</code> (excluding
 the index <code>mid</code> itself) and the second will contain all
 indices from <code>[mid, len)</code> (excluding the index <code>len</code> itself).</p>
 
-<h1 id="panics" class='section-header'><a
-                           href="#panics">Panics</a></h1>
+<h1 id='panics-5' class='section-header'><a href='#panics-5'>Panics</a></h1>
 <p>Panics if <code>mid &gt; len</code>.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example-6' class='section-header'><a href='#example-6'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>, <span class='number'>6</span>];
 
 <span class='comment'>// scoped to restrict the lifetime of the borrows</span>
@@ -525,12 +446,11 @@ indices from <code>[mid, len)</code> (excluding the index <code>len</code> itsel
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>left</span> <span class='op'>==</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>, <span class='number'>6</span>]);
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>right</span> <span class='op'>==</span> []);
 }</pre>
-</div><h4 id='method.split' class='method'><code>fn <a href='#method.split' class='fnname'>split</a>&lt;F&gt;(&amp;self, pred: F) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.Split.html' title='core::slice::Split'>Split</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
+</div><h4 id='method.split' class='method'><code>fn <a href='#method.split' class='fnname'>split</a>&lt;F&gt;(&amp;self, pred: F) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.Split.html' title='core::slice::Split'>Split</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
 <div class='docblock'><p>Returns an iterator over subslices separated by elements that match
 <code>pred</code>.  The matched element is not contained in the subslices.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1>
+<h1 id='examples-21' class='section-header'><a href='#examples-21'>Examples</a></h1>
 <p>Print the slice split by numbers divisible by 3 (i.e. <code>[10, 40]</code>,
 <code>[20]</code>, <code>[50]</code>):</p>
 <pre class='rust rust-example-rendered'>
@@ -538,10 +458,10 @@ indices from <code>[mid, len)</code> (excluding the index <code>len</code> itsel
 <span class='kw'>for</span> <span class='ident'>group</span> <span class='kw'>in</span> <span class='ident'>v</span>.<span class='ident'>split</span>(<span class='op'>|</span><span class='ident'>num</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>num</span> <span class='op'>%</span> <span class='number'>3</span> <span class='op'>==</span> <span class='number'>0</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>group</span>);
 }</pre>
-</div><h4 id='method.split_mut' class='method'><code>fn <a href='#method.split_mut' class='fnname'>split_mut</a>&lt;F&gt;(&amp;mut self, pred: F) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.SplitMut.html' title='core::slice::SplitMut'>SplitMut</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
+</div><h4 id='method.split_mut' class='method'><code>fn <a href='#method.split_mut' class='fnname'>split_mut</a>&lt;F&gt;(&amp;mut self, pred: F) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.SplitMut.html' title='core::slice::SplitMut'>SplitMut</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
 <div class='docblock'><p>Returns an iterator over mutable subslices separated by elements that
 match <code>pred</code>.  The matched element is not contained in the subslices.</p>
-</div><h4 id='method.splitn' class='method'><code>fn <a href='#method.splitn' class='fnname'>splitn</a>&lt;F&gt;(&amp;self, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.SplitN.html' title='core::slice::SplitN'>SplitN</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
+</div><h4 id='method.splitn' class='method'><code>fn <a href='#method.splitn' class='fnname'>splitn</a>&lt;F&gt;(&amp;self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.SplitN.html' title='core::slice::SplitN'>SplitN</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
 <div class='docblock'><p>Returns an iterator over subslices separated by elements that match
 <code>pred</code>, limited to returning at most <code>n</code> items.  The matched element is
 not contained in the subslices.</p>
@@ -549,8 +469,7 @@ not contained in the subslices.</p>
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1>
+<h1 id='examples-22' class='section-header'><a href='#examples-22'>Examples</a></h1>
 <p>Print the slice split once by numbers divisible by 3 (i.e. <code>[10, 40]</code>,
 <code>[20, 60, 50]</code>):</p>
 <pre class='rust rust-example-rendered'>
@@ -558,14 +477,14 @@ slice.</p>
 <span class='kw'>for</span> <span class='ident'>group</span> <span class='kw'>in</span> <span class='ident'>v</span>.<span class='ident'>splitn</span>(<span class='number'>2</span>, <span class='op'>|</span><span class='ident'>num</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>num</span> <span class='op'>%</span> <span class='number'>3</span> <span class='op'>==</span> <span class='number'>0</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>group</span>);
 }</pre>
-</div><h4 id='method.splitn_mut' class='method'><code>fn <a href='#method.splitn_mut' class='fnname'>splitn_mut</a>&lt;F&gt;(&amp;mut self, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.SplitNMut.html' title='core::slice::SplitNMut'>SplitNMut</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
+</div><h4 id='method.splitn_mut' class='method'><code>fn <a href='#method.splitn_mut' class='fnname'>splitn_mut</a>&lt;F&gt;(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.SplitNMut.html' title='core::slice::SplitNMut'>SplitNMut</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
 <div class='docblock'><p>Returns an iterator over subslices separated by elements that match
 <code>pred</code>, limited to returning at most <code>n</code> items.  The matched element is
 not contained in the subslices.</p>
 
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
-</div><h4 id='method.rsplitn' class='method'><code>fn <a href='#method.rsplitn' class='fnname'>rsplitn</a>&lt;F&gt;(&amp;self, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.RSplitN.html' title='core::slice::RSplitN'>RSplitN</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
+</div><h4 id='method.rsplitn' class='method'><code>fn <a href='#method.rsplitn' class='fnname'>rsplitn</a>&lt;F&gt;(&amp;self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.RSplitN.html' title='core::slice::RSplitN'>RSplitN</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
 <div class='docblock'><p>Returns an iterator over subslices separated by elements that match
 <code>pred</code> limited to returning at most <code>n</code> items. This starts at the end of
 the slice and works backwards.  The matched element is not contained in
@@ -574,8 +493,7 @@ the subslices.</p>
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1>
+<h1 id='examples-23' class='section-header'><a href='#examples-23'>Examples</a></h1>
 <p>Print the slice split once, starting from the end, by numbers divisible
 by 3 (i.e. <code>[50]</code>, <code>[10, 40, 30, 20]</code>):</p>
 <pre class='rust rust-example-rendered'>
@@ -583,7 +501,7 @@ by 3 (i.e. <code>[50]</code>, <code>[10, 40, 30, 20]</code>):</p>
 <span class='kw'>for</span> <span class='ident'>group</span> <span class='kw'>in</span> <span class='ident'>v</span>.<span class='ident'>rsplitn</span>(<span class='number'>2</span>, <span class='op'>|</span><span class='ident'>num</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>num</span> <span class='op'>%</span> <span class='number'>3</span> <span class='op'>==</span> <span class='number'>0</span>) {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>group</span>);
 }</pre>
-</div><h4 id='method.rsplitn_mut' class='method'><code>fn <a href='#method.rsplitn_mut' class='fnname'>rsplitn_mut</a>&lt;F&gt;(&amp;mut self, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/core/slice/struct.RSplitNMut.html' title='core::slice::RSplitNMut'>RSplitNMut</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
+</div><h4 id='method.rsplitn_mut' class='method'><code>fn <a href='#method.rsplitn_mut' class='fnname'>rsplitn_mut</a>&lt;F&gt;(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, pred: F) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/core/slice/struct.RSplitNMut.html' title='core::slice::RSplitNMut'>RSplitNMut</a>&lt;T, F&gt; <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></span></code></h4>
 <div class='docblock'><p>Returns an iterator over subslices separated by elements that match
 <code>pred</code> limited to returning at most <code>n</code> items. This starts at the end of
 the slice and works backwards.  The matched element is not contained in
@@ -591,41 +509,32 @@ the subslices.</p>
 
 <p>The last element returned, if any, will contain the remainder of the
 slice.</p>
-</div><h4 id='method.contains' class='method'><code>fn <a href='#method.contains' class='fnname'>contains</a>(&amp;self, x: &amp;T) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
+</div><h4 id='method.contains' class='method'><code>fn <a href='#method.contains' class='fnname'>contains</a>(&amp;self, x: &amp;T) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
 <div class='docblock'><p>Returns true if the slice contains an element with the given value.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-24' class='section-header'><a href='#examples-24'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>40</span>, <span class='number'>30</span>];
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span>.<span class='ident'>contains</span>(<span class='kw-2'>&amp;</span><span class='number'>30</span>));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>v</span>.<span class='ident'>contains</span>(<span class='kw-2'>&amp;</span><span class='number'>50</span>));</pre>
-</div><h4 id='method.starts_with' class='method'><code>fn <a href='#method.starts_with' class='fnname'>starts_with</a>(&amp;self, needle: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
+</div><h4 id='method.starts_with' class='method'><code>fn <a href='#method.starts_with' class='fnname'>starts_with</a>(&amp;self, needle: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
 <div class='docblock'><p>Returns true if <code>needle</code> is a prefix of the slice.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-25' class='section-header'><a href='#examples-25'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>40</span>, <span class='number'>30</span>];
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span>.<span class='ident'>starts_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>10</span>]));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span>.<span class='ident'>starts_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>10</span>, <span class='number'>40</span>]));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>v</span>.<span class='ident'>starts_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>50</span>]));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>v</span>.<span class='ident'>starts_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>10</span>, <span class='number'>50</span>]));</pre>
-</div><h4 id='method.ends_with' class='method'><code>fn <a href='#method.ends_with' class='fnname'>ends_with</a>(&amp;self, needle: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
+</div><h4 id='method.ends_with' class='method'><code>fn <a href='#method.ends_with' class='fnname'>ends_with</a>(&amp;self, needle: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
 <div class='docblock'><p>Returns true if <code>needle</code> is a suffix of the slice.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-26' class='section-header'><a href='#examples-26'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>40</span>, <span class='number'>30</span>];
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span>.<span class='ident'>ends_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>30</span>]));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span>.<span class='ident'>ends_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>40</span>, <span class='number'>30</span>]));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>v</span>.<span class='ident'>ends_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>50</span>]));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>v</span>.<span class='ident'>ends_with</span>(<span class='kw-2'>&amp;</span>[<span class='number'>50</span>, <span class='number'>30</span>]));</pre>
-</div><h4 id='method.position_elem' class='method'><code>fn <a href='#method.position_elem' class='fnname'>position_elem</a>(&amp;self, t: &amp;T) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.3.0<p>: less idiomatic than .iter().position()</p>
-</em></div><div class='docblock'><p>Find the first index containing a matching value.</p>
-</div><h4 id='method.rposition_elem' class='method'><code>fn <a href='#method.rposition_elem' class='fnname'>rposition_elem</a>(&amp;self, t: &amp;T) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a>&lt;T&gt;</span></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.3.0<p>: less idiomatic than .iter().rev().position()</p>
-</em></div><div class='docblock'><p>Find the last index containing a matching value.</p>
-</div><h4 id='method.binary_search' class='method'><code>fn <a href='#method.binary_search' class='fnname'>binary_search</a>(&amp;self, x: &amp;T) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a></span></code></h4>
+</div><h4 id='method.binary_search' class='method'><code>fn <a href='#method.binary_search' class='fnname'>binary_search</a>(&amp;self, x: &amp;T) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a></span></code></h4>
 <div class='docblock'><p>Binary search a sorted slice for a given element.</p>
 
 <p>If the value is found then <code>Ok</code> is returned, containing the
@@ -633,8 +542,7 @@ index of the matching element; if the value is not found then
 <code>Err</code> is returned, containing the index where a matching
 element could be inserted while maintaining sorted order.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1>
+<h1 id='example-7' class='section-header'><a href='#example-7'>Example</a></h1>
 <p>Looks up a series of four elements. The first is found, with a
 uniquely determined position; the second and third are not
 found; the fourth could match any position in <code>[1,4]</code>.</p>
@@ -646,7 +554,7 @@ found; the fourth could match any position in <code>[1,4]</code>.</p>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>s</span>.<span class='ident'>binary_search</span>(<span class='kw-2'>&amp;</span><span class='number'>100</span>), <span class='prelude-val'>Err</span>(<span class='number'>13</span>));
 <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>s</span>.<span class='ident'>binary_search</span>(<span class='kw-2'>&amp;</span><span class='number'>1</span>);
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='kw'>match</span> <span class='ident'>r</span> { <span class='prelude-val'>Ok</span>(<span class='number'>1</span>...<span class='number'>4</span>) <span class='op'>=&gt;</span> <span class='boolval'>true</span>, _ <span class='op'>=&gt;</span> <span class='boolval'>false</span>, });</pre>
-</div><h4 id='method.binary_search_by' class='method'><code>fn <a href='#method.binary_search_by' class='fnname'>binary_search_by</a>&lt;F&gt;(&amp;self, f: F) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></span></code></h4>
+</div><h4 id='method.binary_search_by' class='method'><code>fn <a href='#method.binary_search_by' class='fnname'>binary_search_by</a>&lt;F&gt;(&amp;self, f: F) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt; <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></span></code></h4>
 <div class='docblock'><p>Binary search a sorted slice with a comparator function.</p>
 
 <p>The comparator function should implement an order consistent
@@ -659,8 +567,7 @@ the index for the matched element; if no match is found then
 <code>Err</code> is returned, containing the index where a matching
 element could be inserted while maintaining sorted order.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1>
+<h1 id='example-8' class='section-header'><a href='#example-8'>Example</a></h1>
 <p>Looks up a series of four elements. The first is found, with a
 uniquely determined position; the second and third are not
 found; the fourth could match any position in <code>[1,4]</code>.</p>
@@ -676,26 +583,43 @@ found; the fourth could match any position in <code>[1,4]</code>.</p>
 <span class='kw'>let</span> <span class='ident'>seek</span> <span class='op'>=</span> <span class='number'>1</span>;
 <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='ident'>s</span>.<span class='ident'>binary_search_by</span>(<span class='op'>|</span><span class='ident'>probe</span><span class='op'>|</span> <span class='ident'>probe</span>.<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='ident'>seek</span>));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='kw'>match</span> <span class='ident'>r</span> { <span class='prelude-val'>Ok</span>(<span class='number'>1</span>...<span class='number'>4</span>) <span class='op'>=&gt;</span> <span class='boolval'>true</span>, _ <span class='op'>=&gt;</span> <span class='boolval'>false</span>, });</pre>
-</div><h4 id='method.sort' class='method'><code>fn <a href='#method.sort' class='fnname'>sort</a>(&amp;mut self) <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a></span></code></h4>
+</div><h4 id='method.sort' class='method'><code>fn <a href='#method.sort' class='fnname'>sort</a>(&amp;mut self) <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a></span></code></h4>
 <div class='docblock'><p>Sorts the slice, in place.</p>
 
 <p>This is equivalent to <code>self.sort_by(|a, b| a.cmp(b))</code>.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<p>This is a stable sort.</p>
+
+<h1 id='examples-27' class='section-header'><a href='#examples-27'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='op'>-</span><span class='number'>5</span>, <span class='number'>4</span>, <span class='number'>1</span>, <span class='op'>-</span><span class='number'>3</span>, <span class='number'>2</span>];
 
 <span class='ident'>v</span>.<span class='ident'>sort</span>();
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> [<span class='op'>-</span><span class='number'>5</span>, <span class='op'>-</span><span class='number'>3</span>, <span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>4</span>]);</pre>
-</div><h4 id='method.sort_by' class='method'><code>fn <a href='#method.sort_by' class='fnname'>sort_by</a>&lt;F&gt;(&amp;mut self, compare: F) <span class='where'>where F: <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T, &amp;T) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></span></code></h4>
+</div><h4 id='method.sort_by_key' class='method'><code>fn <a href='#method.sort_by_key' class='fnname'>sort_by_key</a>&lt;B, F&gt;(&amp;mut self, f: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T) -&gt; B, B: <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a></span></code></h4>
+<div class='stability'><em class='stab unstable'>Unstable (<code>slice_sort_by_key</code>)<p>: recently added</p>
+</em></div><div class='docblock'><p>Sorts the slice, in place, using <code>key</code> to extract a key by which to
+order the sort by.</p>
+
+<p>This sort is <code>O(n log n)</code> worst-case and stable, but allocates
+approximately <code>2 * n</code>, where <code>n</code> is the length of <code>self</code>.</p>
+
+<p>This is a stable sort.</p>
+
+<h1 id='examples-28' class='section-header'><a href='#examples-28'>Examples</a></h1><pre class='rust rust-example-rendered'>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>slice_sort_by_key</span>)]</span>
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='op'>-</span><span class='number'>5i32</span>, <span class='number'>4</span>, <span class='number'>1</span>, <span class='op'>-</span><span class='number'>3</span>, <span class='number'>2</span>];
+
+<span class='ident'>v</span>.<span class='ident'>sort_by_key</span>(<span class='op'>|</span><span class='ident'>k</span><span class='op'>|</span> <span class='ident'>k</span>.<span class='ident'>abs</span>());
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='op'>-</span><span class='number'>3</span>, <span class='number'>4</span>, <span class='op'>-</span><span class='number'>5</span>]);</pre>
+</div><h4 id='method.sort_by' class='method'><code>fn <a href='#method.sort_by' class='fnname'>sort_by</a>&lt;F&gt;(&amp;mut self, compare: F) <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;T, &amp;T) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/cmp/enum.Ordering.html' title='core::cmp::Ordering'>Ordering</a></span></code></h4>
 <div class='docblock'><p>Sorts the slice, in place, using <code>compare</code> to compare
 elements.</p>
 
 <p>This sort is <code>O(n log n)</code> worst-case and stable, but allocates
 approximately <code>2 * n</code>, where <code>n</code> is the length of <code>self</code>.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples-29' class='section-header'><a href='#examples-29'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>5</span>, <span class='number'>4</span>, <span class='number'>1</span>, <span class='number'>3</span>, <span class='number'>2</span>];
 <span class='ident'>v</span>.<span class='ident'>sort_by</span>(<span class='op'>|</span><span class='ident'>a</span>, <span class='ident'>b</span><span class='op'>|</span> <span class='ident'>a</span>.<span class='ident'>cmp</span>(<span class='ident'>b</span>));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>]);
@@ -703,75 +627,12 @@ approximately <code>2 * n</code>, where <code>n</code> is the length of <code>se
 <span class='comment'>// reverse sorting</span>
 <span class='ident'>v</span>.<span class='ident'>sort_by</span>(<span class='op'>|</span><span class='ident'>a</span>, <span class='ident'>b</span><span class='op'>|</span> <span class='ident'>b</span>.<span class='ident'>cmp</span>(<span class='ident'>a</span>));
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> [<span class='number'>5</span>, <span class='number'>4</span>, <span class='number'>3</span>, <span class='number'>2</span>, <span class='number'>1</span>]);</pre>
-</div><h4 id='method.permutations' class='method'><code>fn <a href='#method.permutations' class='fnname'>permutations</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/slice/struct.Permutations.html' title='collections::slice::Permutations'>Permutations</a>&lt;T&gt; <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.2.0<p>: not clear this should be in the stdlib</p>
-</em></div><div class='docblock'><p>Creates an iterator that yields every possible permutation of the
-vector in succession.</p>
-
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>permutations</span>)]</span>
-
-<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>perms</span> <span class='op'>=</span> <span class='ident'>v</span>.<span class='ident'>permutations</span>();
-
-<span class='kw'>for</span> <span class='ident'>p</span> <span class='kw'>in</span> <span class='ident'>perms</span> {
-  <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>p</span>);
-}</pre>
-
-<p>Iterating through permutations one by one.</p>
-<pre class='rust rust-example-rendered'>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>permutations</span>)]</span>
-
-<span class='kw'>let</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>];
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>perms</span> <span class='op'>=</span> <span class='ident'>v</span>.<span class='ident'>permutations</span>();
-
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>]), <span class='ident'>perms</span>.<span class='ident'>next</span>());
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1</span>, <span class='number'>3</span>, <span class='number'>2</span>]), <span class='ident'>perms</span>.<span class='ident'>next</span>());
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>3</span>, <span class='number'>1</span>, <span class='number'>2</span>]), <span class='ident'>perms</span>.<span class='ident'>next</span>());</pre>
-</div><h4 id='method.next_permutation' class='method'><code>fn <a href='#method.next_permutation' class='fnname'>next_permutation</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a></span></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.2.0<p>: not clear this should be in the stdlib</p>
-</em></div><div class='docblock'><p>Mutates the slice to the next lexicographic permutation.</p>
-
-<p>Returns <code>true</code> if successful and <code>false</code> if the slice is at the
-last-ordered permutation.</p>
-
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>permutations</span>)]</span>
-
-<span class='kw'>let</span> <span class='ident'>v</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [_] <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='number'>0</span>, <span class='number'>1</span>, <span class='number'>2</span>];
-<span class='ident'>v</span>.<span class='ident'>next_permutation</span>();
-<span class='kw'>let</span> <span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [_] <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='number'>0</span>, <span class='number'>2</span>, <span class='number'>1</span>];
-<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> <span class='ident'>b</span>);
-<span class='ident'>v</span>.<span class='ident'>next_permutation</span>();
-<span class='kw'>let</span> <span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [_] <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='number'>1</span>, <span class='number'>0</span>, <span class='number'>2</span>];
-<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> <span class='ident'>b</span>);</pre>
-</div><h4 id='method.prev_permutation' class='method'><code>fn <a href='#method.prev_permutation' class='fnname'>prev_permutation</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a> <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Ord.html' title='core::cmp::Ord'>Ord</a></span></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.2.0<p>: not clear this should be in the stdlib</p>
-</em></div><div class='docblock'><p>Mutates the slice to the previous lexicographic permutation.</p>
-
-<p>Returns <code>true</code> if successful and <code>false</code> if the slice is at the
-first-ordered permutation.</p>
-
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>permutations</span>)]</span>
-
-<span class='kw'>let</span> <span class='ident'>v</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [_] <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='number'>1</span>, <span class='number'>0</span>, <span class='number'>2</span>];
-<span class='ident'>v</span>.<span class='ident'>prev_permutation</span>();
-<span class='kw'>let</span> <span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [_] <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='number'>0</span>, <span class='number'>2</span>, <span class='number'>1</span>];
-<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> <span class='ident'>b</span>);
-<span class='ident'>v</span>.<span class='ident'>prev_permutation</span>();
-<span class='kw'>let</span> <span class='ident'>b</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [_] <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='number'>0</span>, <span class='number'>1</span>, <span class='number'>2</span>];
-<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>v</span> <span class='op'>==</span> <span class='ident'>b</span>);</pre>
-</div><h4 id='method.clone_from_slice' class='method'><code>fn <a href='#method.clone_from_slice' class='fnname'>clone_from_slice</a>(&amp;mut self, src: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></h4>
-<div class='stability'><em class='stab unstable'>Unstable</em></div><div class='docblock'><p>Copies as many elements from <code>src</code> as it can into <code>self</code> (the
+</div><h4 id='method.clone_from_slice' class='method'><code>fn <a href='#method.clone_from_slice' class='fnname'>clone_from_slice</a>(&amp;mut self, src: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[T]</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a> <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></h4>
+<div class='stability'><em class='stab unstable'>Unstable (<code>clone_from_slice</code>)</em></div><div class='docblock'><p>Copies as many elements from <code>src</code> as it can into <code>self</code> (the
 shorter of <code>self.len()</code> and <code>src.len()</code>). Returns the number
 of elements copied.</p>
 
-<h1 id="example" class='section-header'><a
-                           href="#example">Example</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='example-9' class='section-header'><a href='#example-9'>Example</a></h1><pre class='rust rust-example-rendered'>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>clone_from_slice</span>)]</span>
 
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>dst</span> <span class='op'>=</span> [<span class='number'>0</span>, <span class='number'>0</span>, <span class='number'>0</span>];
@@ -783,51 +644,35 @@ of elements copied.</p>
 <span class='kw'>let</span> <span class='ident'>src2</span> <span class='op'>=</span> [<span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>, <span class='number'>6</span>];
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>dst</span>.<span class='ident'>clone_from_slice</span>(<span class='kw-2'>&amp;</span><span class='ident'>src2</span>) <span class='op'>==</span> <span class='number'>3</span>);
 <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>dst</span> <span class='op'>==</span> [<span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>]);</pre>
-</div><h4 id='method.move_from' class='method'><code>fn <a href='#method.move_from' class='fnname'>move_from</a>(&amp;mut self, src: <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;, start: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, end: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
-<div class='stability'><em class='stab unstable deprecated'>Deprecated since 1.3.0<p>: unclear that it must belong in the standard library</p>
-</em></div><div class='docblock'><p>Consumes <code>src</code> and moves as many elements as it can into <code>self</code>
-from the range [start,end).</p>
-
-<p>Returns the number of elements copied (the shorter of <code>self.len()</code>
-and <code>end - start</code>).</p>
-
-<h1 id="arguments" class='section-header'><a
-                           href="#arguments">Arguments</a></h1>
-<ul>
-<li>src - A mutable vector of <code>T</code></li>
-<li>start - The index into <code>src</code> to start copying from</li>
-<li>end - The index into <code>src</code> to stop copying from</li>
-</ul>
-
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>move_from</span>)]</span>
-
-<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>a</span> <span class='op'>=</span> [<span class='number'>1</span>, <span class='number'>2</span>, <span class='number'>3</span>, <span class='number'>4</span>, <span class='number'>5</span>];
-<span class='kw'>let</span> <span class='ident'>b</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>6</span>, <span class='number'>7</span>, <span class='number'>8</span>];
-<span class='kw'>let</span> <span class='ident'>num_moved</span> <span class='op'>=</span> <span class='ident'>a</span>.<span class='ident'>move_from</span>(<span class='ident'>b</span>, <span class='number'>0</span>, <span class='number'>3</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>num_moved</span>, <span class='number'>3</span>);
-<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>a</span> <span class='op'>==</span> [<span class='number'>6</span>, <span class='number'>7</span>, <span class='number'>8</span>, <span class='number'>4</span>, <span class='number'>5</span>]);</pre>
-</div><h4 id='method.to_vec' class='method'><code>fn <a href='#method.to_vec' class='fnname'>to_vec</a>(&amp;self) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt; <span class='where'>where T: <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></h4>
+</div><h4 id='method.to_vec' class='method'><code>fn <a href='#method.to_vec' class='fnname'>to_vec</a>(&amp;self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt; <span class='where'>where T: <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a></span></code></h4>
 <div class='docblock'><p>Copies <code>self</code> into a new <code>Vec</code>.</p>
-</div><h4 id='method.into_vec' class='method'><code>fn <a href='#method.into_vec' class='fnname'>into_vec</a>(self: <a class='struct' href='http://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>[T]</a>&gt;) -&gt; <a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
+</div><h4 id='method.into_vec' class='method'><code>fn <a href='#method.into_vec' class='fnname'>into_vec</a>(self: <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>[T]</a>&gt;) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;T&gt;</code></h4>
 <div class='docblock'><p>Converts <code>self</code> into a vector without clones or allocation.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>[<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>]</a></code></h4>
-<h4 id='method.deref' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>&lt;'a&gt;(&amp;'a self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Index.html' title='core::ops::Index'>Index</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='assoc_type.Output' class='type'><code>type Output = <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-<h4 id='method.index' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Index.html#method.index' class='fnname'>index</a>&lt;'a&gt;(&amp;'a self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>) -&gt; &amp;'a <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html' title='core::ops::IndexMut'>IndexMut</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.index_mut' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html#method.index_mut' class='fnname'>index_mut</a>&lt;'a&gt;(&amp;'a mut self, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>) -&gt; &amp;'a mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../rustty/trait.HasSize.html' title='rustty::HasSize'>HasSize</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.size' class='method'><code>fn <a href='../rustty/trait.HasSize.html#method.size' class='fnname'>size</a>(&amp;self) -&gt; <a class='type' href='../rustty/type.Size.html' title='rustty::Size'>Size</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='../rustty/trait.CellAccessor.html' title='rustty::CellAccessor'>CellAccessor</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.cellvec' class='method'><code>fn <a href='../rustty/trait.CellAccessor.html#method.cellvec' class='fnname'>cellvec</a>(&amp;self) -&gt; &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<h4 id='method.cellvec_mut' class='method'><code>fn <a href='../rustty/trait.CellAccessor.html#method.cellvec_mut' class='fnname'>cellvec_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<h4 id='method.clear-1' class='method'><code>fn <a href='../rustty/trait.CellAccessor.html#method.clear' class='fnname'>clear</a>(&amp;mut self, blank: <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>)</code></h4>
+<h4 id='method.pos_to_index' class='method'><code>fn <a href='../rustty/trait.CellAccessor.html#method.pos_to_index' class='fnname'>pos_to_index</a>(&amp;self, x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<h4 id='method.get-1' class='method'><code>fn <a href='../rustty/trait.CellAccessor.html#method.get' class='fnname'>get</a>(&amp;self, x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<h4 id='method.get_mut-1' class='method'><code>fn <a href='../rustty/trait.CellAccessor.html#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self, x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>Deref</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='assoc_type.Target' class='type'><code>type Target = <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>[<a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>]</a></code></h4>
+<h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#method.deref' class='fnname'>deref</a>&lt;'a&gt;(&amp;'a self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a [</a><a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html' title='core::ops::DerefMut'>DerefMut</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.deref_mut' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.DerefMut.html#method.deref_mut' class='fnname'>deref_mut</a>&lt;'a&gt;(&amp;'a mut self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;'a mut [</a><a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Index.html' title='core::ops::Index'>Index</a>&lt;<a class='type' href='../rustty/type.Pos.html' title='rustty::Pos'>Pos</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='assoc_type.Output' class='type'><code>type Output = <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+<h4 id='method.index' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Index.html#method.index' class='fnname'>index</a>&lt;'a&gt;(&amp;'a self, index: <a class='type' href='../rustty/type.Pos.html' title='rustty::Pos'>Pos</a>) -&gt; &amp;'a <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html' title='core::ops::IndexMut'>IndexMut</a>&lt;<a class='type' href='../rustty/type.Pos.html' title='rustty::Pos'>Pos</a>&gt; for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.index_mut' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.IndexMut.html#method.index_mut' class='fnname'>index_mut</a>&lt;'a&gt;(&amp;'a mut self, index: <a class='type' href='../rustty/type.Pos.html' title='rustty::Pos'>Pos</a>) -&gt; &amp;'a mut <a class='struct' href='../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../rustty/struct.Terminal.html' title='rustty::Terminal'>Terminal</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -844,7 +689,7 @@ and <code>end - start</code>).</p>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -854,8 +699,8 @@ and <code>end - start</code>).</p>
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -864,7 +709,7 @@ and <code>end - start</code>).</p>
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -876,6 +721,6 @@ and <code>end - start</code>).</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

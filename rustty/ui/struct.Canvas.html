@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Canvas` struct in crate `rustty`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Canvas">
+
+    <title>rustty::ui::Canvas - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>rustty</a>::<wbr><a href='index.html'>ui</a></p><script>window.sidebarCurrent = {name: 'Canvas', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rustty</a>::<wbr><a href='index.html'>ui</a>::<wbr><a class='struct' href=''>Canvas</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1210' class='srclink' href='../../src/rustty/ui/canvas.rs.html#33-35' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Canvas {
+    // some fields omitted
+}</pre><div class='docblock'><p>Logical clone of <a href="core/frame/struct.Frame.html">Frame</a> that exposes backend
+functionality for users without breaking the API rules</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>ui</span>::<span class='ident'>Canvas</span>;
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>canvas</span> <span class='op'>=</span> <span class='ident'>Canvas</span>::<span class='ident'>new</span>(<span class='number'>60</span>, <span class='number'>10</span>);
+
+<span class='kw'>let</span> (<span class='ident'>rows</span>, <span class='ident'>cols</span>) <span class='op'>=</span> <span class='ident'>canvas</span>.<span class='ident'>size</span>();
+<span class='comment'>// Set the entire canvas to &#39;-&#39; character</span>
+<span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>cols</span><span class='op'>*</span><span class='ident'>rows</span> {
+    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>i</span> <span class='op'>/</span> <span class='ident'>cols</span>;
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>i</span> <span class='op'>%</span> <span class='ident'>cols</span>;
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cell</span> <span class='op'>=</span> <span class='ident'>canvas</span>.<span class='ident'>get_mut</span>(<span class='ident'>x</span>, <span class='ident'>y</span>).<span class='ident'>unwrap</span>();
+    <span class='ident'>cell</span>.<span class='ident'>set_ch</span>(<span class='string'>&#39;-&#39;</span>);
+}</pre>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../rustty/ui/struct.Canvas.html' title='rustty::ui::Canvas'>Canvas</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(cols: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, rows: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='struct' href='../../rustty/ui/struct.Canvas.html' title='rustty::ui::Canvas'>Canvas</a></code></h4>
+<div class='docblock'><p>Constructs a new <code>Canvas</code> object <em>cols</em> wide by <em>rows</em> high</p>
+
+<h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>ui</span>::<span class='ident'>Canvas</span>;
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>canvas</span> <span class='op'>=</span> <span class='ident'>Canvas</span>::<span class='ident'>new</span>(<span class='number'>60</span>, <span class='number'>10</span>); </pre>
+</div><h4 id='method.size' class='method'><code>fn <a href='#method.size' class='fnname'>size</a>(&amp;self) -&gt; <a class='type' href='../../rustty/type.Size.html' title='rustty::Size'>Size</a></code></h4>
+<div class='docblock'><p>Returns the size of the canvas</p>
+
+<h1 id='examples-2' class='section-header'><a href='#examples-2'>Examples</a></h1><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>ui</span>::<span class='ident'>Canvas</span>;
+
+<span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>canvas</span> <span class='op'>=</span> <span class='ident'>Canvas</span>::<span class='ident'>new</span>(<span class='number'>60</span>, <span class='number'>10</span>);
+
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>canvas</span>.<span class='ident'>size</span>(), (<span class='number'>60</span>, <span class='number'>10</span>));</pre>
+</div><h4 id='method.cellvec' class='method'><code>fn <a href='#method.cellvec' class='fnname'>cellvec</a>(&amp;self) -&gt; &amp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<div class='docblock'><p>Returns a reference to the vector of cells
+that lie within the canvas</p>
+</div><h4 id='method.cellvec_mut' class='method'><code>fn <a href='#method.cellvec_mut' class='fnname'>cellvec_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<div class='docblock'><p>Returns a mutable reference to the vector
+of cells that lie within the canvas</p>
+</div><h4 id='method.clear' class='method'><code>fn <a href='#method.clear' class='fnname'>clear</a>(&amp;mut self, blank: <a class='struct' href='../../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>)</code></h4>
+<div class='docblock'><p>Clears the canvas with a <em>blank</em> <a href="../struct.Cell.html">Cell</a></p>
+</div><h4 id='method.pos_to_index' class='method'><code>fn <a href='#method.pos_to_index' class='fnname'>pos_to_index</a>(&amp;self, x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<div class='docblock'><p>Converts a position on the screen to the relative coordinate
+within the Canvas cell buffer</p>
+</div><h4 id='method.get' class='method'><code>fn <a href='#method.get' class='fnname'>get</a>(&amp;self, x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='struct' href='../../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<div class='docblock'><p>Returns a reference to the cell at the specified position (<em>x</em>,*y*),
+in the form of an <em>Option</em>. If no cell exists at that position,
+then <em>None</em></p>
+</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self, x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut <a class='struct' href='../../rustty/struct.Cell.html' title='rustty::Cell'>Cell</a>&gt;</code></h4>
+<div class='docblock'><p>Returns a mutable reference to the cell at the specified position
+(<em>x</em>, <em>y</em>), in the form of an <em>Option</em>. If no cell exists at that
+position, then <em>None</em></p>
+</div><h4 id='method.origin' class='method'><code>fn <a href='#method.origin' class='fnname'>origin</a>(&amp;self) -&gt; <a class='type' href='../../rustty/type.Pos.html' title='rustty::Pos'>Pos</a></code></h4>
+<div class='docblock'><p>The location of the canvas</p>
+</div><h4 id='method.set_origin' class='method'><code>fn <a href='#method.set_origin' class='fnname'>set_origin</a>(&amp;mut self, new_origin: <a class='type' href='../../rustty/type.Pos.html' title='rustty::Pos'>Pos</a>)</code></h4>
+<div class='docblock'><p>Mantually sets the location of the canvas</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='../../rustty/ui/core/widget/trait.Widget.html' title='rustty::ui::core::widget::Widget'>Widget</a> for <a class='struct' href='../../rustty/ui/struct.Canvas.html' title='rustty::ui::Canvas'>Canvas</a></code></h3><div class='impl-items'><h4 id='method.draw' class='method'><code>fn <a href='../../rustty/ui/core/widget/trait.Widget.html#method.draw' class='fnname'>draw</a>(&amp;mut self, parent: &amp;mut <a class='trait' href='../../rustty/trait.CellAccessor.html' title='rustty::CellAccessor'>CellAccessor</a>)</code></h4>
+<h4 id='method.pack' class='method'><code>fn <a href='../../rustty/ui/core/widget/trait.Widget.html#method.pack' class='fnname'>pack</a>(&amp;mut self, parent: &amp;<a class='trait' href='../../rustty/trait.HasSize.html' title='rustty::HasSize'>HasSize</a>, halign: <a class='enum' href='../../rustty/ui/core/attributes/enum.HorizontalAlign.html' title='rustty::ui::core::attributes::HorizontalAlign'>HorizontalAlign</a>, valign: <a class='enum' href='../../rustty/ui/core/attributes/enum.VerticalAlign.html' title='rustty::ui::core::attributes::VerticalAlign'>VerticalAlign</a>, margin: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</a>)</code></h4>
+<h4 id='method.resize' class='method'><code>fn <a href='../../rustty/ui/core/widget/trait.Widget.html#method.resize' class='fnname'>resize</a>(&amp;mut self, new_size: <a class='type' href='../../rustty/type.Size.html' title='rustty::Size'>Size</a>)</code></h4>
+<h4 id='method.draw_box' class='method'><code>fn <a href='../../rustty/ui/core/widget/trait.Widget.html#method.draw_box' class='fnname'>draw_box</a>(&amp;mut self)</code></h4>
+<h4 id='method.frame' class='method'><code>fn <a href='../../rustty/ui/core/widget/trait.Widget.html#method.frame' class='fnname'>frame</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../rustty/ui/core/frame/struct.Frame.html' title='rustty::ui::core::frame::Frame'>Frame</a></code></h4>
+<h4 id='method.frame_mut' class='method'><code>fn <a href='../../rustty/ui/core/widget/trait.Widget.html#method.frame_mut' class='fnname'>frame_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../../rustty/ui/core/frame/struct.Frame.html' title='rustty::ui::core::frame::Frame'>Frame</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "rustty";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

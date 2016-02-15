@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["HorizontalLayout","Hold buttons and align them horizontally for drawing within a Dialog"]]});

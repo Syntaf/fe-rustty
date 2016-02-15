@@ -9,6 +9,7 @@
 
     <title>driver.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -24,10 +25,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -206,7 +207,56 @@
 <span id="164">164</span>
 <span id="165">165</span>
 <span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
 </pre><pre class='rust '>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
+
 <span class='kw'>use</span> <span class='ident'>util</span>::<span class='ident'>errors</span>::{
     <span class='prelude-ty'>Result</span>,
     <span class='ident'>Error</span>,
@@ -234,12 +284,55 @@
 <span class='kw'>const</span> <span class='ident'>SETFG</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;setaf&quot;</span>;
 <span class='kw'>const</span> <span class='ident'>SETBG</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span> <span class='op'>=</span> <span class='string'>&quot;setab&quot;</span>;
 
+<span class='comment'>// Terminfo keys. These are arrays because the terminfo database from the `term` crate sometimes</span>
+<span class='comment'>// uses the variable name and othertimes the capname.</span>
+<span class='comment'>//</span>
+<span class='comment'>// Arrays are formatted as [&quot;variable_name&quot;, &quot;cap_name&quot;].</span>
+<span class='kw'>const</span> <span class='ident'>KEY_F1</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f1&quot;</span>, <span class='string'>&quot;kf1&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F2</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f2&quot;</span>, <span class='string'>&quot;kf2&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F3</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f3&quot;</span>, <span class='string'>&quot;kf3&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F4</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f4&quot;</span>, <span class='string'>&quot;kf4&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F5</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f5&quot;</span>, <span class='string'>&quot;kf5&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F6</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f6&quot;</span>, <span class='string'>&quot;kf6&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F7</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f7&quot;</span>, <span class='string'>&quot;kf7&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F8</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f8&quot;</span>, <span class='string'>&quot;kf8&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F9</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f9&quot;</span>, <span class='string'>&quot;kf9&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F10</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f10&quot;</span>, <span class='string'>&quot;kf10&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F11</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f11&quot;</span>, <span class='string'>&quot;kf11&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_F12</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_f12&quot;</span>, <span class='string'>&quot;kf12&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_UP</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_up&quot;</span>, <span class='string'>&quot;kcuu1&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_DOWN</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_down&quot;</span>, <span class='string'>&quot;kcud1&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_LEFT</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_left&quot;</span>, <span class='string'>&quot;kcub1&quot;</span>];
+<span class='kw'>const</span> <span class='ident'>KEY_RIGHT</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='string'>&quot;key_right&quot;</span>, <span class='string'>&quot;kcuf1&quot;</span>];
+
+<span class='comment'>// Array of terminal keys.</span>
+<span class='kw'>const</span> <span class='ident'>KEYS</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>]] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[
+    <span class='ident'>KEY_F1</span>,
+    <span class='ident'>KEY_F2</span>,
+    <span class='ident'>KEY_F3</span>,
+    <span class='ident'>KEY_F4</span>,
+    <span class='ident'>KEY_F5</span>,
+    <span class='ident'>KEY_F6</span>,
+    <span class='ident'>KEY_F7</span>,
+    <span class='ident'>KEY_F8</span>,
+    <span class='ident'>KEY_F9</span>,
+    <span class='ident'>KEY_F10</span>,
+    <span class='ident'>KEY_F11</span>,
+    <span class='ident'>KEY_F12</span>,
+    <span class='ident'>KEY_UP</span>,
+    <span class='ident'>KEY_DOWN</span>,
+    <span class='ident'>KEY_LEFT</span>,
+    <span class='ident'>KEY_RIGHT</span>,
+];
+
 <span class='comment'>// Array of terminal capabilities. Used as an iterator to test for functionality.</span>
 <span class='comment'>//</span>
 <span class='comment'>// At the moment all functionality is required, however in the future we should implement optional</span>
 <span class='comment'>// functionality checks so the absence of underlining or reverse video doesn&#39;t cause initialization</span>
 <span class='comment'>// to fail.</span>
-<span class='kw'>static</span> <span class='ident'>CAPABILITIES</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[
+<span class='comment'>//</span>
+<span class='comment'>// TODO: Optional functionality testing.</span>
+<span class='kw'>const</span> <span class='ident'>CAPABILITIES</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>] <span class='op'>=</span> <span class='kw-2'>&amp;</span>[
     <span class='ident'>ENTER_CA</span>,
     <span class='ident'>EXIT_CA</span>,
     <span class='ident'>SHOW_CURSOR</span>,
@@ -300,6 +393,8 @@
     <span class='ident'>tinfo</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>TermInfo</span>,
 }
 
+<span class='comment'>// We will never need to mutate the terminfo database, and it is only used internally as a lookup</span>
+<span class='comment'>// table for the driver. `lazy_static` seems to be the best approach at the moment.</span>
 <span class='macro'>lazy_static</span><span class='macro'>!</span> {
     <span class='kw'>static</span> <span class='kw-2'>ref</span> <span class='ident'>TINFO</span>: <span class='ident'>TermInfo</span> <span class='op'>=</span> {
         <span class='ident'>TermInfo</span>::<span class='ident'>from_env</span>().<span class='ident'>unwrap_or</span>({
@@ -357,12 +452,12 @@
 
         <span class='kw'>match</span> <span class='ident'>dfn</span> {
             <span class='ident'>DevFn</span>::<span class='ident'>SetFg</span>(<span class='ident'>attr</span>) <span class='op'>|</span> <span class='ident'>DevFn</span>::<span class='ident'>SetBg</span>(<span class='ident'>attr</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>let</span> <span class='ident'>params</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='ident'>Param</span>::<span class='ident'>Number</span>(<span class='ident'>attr</span> <span class='kw'>as</span> <span class='ident'>i16</span>)];
+                <span class='kw'>let</span> <span class='ident'>params</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='ident'>Param</span>::<span class='ident'>Number</span>(<span class='ident'>attr</span> <span class='kw'>as</span> <span class='ident'>i32</span>)];
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>vars</span> <span class='op'>=</span> <span class='ident'>Variables</span>::<span class='ident'>new</span>();
                 <span class='ident'>parm</span>::<span class='ident'>expand</span>(<span class='ident'>cap</span>, <span class='ident'>params</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>vars</span>).<span class='ident'>unwrap</span>()
             },
             <span class='ident'>DevFn</span>::<span class='ident'>SetCursor</span>(<span class='ident'>x</span>, <span class='ident'>y</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>let</span> <span class='ident'>params</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='ident'>Param</span>::<span class='ident'>Number</span>(<span class='ident'>y</span> <span class='kw'>as</span> <span class='ident'>i16</span>), <span class='ident'>Param</span>::<span class='ident'>Number</span>(<span class='ident'>x</span> <span class='kw'>as</span> <span class='ident'>i16</span>)];
+                <span class='kw'>let</span> <span class='ident'>params</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span>[<span class='ident'>Param</span>::<span class='ident'>Number</span>(<span class='ident'>y</span> <span class='kw'>as</span> <span class='ident'>i32</span>), <span class='ident'>Param</span>::<span class='ident'>Number</span>(<span class='ident'>x</span> <span class='kw'>as</span> <span class='ident'>i32</span>)];
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>vars</span> <span class='op'>=</span> <span class='ident'>Variables</span>::<span class='ident'>new</span>();
                 <span class='ident'>parm</span>::<span class='ident'>expand</span>(<span class='ident'>cap</span>, <span class='ident'>params</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>vars</span>).<span class='ident'>unwrap</span>()
             },
@@ -379,10 +474,12 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -399,7 +496,7 @@
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -409,8 +506,8 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -419,7 +516,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -431,6 +528,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

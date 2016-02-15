@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Frame","The `Frame` struct is the building block for all future widgets inside of *ui*. Objects of `Frame` abstract away the actual creation and drawing of areas of a terminal, because this process is the same for all widgets. Every widget should contain one `Frame` type to be used to render text to the screen"]]});

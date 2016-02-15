@@ -9,6 +9,7 @@
 
     <title>rustty - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -24,10 +25,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'></p><script>window.sidebarCurrent = {name: 'rustty', ty: 'mod', relpath: '../'};</script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -45,10 +46,9 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/rustty/lib.rs.html#1-31' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/rustty/lib.rs.html#1-35' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'>
-<h1 id="rustty" class='section-header'><a
-                           href="#rustty">Rustty</a></h1>
+<h1 id='rustty' class='section-header'><a href='#rustty'>Rustty</a></h1>
 <p>Rustty is a terminal UI library that provides a simple, concise abstraction over an
 underlying terminal device.</p>
 
@@ -59,7 +59,16 @@ pushed onto an input stream to be read and responded to.</p>
 
 <p>Futher reading on the concepts behind Rustty can be found in the
 <a href="https://github.com/cpjreynolds/rustty/blob/master/README.md">README</a></p>
-</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='ui/index.html'
+                               title='rustty::ui'>ui</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                     <tr class=' module-item'>
                         <td><a class='struct' href='struct.Cell.html'
@@ -115,15 +124,61 @@ pushed onto an input stream to be read and responded to.</p>
 
                         </td>
                     </tr>
+                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.CellAccessor.html'
+                               title='rustty::CellAccessor'>CellAccessor</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.HasPosition.html'
+                               title='rustty::HasPosition'>HasPosition</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='trait' href='trait.HasSize.html'
+                               title='rustty::HasSize'>HasSize</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.Pos.html'
+                               title='rustty::Pos'>Pos</a></td>
+                        <td class='docblock short'>
+                             <p>A <code>(x, y)</code> position on screen.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='type' href='type.Size.html'
+                               title='rustty::Size'>Size</a></td>
+                        <td class='docblock short'>
+                             <p>A <code>(cols, rows)</code> size.</p>
+
+                        </td>
+                    </tr>
                 </table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -140,7 +195,7 @@ pushed onto an input stream to be read and responded to.</p>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -150,8 +205,8 @@ pushed onto an input stream to be read and responded to.</p>
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -160,7 +215,7 @@ pushed onto an input stream to be read and responded to.</p>
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -172,6 +227,6 @@ pushed onto an input stream to be read and responded to.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 
     <title>rustty::Color - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -24,10 +25,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>rustty</a></p><script>window.sidebarCurrent = {name: 'Color', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-3146' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#332-343' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-483' class='srclink' href='../src/rustty/core/cellbuffer.rs.html#388-399' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Color {
     Black,
     Red,
@@ -55,7 +56,7 @@
     Magenta,
     Cyan,
     White,
-    Byte(<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
+    Byte(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
     Default,
 }</pre><div class='docblock'><p>The color of a <code>Cell</code>.</p>
 
@@ -67,8 +68,7 @@ color range; in addition, the eight basic colors coupled with <code>Attr::Bold</
 
 <p><code>Color::Byte(..)</code> may be used to specify a color in the 8-bit range.</p>
 
-<h1 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h1><pre class='rust rust-example-rendered'>
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>rustty</span>::<span class='ident'>Color</span>;
 
 <span class='comment'>// The default color.</span>
@@ -83,22 +83,24 @@ color range; in addition, the eight basic colors coupled with <code>Attr::Bold</
 <span class='comment'>// Basic colors are also 8-bit colors (but not vice-versa).</span>
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>red</span>.<span class='ident'>as_byte</span>(), <span class='ident'>fancy</span>.<span class='ident'>as_byte</span>())</pre>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Black'><code>Black</code></td><td></td></tr><tr><td id='variant.Red'><code>Red</code></td><td></td></tr><tr><td id='variant.Green'><code>Green</code></td><td></td></tr><tr><td id='variant.Yellow'><code>Yellow</code></td><td></td></tr><tr><td id='variant.Blue'><code>Blue</code></td><td></td></tr><tr><td id='variant.Magenta'><code>Magenta</code></td><td></td></tr><tr><td id='variant.Cyan'><code>Cyan</code></td><td></td></tr><tr><td id='variant.White'><code>White</code></td><td></td></tr><tr><td id='variant.Byte'><code>Byte</code></td><td></td></tr><tr><td id='variant.Default'><code>Default</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.as_byte' class='method'><code>fn <a href='#method.as_byte' class='fnname'>as_byte</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+<table><tr><td id='variant.Black'><code>Black</code></td><td></td></tr><tr><td id='variant.Red'><code>Red</code></td><td></td></tr><tr><td id='variant.Green'><code>Green</code></td><td></td></tr><tr><td id='variant.Yellow'><code>Yellow</code></td><td></td></tr><tr><td id='variant.Blue'><code>Blue</code></td><td></td></tr><tr><td id='variant.Magenta'><code>Magenta</code></td><td></td></tr><tr><td id='variant.Cyan'><code>Cyan</code></td><td></td></tr><tr><td id='variant.White'><code>White</code></td><td></td></tr><tr><td id='variant.Byte'><code>Byte</code></td><td></td></tr><tr><td id='variant.Default'><code>Default</code></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.as_byte' class='method'><code>fn <a href='#method.as_byte' class='fnname'>as_byte</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the <code>u8</code> representation of the <code>Color</code>.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h4>
-<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../rustty/enum.Color.html' title='rustty::Color'>Color</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -115,7 +117,7 @@ color range; in addition, the eight basic colors coupled with <code>Attr::Bold</
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -125,8 +127,8 @@ color range; in addition, the eight basic colors coupled with <code>Attr::Bold</
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -135,7 +137,7 @@ color range; in addition, the eight basic colors coupled with <code>Attr::Bold</
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -147,6 +149,6 @@ color range; in addition, the eight basic colors coupled with <code>Attr::Bold</
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

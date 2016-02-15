@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Layout","Specialized version of a widget that implements an alignment function and method for forwarding keys to the parent widgets key map. "]]});

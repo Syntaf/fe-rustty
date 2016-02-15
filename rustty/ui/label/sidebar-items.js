@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Label","Display text to widgets"]]});

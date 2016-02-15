@@ -9,6 +9,7 @@
 
     <title>nix::sys::signal::SigAction - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
 
     
@@ -24,10 +25,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='../../index.html'>nix</a>::<wbr><a href='../index.html'>sys</a>::<wbr><a href='index.html'>signal</a></p><script>window.sidebarCurrent = {name: 'SigAction', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -45,7 +46,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-21709' class='srclink' href='../../../src/nix/sys/signal.rs.html#346-348' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-3308' class='srclink' href='../../../src/nix/sys/signal.rs.html#448-450' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SigAction {
     // some fields omitted
 }</pre><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../../../nix/sys/signal/struct.SigAction.html' title='nix::sys::signal::SigAction'>SigAction</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>(handler:  extern "C" fn(<a class='type' href='../../../nix/sys/ioctl/libc/type.c_int.html' title='nix::sys::ioctl::libc::c_int'>c_int</a>), flags: <a class='struct' href='../../../nix/sys/signal/signal/struct.SockFlag.html' title='nix::sys::signal::signal::SockFlag'>SockFlag</a>, mask: <a class='struct' href='../../../nix/sys/signal/struct.SigSet.html' title='nix::sys::signal::SigSet'>SigSet</a>) -&gt; <a class='struct' href='../../../nix/sys/signal/struct.SigAction.html' title='nix::sys::signal::SigAction'>SigAction</a></code></h4>
@@ -54,10 +55,12 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -74,7 +77,7 @@
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -84,8 +87,8 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
@@ -94,7 +97,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -106,6 +109,6 @@
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     
-    <script async src="../../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>
