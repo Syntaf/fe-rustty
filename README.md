@@ -16,7 +16,9 @@
 ## Intro
 
 fe is a fork of [rustty](https://github.com/cpjreynolds/rustty) that provides a widget based API for building terminal UI applications. fe only aims at a better implementation of rustty's `ui` module, the backend will always remain the same
-.
+
+See [GameOfLife](https://github.com/Syntaf/GameOfLife) for a good example of what fe is capable of
+
 -------------
 
 fe's backend, Rustty, is based on the concepts of cells and events. A terminal display is an array of cells,
