@@ -12,7 +12,7 @@ keywords = ["terminal", "ui", "tui", "console", "tty"]
 
 [dependencies]
 nix = "0.4"
-term = "0.2"
+term = "0.5"
 lazy_static = "0.1"
 libc = "0.1"
 gag = "0.1.6"
