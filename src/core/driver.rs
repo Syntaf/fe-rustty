@@ -1,31 +1,11 @@
+// Temporary fix before certain constants are used.
 #![allow(dead_code)]
 
-use util::errors::{
-    Result,
-    Error,
-};
+use std::io::{Error, ErrorKind};
 
 use term::terminfo::TermInfo;
 use term::terminfo::parm;
-use term::terminfo::parm::{
-    Param,
-    Variables,
-};
-
-// String constants correspond to terminfo capnames and are used inside the module for convenience.
-const ENTER_CA: &'static str = "smcup";
-const EXIT_CA: &'static str = "rmcup";
-const SHOW_CURSOR: &'static str = "cnorm";
-const HIDE_CURSOR: &'static str = "civis";
-const SET_CURSOR: &'static str = "cup";
-const CLEAR: &'static str = "clear";
-const RESET: &'static str = "sgr0";
-const UNDERLINE: &'static str = "smul";
-const BOLD: &'static str = "bold";
-const BLINK: &'static str = "blink";
-const REVERSE: &'static str = "rev";
-const SETFG: &'static str = "setaf";
-const SETBG: &'static str = "setab";
+use term::terminfo::parm::{Param, Variables};
 
 // Terminfo keys. These are arrays because the terminfo database from the `term` crate sometimes
 // uses the variable name and othertimes the capname.
@@ -49,24 +29,24 @@ const KEY_LEFT: &'static [&'static str] = &["key_left", "kcub1"];
 const KEY_RIGHT: &'static [&'static str] = &["key_right", "kcuf1"];
 
 // Array of terminal keys.
-const KEYS: &'static [&'static [&'static str]] = &[
-    KEY_F1,
-    KEY_F2,
-    KEY_F3,
-    KEY_F4,
-    KEY_F5,
-    KEY_F6,
-    KEY_F7,
-    KEY_F8,
-    KEY_F9,
-    KEY_F10,
-    KEY_F11,
-    KEY_F12,
-    KEY_UP,
-    KEY_DOWN,
-    KEY_LEFT,
-    KEY_RIGHT,
-];
+const KEYS: &'static [&'static [&'static str]] = &[KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6,
+                                                   KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11,
+                                                   KEY_F12, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT];
+
+// String constants correspond to terminfo capnames and are used inside the module for convenience.
+const ENTER_CA: &'static str = "smcup";
+const EXIT_CA: &'static str = "rmcup";
+const SHOW_CURSOR: &'static str = "cnorm";
+const HIDE_CURSOR: &'static str = "civis";
+const SET_CURSOR: &'static str = "cup";
+const CLEAR: &'static str = "clear";
+const RESET: &'static str = "sgr0";
+const UNDERLINE: &'static str = "smul";
+const BOLD: &'static str = "bold";
+const BLINK: &'static str = "blink";
+const REVERSE: &'static str = "rev";
+const SETFG: &'static str = "setaf";
+const SETBG: &'static str = "setab";
 
 // Array of terminal capabilities. Used as an iterator to test for functionality.
 //
@@ -75,27 +55,24 @@ const KEYS: &'static [&'static [&'static str]] = &[
 // to fail.
 //
 // TODO: Optional functionality testing.
-const CAPABILITIES: &'static [&'static str] = &[
-    ENTER_CA,
-    EXIT_CA,
-    SHOW_CURSOR,
-    HIDE_CURSOR,
-    SET_CURSOR,
-    CLEAR,
-    RESET,
-    UNDERLINE,
-    BOLD,
-    REVERSE,
-    SETFG,
-    SETBG,
-];
+const CAPABILITIES: &'static [&'static str] = &[ENTER_CA,
+                                                EXIT_CA,
+                                                SHOW_CURSOR,
+                                                HIDE_CURSOR,
+                                                SET_CURSOR,
+                                                CLEAR,
+                                                RESET,
+                                                UNDERLINE,
+                                                BOLD,
+                                                REVERSE,
+                                                SETFG,
+                                                SETBG];
 
 // Driver capabilities are an enum instead of string constants (there are string constants private
 // to the module however, those are only used for naming convenience and disambiguation)
 // to take advantage of compile-time type-checking instead of hoping invalid strings aren't passed.
 // This allows us to guarantee that driver accesses will succeed. In addition, using an enum means
 // Driver doesn't need hard-coded methods for each capability we want to use.
-#[allow(dead_code)]
 pub enum DevFn {
     EnterCa,
     ExitCa,
@@ -133,22 +110,7 @@ impl DevFn {
 }
 
 pub struct Driver {
-    tinfo: &'static TermInfo,
-}
-
-// We will never need to mutate the terminfo database, and it is only used internally as a lookup
-// table for the driver. `lazy_static` seems to be the best approach at the moment.
-lazy_static! {
-    static ref TINFO: TermInfo = {
-        TermInfo::from_env().unwrap_or({
-            TermInfo {
-                names: Default::default(),
-                bools: Default::default(),
-                numbers: Default::default(),
-                strings: Default::default(),
-            }
-        })
-    };
+    tinfo: TermInfo,
 }
 
 // Validates and returns a reference to the terminfo database.
@@ -158,12 +120,20 @@ lazy_static! {
 //
 // If this function returns Err(..), the terminfo database did not contain all the required
 // functionality; the error returned will provide more specific detail.
-fn get_tinfo() -> Result<&'static TermInfo> {
-    let tinfo = &*TINFO;
+fn get_tinfo() -> Result<TermInfo, Error> {
+    let tinfo = TermInfo::from_env().unwrap_or({
+        TermInfo {
+            names: Default::default(),
+            bools: Default::default(),
+            numbers: Default::default(),
+            strings: Default::default(),
+        }
+    });
 
     for capname in CAPABILITIES {
         if !tinfo.strings.contains_key(*capname) {
-            return Err(Error::new(format!("terminal missing capability: '{}'", capname)));
+            return Err(Error::new(ErrorKind::NotFound,
+                                  format!("terminal missing capability: '{}'", capname)));
         }
     }
     Ok(tinfo)
@@ -173,11 +143,9 @@ impl Driver {
     // Creates a new `Driver`
     //
     // If successful, the terminfo database is guaranteed to contain all capabilities we support.
-    pub fn new() -> Result<Driver> {
+    pub fn new() -> Result<Driver, Error> {
         let tinfo = try!(get_tinfo());
-        Ok(Driver {
-            tinfo: tinfo,
-        })
+        Ok(Driver { tinfo: tinfo })
     }
 
     // Returns the device specific escape sequence for the given `DevFn`.
@@ -194,20 +162,18 @@ impl Driver {
         let cap = self.tinfo.strings.get(capname).unwrap();
 
         match dfn {
-            DevFn::SetFg(attr) | DevFn::SetBg(attr) => {
+            DevFn::SetFg(attr) |
+            DevFn::SetBg(attr) => {
                 let params = &[Param::Number(attr as i32)];
                 let mut vars = Variables::new();
                 parm::expand(cap, params, &mut vars).unwrap()
-            },
+            }
             DevFn::SetCursor(x, y) => {
                 let params = &[Param::Number(y as i32), Param::Number(x as i32)];
                 let mut vars = Variables::new();
                 parm::expand(cap, params, &mut vars).unwrap()
-            },
-            _ => {
-                cap.clone()
-            },
+            }
+            _ => cap.clone(),
         }
     }
 }
-
